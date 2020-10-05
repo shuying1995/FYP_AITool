@@ -50,6 +50,7 @@
 <script>
 export default {
   name: "LoginPage",
+  title: "Login",
 };
 </script>
 
