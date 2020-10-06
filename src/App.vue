@@ -1,56 +1,41 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+    <div id="nav">
+      <router-link
+        v-if="authenticated"
+        to="/homepage"
+        v-on:click.native="logout()"
+        replace
+        >Logout</router-link
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <LoginPage />
-    </v-main>
+    </div>
+    <router-view @authenticated="setAuthenticated" />
   </v-app>
 </template>
 
 <script>
-import LoginPage from "./components/LoginPage";
-
 export default {
   name: "App",
 
-  components: {
-    LoginPage,
+  components: {},
+
+  data() {
+    return {
+      authenticated: false,
+      mockAccount: {
+        username: "username",
+        password: "password",
+      },
+    };
   },
 
-  data: () => ({
-    //
-  }),
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status;
+    },
+    logout() {
+      this.authenticated = false;
+    },
+  },
 };
 </script>

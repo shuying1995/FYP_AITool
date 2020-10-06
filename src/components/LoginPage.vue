@@ -1,70 +1,149 @@
 <template>
-  <v-app>
-    <v-container fill-height>
-      <v-layout align-center justify-center fill-height>
-        <v-flex xs12 sm6 class="login-bg"> </v-flex>
-      </v-layout>
-      <v-layout align-center justify-end>
-        <v-flex xs12 sm8 md4>
-          <v-col>
-            <v-row>
-              <p>Sign in with your organizational account</p>
-              <v-flex xs12 class="login-form">
-                <v-form>
-                  <v-text-field
-                    label="Username"
-                    outlined
-                    full-width
-                    single-line
-                    prepend-inner-icon="mdi-account-outline"
-                  ></v-text-field>
-                </v-form>
-              </v-flex>
-            </v-row>
-            <v-row>
-              <v-flex xs12>
-                <v-text-field
-                  label="Password"
-                  outlined
-                  full-width
-                  single-line
-                  prepend-inner-icon="mdi-lock-outline"
-                ></v-text-field>
-              </v-flex>
-            </v-row>
-            <v-row>
-              <v-flex class="text-center">
-                <v-btn label="Signin">Signin</v-btn>
-              </v-flex>
-            </v-row>
-          </v-col>
-          <v-layout>
-            <v-flex xs12> </v-flex>
-          </v-layout>
-        </v-flex>
+  <v-content style="height: 100% !important">
+    <v-container pa-0 fluid fill-height>
+      <v-layout>
+        <v-row>
+          <v-flex xs12 sm6 md8 class="login-bg">
+            <v-layout align-center justify-center fill-height pa-3>
+              <div
+                class="text-xs-center mb-3 pa-4"
+                style="background-color: rgba(0, 0, 0, 0.5)"
+              >
+                <div class="display-1 font-weight-black mb-3">
+                  Marketing information!
+                </div>
+              </div>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12 sm6 md4 class="active px-5">
+            <v-layout justify-center fill-height px-5>
+              <v-layout column>
+                <v-flex xs12>
+                  <div class="text-xs-center">
+                    <div class="login-title">AI Tool Name</div>
+                    <div class="login-header mt-2">
+                      Sign in with your organizational account
+                    </div>
+                  </div>
+                  <v-form class="mt-10">
+                    <v-text-field
+                      class="pa-0 ma-0"
+                      name="username"
+                      v-model="input.username"
+                      placeholder="Username"
+                      filed
+                      full-width
+                      single-line
+                      background-color="#f4f8f7"
+                      color="grey darken-2"
+                      prepend-inner-icon="mdi-account-outline"
+                    />
+                    <v-text-field
+                      class="pa-0 ma-0"
+                      name="password"
+                      v-model="input.password"
+                      placeholder="Password"
+                      :append-icon="
+                        show ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
+                      "
+                      :type="show ? 'text' : 'password'"
+                      filled
+                      single-line
+                      full-width
+                      background-color="#f4f8f7"
+                      color="grey darken-2"
+                      prepend-inner-icon="mdi-lock-outline"
+                      autocomplete="password"
+                      @click:append="show = !show"
+                    />
+                    <v-btn
+                      rounded
+                      dark
+                      ripple
+                      color="teal"
+                      class="mt-4 mb-5"
+                      style="width: 200px"
+                      v-on:click="login()"
+                    >
+                      Log in
+                    </v-btn>
+                  </v-form>
+                  <v-row class="justify-end mt-2">
+                    <span><a href="/forgot">Forget password?</a></span>
+                  </v-row>
+                  <v-row class="justify-center mt-8">
+                    <span
+                      >Don't have an account?<a href="/signup">
+                        Sign up!</a
+                      ></span
+                    >
+                  </v-row>
+                </v-flex>
+              </v-layout>
+            </v-layout>
+          </v-flex>
+        </v-row>
       </v-layout>
     </v-container>
-  </v-app>
+  </v-content>
 </template>
 
 <script>
 export default {
   name: "LoginPage",
   title: "Login",
+  data() {
+    return {
+      show: "",
+      input: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    login() {
+      if (this.input.username != "" && this.input.password != "") {
+        if (
+          this.input.username ==
+            this.$parent.$root.$children[0].mockAccount.username &&
+          this.input.password ==
+            this.$parent.$root.$children[0].mockAccount.password
+        ) {
+          this.$emit("authenticated", true);
+          this.$router.push({ name: "HomePage" });
+        } else {
+          console.log("The username and / or password is incorrect");
+        }
+      } else {
+        console.log("A username and password must be present");
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .login-bg {
-  min-height: 1000px;
-  min-width: 600px;
+  min-height: 950px;
   background-image: url(../assets/loginimage.png);
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
 }
 
-.login-form {
-  min-width: 50%;
+.login-title {
+  font-size: 24px;
+  font-weight: bold !important;
+  padding-top: 250px;
+  margin-bottom: -5px;
+  min-height: 100px;
+  overflow: hidden;
+}
+
+.login-header {
+  color: #000000;
+  font-weight: normal;
+  font-size: 0.9em;
 }
 </style>>
