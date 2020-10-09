@@ -31,12 +31,13 @@
                       name="username"
                       v-model="input.username"
                       placeholder="Username"
-                      filed
+                      filled
                       full-width
                       single-line
                       background-color="#f4f8f7"
                       color="grey darken-2"
                       prepend-inner-icon="mdi-account-outline"
+                      v-on:keyup.enter="login"
                     />
                     <v-text-field
                       class="pa-0 ma-0"
@@ -55,6 +56,7 @@
                       prepend-inner-icon="mdi-lock-outline"
                       autocomplete="password"
                       @click:append="show = !show"
+                      v-on:keyup.enter="login"
                     />
                     <v-btn
                       rounded
@@ -64,6 +66,7 @@
                       class="mt-4 mb-5"
                       style="width: 200px"
                       v-on:click="login()"
+                      v-on:keyup.enter="login"
                     >
                       Log in
                     </v-btn>
@@ -125,7 +128,7 @@ export default {
 
 <style scoped>
 .login-bg {
-  min-height: 950px;
+  min-height: 100%;
   background-image: url(../assets/loginimage.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -135,9 +138,8 @@ export default {
 .login-title {
   font-size: 24px;
   font-weight: bold !important;
-  padding-top: 250px;
+  padding-top: 25%;
   margin-bottom: -5px;
-  min-height: 100px;
   overflow: hidden;
 }
 
@@ -146,4 +148,4 @@ export default {
   font-weight: normal;
   font-size: 0.9em;
 }
-</style>>
+</style>

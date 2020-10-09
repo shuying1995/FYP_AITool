@@ -6,8 +6,7 @@
         to="/homepage"
         v-on:click.native="logout()"
         replace
-        >Logout</router-link
-      >
+      ></router-link>
     </div>
     <router-view @authenticated="setAuthenticated" />
   </v-app>
