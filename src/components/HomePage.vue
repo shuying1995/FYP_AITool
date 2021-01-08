@@ -1,83 +1,445 @@
 <template>
   <v-main>
-    <v-toolbar height="70%">
-      <v-toolbar-side-icon>
-        <v-img src="../assets/logo.png" width="25%"> </v-img>
-      </v-toolbar-side-icon>
-      <v-row justify="end">
-        <v-btn icon>
-          <v-icon>mdi-account-outline</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-home-outline</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-bell-outline</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-help-circle-outline</v-icon>
-        </v-btn>
-      </v-row>
-    </v-toolbar>
-
     <v-container fluid>
       <v-card>
-        <v-row>
+        <v-row class="mr-4">
           <v-col class="ml-8">
-            <v-tabs v-model="tab">
-              <v-tab v-for="item in items" :key="item.tab">
-                {{ item.tab }}
+            <v-tabs v-model="activetab" color="orange">
+              <v-tab v-for="tab of tabs" :key="tab.index">
+              {{ tab.name }}
               </v-tab>
+              
+              <v-tab-item>
+                <v-card flat>
+                  <v-card-text>
+                    <v-layout row wrap ml-3 mr-1>
+                      <v-col class="text-right">
+                        <v-menu offset-y>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn v-bind="attrs" v-on="on" rounded>
+                              Sort by
+                              <v-icon>mdi-chevron-down</v-icon>
+                            </v-btn>
+                          </template>
+                          <v-list>
+                            <v-list-item v-for="(item, index) in items" :key="index" link>
+                              <v-list-item-title>{{ item.title }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                        </v-menu>
+                      </v-col>
+                    </v-layout>
+
+                    <v-layout row wrap ml-1>
+                      <v-flex v-for="item in this.OnCards" :key="item.ID">
+                        <v-card class="ma-2" max-width="370" outlined>
+                          <v-list-item three-line>
+                            <v-list-item-content>
+                              <v-flex row wrap class="ma-0">
+                                <p class="pt-2">{{ item.Name }}</p>
+                                <v-spacer />
+                                <v-btn icon @click="item.IsPinned = !item.IsPinned">
+                                  <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
+                                  <v-icon v-if="item.IsPinned">mdi-pin</v-icon>
+                                </v-btn>
+                                <v-btn icon @click="item.IsFavourite = !item.IsFavourite">
+                                  <v-icon v-if="!item.IsFavourite">mdi-heart-outline</v-icon>
+                                  <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
+                                </v-btn>
+                              </v-flex>
+                              <p class="pt-2">Date of creation: {{ item.CreatedDate }}</p>
+                              <p class="pt-2">Member: {{ item.Member }}</p>
+                              <v-progress-linear
+                                v-model="item.Progress"
+                                color="amber"
+                                height="25"
+                                ><template>
+                                  <strong>{{ item.Progress }}%</strong>
+                                </template>
+                              </v-progress-linear>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-card>
+                      </v-flex>
+                    </v-layout>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+
+              <v-tab-item>
+                <v-layout row wrap ml-3 mr-1>
+                  <v-col class="text-right">
+                    <v-menu offset-y>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn v-bind="attrs" v-on="on" rounded>
+                          Sort by
+                          <v-icon>mdi-chevron-down</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item v-for="(item, index) in items" :key="index" link>
+                          <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </v-col>
+                </v-layout>
+
+                <v-layout row wrap ml-1>
+                  <v-flex v-for="item in this.PRCards" :key="item.ID">
+                    <v-card class="ma-2" max-width="370" outlined>
+                      <v-list-item three-line>
+                        <v-list-item-content>
+                          <p class="pt-2">{{ item.Name }}</p>
+                          <v-card class="my-3" outlined height="120px">
+                            <p class="pt-2">{{ item.Message }}</p>
+                          </v-card>
+                          <v-flex row wrap class="justify-center">
+                            <v-btn color="success" @click="DesDesignProject">
+                              Accept
+                              <v-icon>mdi-check-circle-outline</v-icon>
+                            </v-btn>
+                            <v-btn color="error">
+                              Reject
+                              <v-icon>mdi-close-circle-outline</v-icon>
+                            </v-btn>
+                          </v-flex>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </v-tab-item>
+
+              <v-tab-item>
+                <v-layout row wrap ml-3 mr-1>
+                  <v-col class="text-right">
+                    <v-menu offset-y>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn v-bind="attrs" v-on="on" rounded>
+                          Sort by 
+                          <v-icon>mdi-chevron-down</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item v-for="(item, index) in items" :key="index" link>
+                          <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+
+                    <v-btn @click="CreateProject" class="ml-4">New Project</v-btn>
+                  </v-col>
+                </v-layout>
+
+                <v-layout row wrap ml-1>
+                  <v-flex v-for="item in this.MyCards" :key="item.ID">
+                    <v-card class="ma-2" max-width="370" outlined @contextmenu="show">
+                      <v-menu
+                        v-model="showMenu"
+                        :position-x="x"
+                        :position-y="y"
+                        absolute
+                        offset-y
+                      >
+                        <v-list>
+                          <v-list-item
+                            v-for="(item, index) in menuitems"
+                            :key="index"
+                            link
+                            @click="item.action"
+                          >
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                      
+                      <v-list-item three-line>
+                        <v-list-item-content>
+                          <v-flex row wrap class="ma-0">
+                            <p class="pt-2">{{ item.Name }}</p>
+                            <v-spacer />
+                            <v-btn icon @click="item.IsPinned = !item.IsPinned">
+                              <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
+                              <v-icon v-if="item.IsPinned">mdi-pin</v-icon>
+                            </v-btn>
+                            <v-btn icon @click="item.IsFavourite = !item.IsFavourite">
+                              <v-icon v-if="!item.IsFavourite">mdi-heart-outline</v-icon>
+                              <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
+                            </v-btn>
+                          </v-flex>
+                          <p class="pt-2">Date of creation: {{ item.CreatedDate }}</p>
+                          <p class="pt-2">Member: {{ item.Member }}</p>
+                          <v-progress-linear
+                            v-model="item.Progress"
+                            color="amber"
+                            height="25"
+                            ><template>
+                              <strong>{{ item.Progress }}%</strong>
+                            </template>
+                          </v-progress-linear>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </v-tab-item>
             </v-tabs>
           </v-col>
-          <v-col class="text-right">
-            <v-btn>
-              Create New
-            </v-btn>
-          </v-col>
         </v-row>
-        <v-tabs-items v-model="tab">
-          <v-tab-item v-for="item in items" :key="item.tab">
-            <v-card flat>
-              <v-card-text>
-                <component v-bind:is="item.content"></component>
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
       </v-card>
     </v-container>
   </v-main>
 </template>
 
 <script>
-import HomePageOngoingP from "../components/HomePageOngoingP";
-import HomePagePReq from "../components/HomePagePReq";
-import HomePageMyP from "../components/HomePageMyP";
 
 export default {
   name: "HomePage",
   title: "Home",
-  components: {
-    HomePageOngoingP,
-    HomePagePReq,
-    HomePageMyP,
-  },
-
   data() {
     return {
-      tab: null,
+      activetab: 0,
+      tabs: [
+      { index: 0, name: "Ongoing Projects" },
+      { index: 1, name: "Project Requests" },
+      { index: 2, name: "My Projects" },
+    ],
+      showMenu: false,
+      x: 0,
+      y: 0,
+      menuitems: [
+        { title: 'Edit', action: this.EditTeam },
+        { title: 'Delete', action: this.DeleteTeam },
+      ],
       items: [
-        { tab: "Ongoing Projects", content: "HomePageOngoingP" },
-        { tab: "Project Requests", content: "HomePagePReq" },
-        { tab: "My Projects", content: "HomePageMyP" },
+        { title: "Date: New to old" },
+        { title: "Date: Old to new" },
+        { title: "Progress: High to low" },
+        { title: "Progress: Low to high" },
+        { title: "Favourited" },
+      ],
+      OnCards: [
+        {
+          ID: "1",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: false,
+          IsFavourite: false,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "50",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "70",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "100",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "0",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+      ],
+      PRCards: [
+        {
+          ID: "1",
+          Name: "XX",
+          Message: "Project Description",
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          Message: "Project Description",
+        },
+        {
+          ID: "3",
+          Name: "YY",
+          Message: "Project Description",
+        },
+      ],
+      MyCards: [
+        {
+          ID: "1",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: false,
+          IsFavourite: false,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "50",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "70",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "100",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "0",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          CreatedDate: "10 Oct",
+          Member: "2",
+          Progress: "30",
+          IsPinned: true,
+          IsFavourite: true,
+        },
       ],
     };
   },
+  created: function(){
+  console.log(this.activetab=JSON.parse(window.localStorage.getItem('activetab'))); 
+  },
+  methods: {
+        CreateProject() {
+            this.$router.push({ name: "CreateProject" });
+        },
+        EditTeam(){
+        this.$router.push({ name: "EditProjects"});
+        },
+        DeleteTeam(){
+        this.$router.push({ name: "DeleteProjects"});
+        },
+        DesDesignProject(){
+        this.$router.push({ name:"DesDesignProject"});
+        },
+        show (e) {
+        e.preventDefault()
+        this.showMenu = false
+        this.x = e.clientX
+        this.y = e.clientY
+        this.$nextTick(() => {
+          this.showMenu = true
+        })
+      },
+    }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-btn {
+  margin-left: 10px;
+}
+
+.custom .v-btn {
+  width: 108px;
+  min-width: 108px;
+}
+</style>

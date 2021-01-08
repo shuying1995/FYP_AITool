@@ -1,5 +1,5 @@
 <template>
-  <v-content style="height: 100% !important">
+  <v-main style="height: 100% !important">
     <v-container pa-0 fluid fill-height>
       <v-layout>
         <v-row>
@@ -88,7 +88,7 @@
         </v-row>
       </v-layout>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script>
@@ -114,6 +114,7 @@ export default {
             this.$parent.$root.$children[0].mockAccount.password
         ) {
           this.$emit("authenticated", true);
+          window.localStorage.setItem('activetab', 0);
           this.$router.push({ name: "HomePage" });
         } else {
           console.log("The username and / or password is incorrect");

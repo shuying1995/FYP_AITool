@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <div id="nav">
+      <AppBar />
       <router-link
         v-if="authenticated"
         to="/homepage"
@@ -13,10 +14,13 @@
 </template>
 
 <script>
+import AppBar from "./components/Appbar";
 export default {
   name: "App",
 
-  components: {},
+  components: {
+    AppBar,
+  },
 
   data() {
     return {
