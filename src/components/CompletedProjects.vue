@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
                         <a>ACCOUNT</a>
                         <p>></p>
@@ -51,13 +51,13 @@
 <script>
 export default {
   methods: {
-        Home() {
+        home() {
             this.$router.push({ name: "HomePage" });
         },
-        MyProjects(){
+        myprojects(){
             this.$router.push({ name: "HomePage"});
         },
-        Profile() {
+        profile() {
           this.$router.push({ name: "Profile"});
         }
     },
@@ -65,11 +65,11 @@ export default {
     return {
         dialog: false,
         items: [
-          { title: 'My Profile', icon: 'mdi-account-outline', action: this.Profile},
-          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.MyProjects},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.TeamManagement},
-          { title: 'Completed Projects', icon: 'mdi-calendar-check', action: this.CompletedProjects},
-          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.FAQs}
+          { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
+          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
+          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
+          { title: 'Completed Projects', icon: 'mdi-calendar-check', action: this.completedprojects},
+          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
         ],
       }
     },

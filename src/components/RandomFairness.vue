@@ -4,7 +4,7 @@
             <v-card v-if="!showComponent">
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
                         <p>DESIGN PROJECT</p>
                     </v-flex>
@@ -36,7 +36,7 @@
                 </v-flex>
 
                 <v-flex class="justify-end pa-2" row wrap>
-                        <v-btn color="warning" @click="InputFairness">Next</v-btn>
+                        <v-btn color="warning" @click="inputfairness">Next</v-btn>
                 </v-flex>
             </v-card>
 
@@ -74,18 +74,18 @@ data() {
     randomItem (items) {
       return items[Math.floor(Math.random()*items.length)];
     },
-    Home(){
+    home(){
         this.$router.push({ name: "HomePage"});
     },
-    InputFairness(){
+    inputfairness(){
         this.showComponent=!this.showComponent;
     },
-    Flip(){
+    flip(){
         this.showFront=!this.showFront;
     }
   },
   created() {
-    console.log(this.selectedImage = this.randomItem(this.images))
+    this.selectedImage = this.randomItem(this.images)
   },
 }
 </script>

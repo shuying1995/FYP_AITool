@@ -29,7 +29,7 @@
                     <v-text-field
                       class="pa-0 ma-0"
                       name="username"
-                      v-model="input.username"
+                      v-model="username"
                       placeholder="Username"
                       filled
                       full-width
@@ -42,7 +42,7 @@
                     <v-text-field
                       class="pa-0 ma-0"
                       name="password"
-                      v-model="input.password"
+                      v-model="password"
                       placeholder="Password"
                       :append-icon="
                         show ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
@@ -65,7 +65,7 @@
                       color="teal"
                       class="mt-4 mb-5"
                       style="width: 200px"
-                      v-on:click="login()"
+                      @click="login"
                       v-on:keyup.enter="login"
                     >
                       Log in
@@ -76,7 +76,7 @@
                   </v-row>
                   <v-row class="justify-center mt-8">
                     <span
-                      >Don't have an account?<a href="/signup">
+                      >Don't have an account?<a @click="register">
                         Sign up!</a
                       ></span
                     >
@@ -87,42 +87,60 @@
           </v-flex>
         </v-row>
       </v-layout>
+      <v-snackbar
+        v-model="snackbar"
+        :color="color"
+        :top="true"
+      >
+        {{ errorMessages }}
+        <v-btn
+          dark
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
     </v-container>
   </v-main>
 </template>
 
 <script>
+const axios = require('axios');
 export default {
   name: "LoginPage",
   title: "Login",
   data() {
     return {
-      show: "",
-      input: {
         username: "",
         password: "",
-      },
-    };
+        errorMessages: "Incorrect login info",
+        snackbar: false,
+        color: "general"
+      }
   },
   methods: {
-    login() {
-      if (this.input.username != "" && this.input.password != "") {
-        if (
-          this.input.username ==
-            this.$parent.$root.$children[0].mockAccount.username &&
-          this.input.password ==
-            this.$parent.$root.$children[0].mockAccount.password
-        ) {
-          this.$emit("authenticated", true);
-          window.localStorage.setItem('activetab', 0);
-          this.$router.push({ name: "HomePage" });
-        } else {
-          console.log("The username and / or password is incorrect");
-        }
-      } else {
-        console.log("A username and password must be present");
-      }
+    login(){
+            axios
+            .post('api/login', {
+                username: this.username,
+                password: this.password
+            })
+            .then((response) => {
+                if(response.data=="Member")
+                this.$router.push({ name: "HomePage"})
+                else
+                this.$router.push({ name: "FacilitatorHomePage"})
+            })
+            .catch((error) => {
+              this.snackbar = true;
+              this.color = "error";
+                console.log(error)
+            })
     },
+    register(){
+      this.$router.push({ name: "Register"});
+    }
   },
 };
 </script>

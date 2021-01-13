@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
                         <p>DESIGN PROJECT</p>
                     </v-flex>
@@ -33,7 +33,7 @@
                         <v-textarea placeholder="Placeholder" outlined height="70px"></v-textarea>
                         <h3>What can go wrong?</h3>
                         <v-textarea placeholder="Placeholder" outlined height="70px"></v-textarea>
-                        <v-btn color="warning" @click="RatingFairness">Next</v-btn>
+                        <v-btn color="warning" @click="ratingfairness">Next</v-btn>
                     </v-col>
                 </v-row>
             </v-card>
@@ -50,10 +50,10 @@ props: {
     }
 },
 methods:{
-    Home(){
+    home(){
         this.$router.push({ name: "HomePage"});
         },
-    RatingFairness(){
+    ratingfairness(){
         this.$router.push({ name: "RatingFairness"});
         },
     }

@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
                         <p>DESIGN PROJECT</p>
                     </v-flex>
@@ -24,7 +24,7 @@
                 </v-row>
 
                 <v-flex class="justify-end pa-2" row wrap>
-                        <v-btn color="warning" @click="InputStakeholders">Next</v-btn>
+                        <v-btn color="warning" @click="inputstakeholders">Next</v-btn>
                 </v-flex>
             </v-card>
         </v-container>
@@ -34,10 +34,10 @@
 <script>
 export default {
 methods:{
-    Home(){
+    home(){
         this.$router.push({ name: "HomePage"});
         },
-    InputStakeholders(){
+    inputstakeholders(){
         this.$router.push({ name: "InputStakeholders"});
     }
     }

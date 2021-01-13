@@ -6,7 +6,7 @@
       </v-toolbar-side-icon>
       <v-row justify="end">
         <v-btn icon>
-          <v-icon @click="Home" color="orange">mdi-home-outline</v-icon>
+          <v-icon @click="home" color="orange">mdi-home-outline</v-icon>
         </v-btn>
         <v-btn icon>
           <v-icon color="orange">mdi-message-bulleted</v-icon>
@@ -15,7 +15,7 @@
           <v-icon color="orange">mdi-bell-outline</v-icon>
         </v-btn>
         <v-btn icon>
-          <v-icon color="orange">mdi-account-outline</v-icon>
+          <v-icon @click="profile" color="orange">mdi-account-outline</v-icon>
         </v-btn>
 
         <v-col cols="2" class="pb-0">
@@ -35,9 +35,12 @@
 export default {
     name: "Appbar",
     methods: {
-        Home() {
+        home() {
             this.$router.push({ name: "HomePage" });
         },
+        profile() {
+            this.$router.push({ name: "Profile"});
+        }
     },
     data() {
     return {

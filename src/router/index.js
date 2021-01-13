@@ -14,6 +14,8 @@ import RandomFairness from "../components/RandomFairness";
 import InputFairness from "../components/InputFairness";
 import RatingFairness from "../components/RatingFairness";
 import DesDesignProject from "../components/DesDesignProject";
+import Register from "../components/Register";
+import FacilitatorHomePage from "../components/FacilitatorHomePage"
 
 Vue.use(VueRouter);
 
@@ -87,6 +89,16 @@ const routes = [
     path: "/desdesignproject",
     name: "DesDesignProject",
     component: DesDesignProject
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register
+  },
+  {
+    path: "/facilitatorhomepage",
+    name: "FacilitatorHomePage",
+    component: FacilitatorHomePage
   },
 ];
 

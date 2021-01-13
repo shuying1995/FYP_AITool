@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="Home">hOME</a>
                         <p>></p>
                         <p>CREATE NEW</p>
                     </v-flex>
@@ -17,6 +17,7 @@
                     <v-row justify="center">
                         <v-col cols="6">
                             <v-text-field
+                            v-model="projectname"
                             class="centered-input" 
                             placeholder="Eg. Design Project 1" 
                             filled 
@@ -34,13 +35,14 @@
                             <v-textarea 
                             placeholder="What is the application that will be the focus of the discussion? It can be your product or a fictional one. Indicate which component of the product is related to the fairness." 
                             filled 
+                            v-model="appscenario"
                             required>
                             </v-textarea>
                         </v-col>
                     </v-row>
 
                     <v-flex class="justify-end pa-2" row wrap>
-                        <v-btn @click="DesignProject" color="success">Create</v-btn>
+                        <v-btn @click="designproject" color="success">Create</v-btn>
                     </v-flex>
             </v-card>
         </v-container>
@@ -49,11 +51,17 @@
 
 <script>
 export default {
+    data(){
+        return{
+            projectname:"",
+            appscenario:""
+        }
+    },
     methods:{
-        Home(){
+        home(){
         this.$router.push({ name: "HomePage"});
         },
-        DesignProject(){
+        designproject(){
         this.$router.push({ name: "DesignProject"});
         }
     }

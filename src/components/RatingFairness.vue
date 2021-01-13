@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
                         <p>DESIGN PROJECT</p>
                     </v-flex>
@@ -47,7 +47,7 @@
 <script>
 export default {
 methods: {
-    Home(){
+    home(){
         this.$router.push({ name: "HomePage"});
     },
 }

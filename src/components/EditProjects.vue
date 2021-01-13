@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
                         <a @click="MyProjects">MY PROJECTS</a>
                         <p>></p>
@@ -112,21 +112,22 @@
 <script>
 export default {
     methods: {
-        Home() {
-            window.localStorage.setItem('activetab', 0);
-            this.$router.push({ name: "HomePage" });
+        home() {
+            //set active tab in local storage
+            //window.localStorage.setItem('activetab', 0);
+            this.$router.push({ name: "FacilitatorHomePage" });
         },
-        MyProjects() {
-            window.localStorage.setItem('activetab', 2);
-            this.$router.push({ name: "HomePage"});
+        myprojects() {
+            //window.localStorage.setItem('activetab', 0);
+            this.$router.push({ name: "FacilitatorHomePage"});
         },
-        InviteMembers() {
+        inviteMembers() {
             this.$router.push({ name: "InviteMembers"});
         },
-        Profile() {
+        profile() {
             this.$router.push({ name:"Profile"});
         },
-        CompletedProjects() {
+        completedprojects() {
             this.$router.push({ name: "CompletedProjects"});
         }
     },
@@ -134,11 +135,11 @@ export default {
     return {
         dialog: false,
         items: [
-          { title: 'My Profile', icon: 'mdi-account-outline', action: this.Profile},
-          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.MyProjects},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.TeamManagement},
-          { title: 'Completed Projects', icon: 'mdi-calendar-check', action: this.CompletedProjects},
-          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.FAQs}
+          { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
+          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
+          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
+          { title: 'Completed Projects', icon: 'mdi-calendar-check', action: this.completedprojects},
+          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
         ],
       }
     },

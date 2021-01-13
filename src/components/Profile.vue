@@ -4,9 +4,9 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">HOME</a>
+                        <a @click="home">HOME</a>
                         <p>></p>
-                        <a @click="MyProjects">ACCOUNT</a>
+                        <a @click="myprojects">ACCOUNT</a>
                         <p>></p>
                         <p>MY PROFILE</p>
                     </v-flex>
@@ -93,16 +93,16 @@
 <script>
 export default {
     methods: {
-        Home() {
+        home() {
             this.$router.push({ name: "HomePage" });
         },
-        Account() {
+        account() {
             this.$router.push({ name: "Account"});
         },
-        MyProjects(){
+        myprojects(){
             this.$router.push({ name: "HomePage"});
         },
-        CompletedProjects(){
+        completedprojects(){
             this.$router.push({ name: "CompletedProjects"});
         }
     },
@@ -110,11 +110,11 @@ export default {
     return {
         dialog: false,
         items: [
-          { title: 'My Profile', icon: 'mdi-account-outline', action: this.Profile},
-          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.MyProjects},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.TeamManagement},
-          { title: 'Completed Project', icon: 'mdi-calendar-check', action: this.CompletedProjects},
-          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.FAQs}
+          { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
+          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
+          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
+          { title: 'Completed Project', icon: 'mdi-calendar-check', action: this.completedprojects},
+          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
         ],
       }
     }
