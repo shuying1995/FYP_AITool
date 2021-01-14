@@ -50,6 +50,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
     data(){
         return{
@@ -63,6 +64,9 @@ export default {
         },
         designproject(){
         this.$router.push({ name: "DesignProject"});
+        },
+        create(){
+            axios
         }
     }
 }

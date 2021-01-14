@@ -112,6 +112,7 @@ export default {
   title: "Login",
   data() {
     return {
+        show:false,
         username: "",
         password: "",
         errorMessages: "Incorrect login info",

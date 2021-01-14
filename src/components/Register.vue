@@ -24,6 +24,7 @@ export default {
     },
     methods: {
         register(){
+            console.log("Hi")
             axios
             .post('api/register', {
                 name: this.name,
