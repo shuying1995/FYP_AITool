@@ -4,7 +4,7 @@
             <v-card>
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
-                        <a @click="Home">hOME</a>
+                        <a @click="Home">HOME</a>
                         <p>></p>
                         <p>CREATE NEW</p>
                     </v-flex>

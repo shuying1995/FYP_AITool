@@ -100,7 +100,7 @@ export default {
             this.$router.push({ name: "Account"});
         },
         myprojects(){
-            this.$router.push({ name: "HomePage"});
+            this.$router.push({ name: "FacilitatorHomePage"});
         },
         completedprojects(){
             this.$router.push({ name: "CompletedProjects"});
