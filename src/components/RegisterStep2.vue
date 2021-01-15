@@ -41,7 +41,6 @@
                         outlined 
                         dense
                         placeholder="Not at all"
-                        :rules="[rules.required]"
                         />
 
                         <p>How long ago did your team begin prioritizing fairness in AI/ML?</p>
@@ -51,7 +50,6 @@
                         outlined 
                         dense
                         placeholder="We are just beginning to"
-                        :rules="[rules.required]"
                         />
 
                         <p>Is fairness in AI/ML something you would like your team to prioritize more?</p>
@@ -61,7 +59,6 @@
                         outlined 
                         dense
                         placeholder="No"
-                        :rules="[rules.required]"
                         />
 
                         <p>In general, do you think other people on your team would like to prioritize fairness more?</p>
@@ -71,11 +68,16 @@
                         outlined 
                         dense
                         placeholder="Definitely not"
-                        :rules="[rules.required]"
                         />
 
-                        <v-flex class="justify-end" row wrap>
-                        <v-btn @click="registerstep1" color="#757575" class="white--text">Previous step</v-btn>
+                        <v-flex class="justify-end pl-3" row wrap>
+                        <v-btn 
+                         @click="registerstep1" 
+                         color="#757575" 
+                         class="white--text"
+                         >
+                         Previous step
+                         </v-btn>
                         <v-spacer/>
                         <v-btn @click="registerstep3" color="warning">Next</v-btn>
                     </v-flex>
@@ -100,7 +102,6 @@ data(){
         q7:'',
         q8items: ['Definitely not','Probably not','Might or might not','Probably yes','Definitely yes'],
         q8:'',
-        rules: {required: value=> !!value || 'Required'},
     }
 },
 methods: {

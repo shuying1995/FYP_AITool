@@ -41,7 +41,6 @@
                      placeholder="Given Name" 
                      outlined 
                      dense
-                     :rules="[rules.required]"
                      />
                     <p>Last Name</p>
                     <v-text-field 
@@ -49,7 +48,6 @@
                      placeholder="Family Name" 
                      outlined 
                      dense
-                     :rules="[rules.required]"
                      />
                      <p>Gender</p>
                      <v-select 
@@ -58,7 +56,6 @@
                       outlined 
                       dense
                       placeholder="Select gender"
-                      :rules="[rules.required]"
                       />
                       <p>Age</p>
                       <v-select 
@@ -67,14 +64,14 @@
                       outlined
                       dense
                       placeholder="Select age"
-                      :rules="[rules.required]"
                       />
 
                       <p>Q1. Which of the following best describes your role on your team?</p>
                       <p>(Please check all that apply)</p>
                       <v-flex row wrap>
                       <v-col md="6"> 
-                        <table>
+                        <v-simple-table>
+                          <tbody>
                           <tr>  
                             <td>
                           <v-checkbox 
@@ -131,10 +128,12 @@
                            v-model="q1"/>
                             </td>
                           </tr>
-                        </table>
+                          </tbody>
+                        </v-simple-table>
                       </v-col>
                       <v-col md="6">
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td>
                           <v-checkbox 
@@ -175,6 +174,8 @@
                            />
                             </td>
                           </tr>
+                          </tbody>
+                          </v-simple-table>
                            <p>Others (Please Specify)</p>
                             <v-text-field 
                             v-model="q1other"
@@ -183,7 +184,6 @@
                             :disabled="disabled"
                             placeholder="Others"
                             />
-                          </table>
                       </v-col>
                       </v-flex>
 
@@ -191,7 +191,8 @@
                       <p>(Please check all that apply)</p>
                       <v-flex row wrap>
                       <v-col md="6">
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td>    
                           <v-checkbox 
@@ -240,10 +241,12 @@
                            v-model="q2"/>
                             </td>
                           </tr>
-                          </table>
+                            </tbody>
+                          </v-simple-table>
                       </v-col>
                       <v-col md="6">
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td>  
                           <v-checkbox 
@@ -284,6 +287,8 @@
                            />
                             </td>
                            </tr>
+                           </tbody>
+                          </v-simple-table>
                            <p>Others (Please Specify)</p>
                             <v-text-field 
                             v-model="q2other"
@@ -292,7 +297,6 @@
                             placeholder="Others"
                             dense
                             /> 
-                        </table>
                       </v-col>
                       </v-flex>
 
@@ -300,7 +304,8 @@
                       <p>(Please check all that apply)</p>
                       <v-flex row wrap>
                       <v-col md="6">   
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td> 
                           <v-checkbox 
@@ -349,10 +354,12 @@
                            v-model="q3"/>
                             </td>
                           </tr>
-                          </table>
+                            </tbody>
+                          </v-simple-table>
                       </v-col>
                       <v-col md="6">
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td>
                           <v-checkbox 
@@ -393,6 +400,8 @@
                            />
                             </td>
                           </tr>
+                          </tbody>
+                          </v-simple-table>
                            <p>Others (Please Specify)</p>
                             <v-text-field 
                             v-model="q3other"
@@ -401,7 +410,6 @@
                             :disabled="disabled"
                             dense
                             /> 
-                          </table>
                       </v-col>
                       </v-flex>
 
@@ -409,7 +417,8 @@
                       <p>(Please check all that apply)</p>
                       <v-flex row wrap>
                       <v-col md="6"> 
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td>
                           <v-checkbox 
@@ -434,10 +443,12 @@
                            v-model="q4"/>
                             </td>
                           </tr>
-                        </table>
+                            </tbody>
+                        </v-simple-table>
                       </v-col>
                       <v-col md="6">
-                          <table>
+                          <v-simple-table>
+                            <tbody>
                           <tr>
                             <td>
                           <v-checkbox 
@@ -470,7 +481,8 @@
                            v-model="q4"/>
                             </td>
                           </tr>
-                        </table> 
+                            </tbody>
+                        </v-simple-table> 
                       </v-col>
                       </v-flex>
                       <v-flex class="justify-end" row wrap>
@@ -503,7 +515,6 @@ export default {
             q3:[],
             q3other:'',
             q4:[],
-            rules: {required: value=> !!value || 'Required'},
         }
     },
     methods:{
@@ -511,9 +522,6 @@ export default {
             this.disabled=!this.disabled
         },
         registerstep2(){
-            if(this.q1.length==0){
-                this.snackbar=true;
-            }
             this.$router.push({ name: "RegisterStep2"}
             )
         },
@@ -530,21 +538,15 @@ export default {
     width: 300px;
 }
 
-table
-{
-    table-layout: fixed;
-    width: 80%;
-    border-collapse: collapse;
-}
-
-td {
+tr, td {
   border: 1px solid black;
   padding-left: 10px;
 }
 
-p{
-    margin:0;
-    padding:0
+p {
+  margin:0;
+  padding-top:0;
 }
+
 </style>>
 

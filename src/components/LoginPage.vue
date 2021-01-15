@@ -58,6 +58,7 @@
                       @click:append="show = !show"
                       v-on:keyup.enter="login"
                     />
+                    <v-flex row wrap class="justify-center">
                     <v-btn
                       rounded
                       dark
@@ -70,6 +71,7 @@
                     >
                       Log in
                     </v-btn>
+                    </v-flex>
                   </v-form>
                   <v-row class="justify-end mt-2">
                     <span><a href="/forgot">Forget password?</a></span>
