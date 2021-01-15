@@ -16,11 +16,11 @@ import RatingFairness from "../components/RatingFairness.vue";
 import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
 import FacilitatorHomePage from "../components/FacilitatorHomePage.vue";
-import RegisterStep1 from "../components/RegisterStep1.vue";
-import RegisterStep2 from "../components/RegisterStep2.vue";
-import RegisterStep3 from "../components/RegisterStep3.vue";
-import RegisterStep4 from "../components/RegisterStep4.vue";
-import RegisterStep5 from "../components/RegisterStep5.vue";
+//import RegisterStep1 from "../components/RegisterStep1.vue";
+//import RegisterStep2 from "../components/RegisterStep2.vue";
+//import RegisterStep3 from "../components/RegisterStep3.vue";
+//import RegisterStep4 from "../components/RegisterStep4.vue";
+//import RegisterStep5 from "../components/RegisterStep5.vue";
 
 Vue.use(VueRouter);
 
@@ -105,7 +105,7 @@ const routes = [
     name: "FacilitatorHomePage",
     component: FacilitatorHomePage
   },
-  {
+  /*{
     path: "/registerstep1",
     name: "RegisterStep1",
     component: RegisterStep1
@@ -129,7 +129,7 @@ const routes = [
     path: "/registerstep5",
     name: "RegisterStep5",
     component: RegisterStep5
-  },
+  },*/
 ];
 
 const router = new VueRouter({

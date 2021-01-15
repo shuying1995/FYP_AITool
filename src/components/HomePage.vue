@@ -71,7 +71,7 @@
                   <v-col class="text-right">
                     <v-menu offset-y>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs" v-on="on" rounded>
+                        <v-btn v-bind="attrs" v-on="on" rounded text>
                           Sort by
                           <v-icon>mdi-chevron-down</v-icon>
                         </v-btn>

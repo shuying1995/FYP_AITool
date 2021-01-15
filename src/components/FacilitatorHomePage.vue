@@ -14,7 +14,7 @@
                   <v-col class="text-right">
                     <v-menu offset-y>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs" v-on="on" rounded>
+                        <v-btn v-bind="attrs" v-on="on" rounded text>
                           Sort by 
                           <v-icon>mdi-chevron-down</v-icon>
                         </v-btn>
@@ -26,13 +26,26 @@
                       </v-list>
                     </v-menu>
 
-                    <v-btn @click="createproject" class="ml-4">New Project</v-btn>
+                    <v-btn 
+                     @click="createproject" 
+                     class="ml-4" 
+                     color="success"
+                     >
+                     <v-icon>mdi-plus</v-icon>
+                     New Project
+                     </v-btn>
                   </v-col>
                 </v-layout>
 
                 <v-layout row wrap ml-1>
-                  <v-flex v-for="item in this.MyCards" :key="item.ID">
-                    <v-card class="ma-2" max-width="370" outlined @contextmenu="show">
+                  <v-flex v-for="item in this.MyCards" :key="item.ID" row wrap>
+                    <v-card 
+                     class="ma-2" 
+                     max-width="330" 
+                     outlined 
+                     @contextmenu="show" 
+                     color="amber darken-1"
+                     >
                       <v-menu
                         v-model="showMenu"
                         :position-x="x"
@@ -55,7 +68,7 @@
                       <v-list-item three-line>
                         <v-list-item-content>
                           <v-flex row wrap class="ma-0">
-                            <p class="pt-2">{{ item.Name }}</p>
+                            <p class="pt-2">Date created: {{ item.CreatedDate }}</p>
                             <v-spacer />
                             <v-btn icon @click="item.IsPinned = !item.IsPinned">
                               <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
@@ -66,16 +79,18 @@
                               <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
                             </v-btn>
                           </v-flex>
-                          <p class="pt-2">Date of creation: {{ item.CreatedDate }}</p>
-                          <p class="pt-2">Member: {{ item.Member }}</p>
+                          <v-flex row wrap class="justify-center">
+                            <h2>{{item.Name}}</h2>
+                          </v-flex>
+                          <p>Progress</p>
                           <v-progress-linear
+                            background-color="grey lighten-2"
+                            color="red"
                             v-model="item.Progress"
-                            color="amber"
-                            height="25"
-                            ><template>
-                              <strong>{{ item.Progress }}%</strong>
-                            </template>
-                          </v-progress-linear>
+                            height="15"
+                            />
+                            <v-divider></v-divider>
+                          <p class="pt-2">Member: {{ item.Member }}</p>
                         </v-list-item-content>
                       </v-list-item>
                     </v-card>
@@ -115,7 +130,7 @@ data(){
         MyCards: [
         {
           ID: "1",
-          Name: "XX",
+          Name: "Project 1",
           CreatedDate: "10 Oct",
           Member: "2",
           Progress: "30",

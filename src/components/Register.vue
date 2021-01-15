@@ -1,31 +1,66 @@
 <template>
     <v-main>
+      <v-container pa-0 fluid fill-height>
+        <v-layout fill-height justify-center>
         <v-form>
             <v-text-field 
-            placeholder="name" 
+            placeholder="Name" 
             v-model="name"
-            :rules="[rules.required]"
+            outlined
+            dense
             />
             <v-text-field 
-            placeholder="username"
-            :rules="[rules.required,rules.usernamemin]" 
-            hint="At least 5 characters"
+            placeholder="Username"
             v-model="username"
+            outlined
+            dense
             />
             <v-text-field 
-            placeholder="email" 
+            placeholder="Email" 
             v-model="email"
-            :rules="[rules.required]"
+            outlined
+            dense
             />
             <v-text-field 
-            placeholder="password" 
+            placeholder="Password" 
             v-model="password"
-            :rules="[rules.required,rules.passwordmin]"
-            hint="At least 8 characters"
+            outlined
+            dense
             />
+            <v-text-field 
+            placeholder="Re-enter password" 
+            v-model="repassword"
+            :rules="[passwordConfirmationRule]"
+            outlined
+            dense
+            />
+
+            <p>Do you want to open a facilitator or member account? Or both?</p>
+                       <v-card 
+                        outlined 
+                        max-width="700px" 
+                        color="#E0E0E0"
+                        class="mb-4 mt-2"
+                        >
+                        <v-card-text>
+                           Facilitator account allows you to create projects and invite members only. 
+                           Member account allows you to participate in projects only. 
+                           Having both facilitator and member account gives you the flexibility to do both and 
+                           you can switch between the accounts using the same username.
+                        </v-card-text>
+                       </v-card>
+                        <v-select 
+                            v-model="role"
+                            :items="roleitems" 
+                            outlined 
+                            dense
+                            placeholder="Facilitator Only"
+                        />
 
             <v-btn @click="register">Submit</v-btn>
         </v-form>
+        </v-layout>
+      </v-container>
     </v-main>
 </template>
 
@@ -34,18 +69,22 @@ const axios = require('axios');
 export default {
     data(){
         return{
-            rules:{
-            required: value => !!value || 'Required',
-            usernamemin: v => v.length >= 5 || 'Minimum 5 characters',
-            passwordmin: v => v.length >= 8 || 'Minimum 8 characters',
-            passwordMatch: () => ('Password you entered does not match')
-            },
             name: '',
             username:'',
             email:'',
             password:'',
+            repassword:'',
+            role:'',
+            roleitems:['Facilitator only','Member only','Both facilitator and member'],
         }
     },
+
+    computed: {
+    passwordConfirmationRule() {
+      return this.password === this.repassword || 'Password must match'
+    }
+},
+
     methods: {
         register(){
             axios
@@ -67,5 +106,12 @@ export default {
 </script>
 
 <style scoped>
+.v-text-field{
+    width: 400px;
+}
 
+p{
+    margin:0;
+    padding:0
+}
 </style>
