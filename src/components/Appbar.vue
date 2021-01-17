@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-toolbar fixed height="70%">
-      <v-toolbar-side-icon>
+      <v-toolbar-side-icon class="ml-4">
         <v-img src="../assets/logo.png" width="25%"> </v-img>
       </v-toolbar-side-icon>
       <v-row justify="end">
@@ -36,7 +36,7 @@ export default {
     name: "Appbar",
     methods: {
         home() {
-            this.$router.push({ name: "HomePage" });
+            this.$router.push({ name: "HomePageOP" });
         },
         profile() {
             this.$router.push({ name: "Profile"});

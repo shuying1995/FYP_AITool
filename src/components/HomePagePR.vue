@@ -1,0 +1,111 @@
+<template>
+    <v-main>
+        <v-container fluid>
+            <v-card>
+                <v-layout row wrap ml-7 mr-8>
+                  <v-flex row wrap class="custom ma-3 mt-6">
+                    <v-btn @click="homepageop" text>Ongoing Projects</v-btn>
+                    <v-btn text class="orange--text">Project Requests</v-btn>
+                  </v-flex>
+                  
+                  <v-col class="text-right mt-3">
+                    <v-menu offset-y>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn v-bind="attrs" v-on="on" rounded text>
+                          Sort by 
+                          <v-icon>mdi-chevron-down</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item v-for="(item, index) in items" :key="index" link>
+                          <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </v-col>
+                </v-layout>
+
+                <v-layout row wrap ml-8>
+                  <v-flex v-for="item in this.PRCards" :key="item.ID">
+                    <v-card 
+                     class="ma-2" 
+                     max-width="350" 
+                     outlined
+                     color="orange"
+                     >
+                      <v-list-item three-line>
+                        <v-list-item-content>
+                          <p class="pt-2 pb-2">{{ item.Name }}</p>
+                          <v-sheet outlined color="white" rounded>
+                          <v-card height="120px" color="orange">
+                            <v-card-text class="text-center white--text">
+                                {{ item.Message }}
+                            </v-card-text>
+                          </v-card>
+                          </v-sheet>
+                          <v-flex row wrap class="justify-center pt-2">
+                            <v-btn color="success" @click="desdesignproject">
+                              Accept
+                              <v-icon>mdi-check-circle-outline</v-icon>
+                            </v-btn>
+                            <v-btn color="error">
+                              Reject
+                              <v-icon>mdi-close-circle-outline</v-icon>
+                            </v-btn>
+                          </v-flex>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-card>
+                  </v-flex>
+                </v-layout> 
+            </v-card>
+        </v-container>
+</v-main>
+</template>
+
+<script>
+export default {
+data(){
+    return{
+        items: [
+        { title: "Date: New to old" },
+        { title: "Date: Old to new" },
+        { title: "Progress: High to low" },
+        { title: "Progress: Low to high" },
+        { title: "Favourited" },
+      ],
+      PRCards: [
+        {
+          ID: "1",
+          Name: "XX",
+          Message: "Project Description",
+        },
+        {
+          ID: "2",
+          Name: "XX",
+          Message: "Project Description",
+        },
+        {
+          ID: "3",
+          Name: "YY",
+          Message: "Project Description",
+        },
+      ],
+    }
+},
+methods: {
+    desdesignproject(){
+        this.$router.push({ name: "DesDesignProject" });
+    },
+    homepageop(){
+        this.$router.push({ name: "HomePageOP" });
+        },
+    }
+}
+</script>
+
+<style scoped>
+.v-btn {
+  margin-left: 10px;
+}
+</style>

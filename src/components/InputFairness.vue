@@ -51,7 +51,7 @@ props: {
 },
 methods:{
     home(){
-        this.$router.push({ name: "HomePage"});
+        this.$router.push({ name: "HomePageOP"});
         },
     ratingfairness(){
         this.$router.push({ name: "RatingFairness"});

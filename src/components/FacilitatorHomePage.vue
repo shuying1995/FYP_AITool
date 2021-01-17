@@ -1,17 +1,13 @@
 <template>
     <v-main>
         <v-container fluid>
-        <v-card>
-            <v-row class="mr-4">
-            <v-col class="ml-8">
-                <v-tabs v-model="activetab" color="orange">
-                <v-tab v-for="tab of tabs" :key="tab.index">
-                {{ tab.name }}
-                </v-tab>
-
-                <v-tab-item>
-                <v-layout row wrap ml-3 mr-1>
-                  <v-col class="text-right">
+            <v-card>
+                <v-layout row wrap ml-7 mr-8>
+                  <v-flex row wrap class="custom ma-3 mt-6">
+                    <v-btn text class="orange--text">My Projects</v-btn>
+                  </v-flex>
+                  
+                  <v-col class="text-right mt-3">
                     <v-menu offset-y>
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs" v-on="on" rounded text>
@@ -37,14 +33,14 @@
                   </v-col>
                 </v-layout>
 
-                <v-layout row wrap ml-1>
+                <v-layout row wrap ml-8>
                   <v-flex v-for="item in this.MyCards" :key="item.ID" row wrap>
                     <v-card 
                      class="ma-2" 
-                     max-width="330" 
+                     max-width="350" 
                      outlined 
                      @contextmenu="show" 
-                     color="amber darken-1"
+                     color="orange"
                      >
                       <v-menu
                         v-model="showMenu"
@@ -83,23 +79,25 @@
                             <h2>{{item.Name}}</h2>
                           </v-flex>
                           <p>Progress</p>
+                          <div class="pb-3">
                           <v-progress-linear
                             background-color="grey lighten-2"
                             color="red"
                             v-model="item.Progress"
-                            height="15"
+                            height="10"
                             />
-                            <v-divider></v-divider>
-                          <p class="pt-2">Member: {{ item.Member }}</p>
+                          </div>
+                            <hr class="solid">
+                          <v-flex row wrap class="pt-2">
+                          <p class="pt-2 ml-4 underline">Member: {{ item.Member }}</p>
+                          <v-spacer/>
+                          <p class="pt-2 round orange--text">{{ item.Dayleft }} Days Left</p>
+                          </v-flex>
                         </v-list-item-content>
                       </v-list-item>
                     </v-card>
                   </v-flex>
                 </v-layout>
-              </v-tab-item>
-                </v-tabs>
-            </v-col>
-            </v-row>
         </v-card>
         </v-container>
     </v-main>
@@ -109,10 +107,6 @@
 export default {
 data(){
     return{
-    activetab: 0,
-      tabs: [
-      { index: 0, name: "My Projects" },
-    ],
     showMenu: false,
         x: 0,
         y: 0,
@@ -134,78 +128,37 @@ data(){
           CreatedDate: "10 Oct",
           Member: "2",
           Progress: "30",
+          Dayleft:"2",
           IsPinned: false,
           IsFavourite: false,
         },
         {
           ID: "2",
-          Name: "XX",
+          Name: "Project 2",
           CreatedDate: "10 Oct",
           Member: "2",
           Progress: "30",
+          Dayleft:"3",
           IsPinned: true,
           IsFavourite: true,
         },
         {
           ID: "2",
-          Name: "XX",
+          Name: "Project 3",
           CreatedDate: "10 Oct",
           Member: "2",
           Progress: "50",
+          Dayleft:"6",
           IsPinned: true,
           IsFavourite: true,
         },
         {
           ID: "2",
-          Name: "XX",
+          Name: "Project 4",
           CreatedDate: "10 Oct",
           Member: "2",
           Progress: "70",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "100",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "0",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
+          Dayleft:"8",
           IsPinned: true,
           IsFavourite: true,
         },
@@ -236,5 +189,23 @@ data(){
 </script>
 
 <style scoped>
+p.round{
+  border-radius: 8px;
+  background-color: white;
+  width: 90px;
+  height: 30px;
+  padding-left: 5px;
+}
 
+p.underline{
+  text-decoration: underline;
+}
+
+hr.solid {
+  border-top: 3px solid white;
+}
+
+.v-btn {
+  margin-left: 10px;
+}
 </style>>

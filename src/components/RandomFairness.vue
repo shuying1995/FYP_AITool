@@ -75,7 +75,7 @@ data() {
       return items[Math.floor(Math.random()*items.length)];
     },
     home(){
-        this.$router.push({ name: "HomePage"});
+        this.$router.push({ name: "HomePageOP"});
     },
     inputfairness(){
         this.showComponent=!this.showComponent;

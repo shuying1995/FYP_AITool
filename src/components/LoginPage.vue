@@ -131,14 +131,14 @@ export default {
             })
             .then((response) => {
                 if(response.data=="Member")
-                this.$router.push({ name: "HomePage"})
+                this.$router.push({ name: "HomePageOP"})
                 else
                 this.$router.push({ name: "FacilitatorHomePage"})
             })
             .catch((error) => {
               this.snackbar = true;
               this.color = "error";
-                console.log(error)
+              console.log(error)
             })
     },
     register(){

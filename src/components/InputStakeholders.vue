@@ -75,7 +75,7 @@
 export default {
 methods:{
     home(){
-        this.$router.push({ name: "HomePage"});
+        this.$router.push({ name: "HomePageOP"});
     },
     randomfairness(){
         this.$router.push({ name: "RandomFairness"});

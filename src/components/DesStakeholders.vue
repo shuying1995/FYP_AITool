@@ -35,7 +35,7 @@
 export default {
 methods:{
     home(){
-        this.$router.push({ name: "HomePage"});
+        this.$router.push({ name: "HomePageOP"});
         },
     inputstakeholders(){
         this.$router.push({ name: "InputStakeholders"});

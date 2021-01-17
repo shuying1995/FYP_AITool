@@ -60,7 +60,7 @@ export default {
     },
     methods:{
         home(){
-        this.$router.push({ name: "HomePage"});
+        this.$router.push({ name: "HomePageOP"});
         },
         designproject(){
         this.$router.push({ name: "DesignProject"});

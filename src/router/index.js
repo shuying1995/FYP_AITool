@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomePage from "../components/HomePage.vue";
+import HomePageOP from "../components/HomePageOP.vue";
+import HomePagePR from "../components/HomePagePR.vue";
+import FacilitatorHomePage from "../components/FacilitatorHomePage.vue";
 import LoginPage from "../components/LoginPage.vue";
 import EditProjects from "../components/EditProjects.vue";
 import CreateProject from "../components/CreateProject.vue";
@@ -15,7 +17,6 @@ import InputFairness from "../components/InputFairness.vue";
 import RatingFairness from "../components/RatingFairness.vue";
 import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
-import FacilitatorHomePage from "../components/FacilitatorHomePage.vue";
 //import RegisterStep1 from "../components/RegisterStep1.vue";
 //import RegisterStep2 from "../components/RegisterStep2.vue";
 //import RegisterStep3 from "../components/RegisterStep3.vue";
@@ -31,9 +32,14 @@ const routes = [
     component: LoginPage,
   },
   {
-    path: "/homepage",
-    name: "HomePage",
-    component: HomePage,
+    path: "/homepageop",
+    name: "HomePageOP",
+    component: HomePageOP,
+  },
+  {
+    path: "/homepagepr",
+    name: "HomePagePR",
+    component: HomePagePR,
   },
   {
     path: "/editprojects",
