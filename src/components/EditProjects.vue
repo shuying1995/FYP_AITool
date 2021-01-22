@@ -51,9 +51,18 @@
                     <p class="font-weight-light">Date Created:31/12/2020</p>
                   </v-col>
                   <v-col class="pa-0">
-                    <v-dialog v-model="dialog" persistent max-width="400px">
+                    <v-dialog 
+                     v-model="dialog" 
+                     persistent 
+                     max-width="400px"
+                     >
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="success" dark v-bind="attrs" v-on="on">
+                        <v-btn 
+                         color="success" 
+                         dark 
+                         v-bind="attrs" 
+                         v-on="on"
+                         >
                           <v-icon>mdi-plus</v-icon>
                           Invite Members
                         </v-btn>

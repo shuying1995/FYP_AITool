@@ -161,6 +161,54 @@
         </v-form>
             </validation-observer>
           </v-card>
+
+          <v-dialog
+            v-model="successdialog"
+            width="500"
+            >
+          <v-card>
+              <v-card-title class="headline success justify-center">
+              Successfully registered!
+              </v-card-title>
+
+                <v-card-actions>
+                <v-btn
+                    color="primary"
+                    text
+                    @click="login"
+                >
+                    Login Now!
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="primary"
+                    text
+                    @click="successdialog = false"
+                >
+                    Close
+                </v-btn>
+                </v-card-actions>
+          </v-card>
+          </v-dialog>
+
+          <v-snackbar
+        v-model="snackbar"
+        :color="color"
+        :top="true"
+      >
+        {{ errorMessages }}
+        <template v-slot:action="{ attrs }">
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+        </template>
+      </v-snackbar>
+
       </v-container>
     </v-main>
 </template>
@@ -199,6 +247,7 @@ export default {
     },
     data(){
         return{
+            successdialog:false,
             showpw:false,
             showcpw:false,
             name: '',
@@ -208,6 +257,9 @@ export default {
             repassword:'',
             roles:[],
             roleitems:['Facilitator','Member','Facilitator, Member'],
+            errorMessages: "Username or email already registered",
+            snackbar: false,
+            color: 'general'
         }
     },
 
@@ -233,9 +285,12 @@ export default {
                 roles: this.roles
             })
             .then((response) => {
+                this.dialog=true;
                 console.log(response)
             })
             .catch((error) => {
+                this.snackbar=true;
+                this.color="error";
                 console.log(error)
             })
         }

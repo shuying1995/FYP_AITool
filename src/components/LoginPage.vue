@@ -95,13 +95,16 @@
         :top="true"
       >
         {{ errorMessages }}
+        <template v-slot:action="{ attrs }">
         <v-btn
           dark
           text
+          v-bind="attrs"
           @click="snackbar = false"
         >
           Close
         </v-btn>
+        </template>
       </v-snackbar>
     </v-container>
   </v-main>
@@ -130,7 +133,7 @@ export default {
                 password: this.password
             })
             .then((response) => {
-                if(response.data=="Member")
+                if(response.data.roles=="Member")
                 this.$router.push({ name: "HomePageOP"})
                 else
                 this.$router.push({ name: "FacilitatorHomePage"})
