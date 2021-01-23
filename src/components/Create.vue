@@ -15,23 +15,23 @@
                     </v-row>
 
                     <v-row justify="center">
-                        <v-col cols="6">
+                        <v-col cols="5">
                             <v-text-field
                             v-model="projectname"
                             class="centered-input" 
                             placeholder="Eg. Design Project 1" 
                             filled 
-                            required>
+                            >
                             </v-text-field>
                         </v-col>
                     </v-row>
 
-                    <v-row justify="center">
+                     <v-row justify="center">
                     <p>Application Scenario*</p>
                     </v-row>
 
                     <v-row justify="center">
-                        <v-col cols="6">
+                        <v-col cols="5">
                             <v-textarea 
                             placeholder="What is the application that will be the focus of the discussion? It can be your product or a fictional one. Indicate which component of the product is related to the fairness." 
                             filled 
@@ -40,6 +40,7 @@
                             </v-textarea>
                         </v-col>
                     </v-row>
+					
 
                     <v-flex class="justify-end pa-2" row wrap>
                         <v-btn @click="designproject" color="success">Create</v-btn>
@@ -50,24 +51,19 @@
 </template>
 
 <script>
-const axios = require('axios');
 export default {
-    data(){
-        return{
-            projectname:"",
-            appscenario:""
-        }
-    },
     methods:{
         home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "FacilitatorHomePage"});
         },
         designproject(){
-        this.$router.push({ name: "DesignProject"});
+          let projectname = this.projectname
+          let appscenario = this.appscenario
+          this.$store
+          .dispatch(
+              "updateProjects", {projectname, appscenario})
+          .then(() => this.$router.push({ name: "DesignProject" }))
         },
-        create(){
-            axios
-        }
     }
 }
 </script>
@@ -99,4 +95,4 @@ p{
   text-align: center
 }
 
-</style>    
+</style>

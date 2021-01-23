@@ -18,7 +18,7 @@
                     <h3>Choose the most suitable one to your application scenario and press next</h3>
                 </v-row>
                 
-                <v-tabs vertical color="purple" icons-and-text v-model="tabs">
+                <v-tabs vertical color="purple" icons-and-text v-model="tabs" fixed-tabs>
                     <v-tab>Life-Critical System </v-tab>
                     <v-tab>Industrial and Commercial Uses</v-tab>
                     <v-tab>Office,Home,Entertainment</v-tab>
@@ -26,23 +26,23 @@
                     <v-tab>Sociotechnical Systems</v-tab>
 
                     <v-tab-item>
-                        <v-img src="../assets/appcard1.jpg" contain max-height="375" max-width="800"> </v-img>
+                        <v-img src="../assets/appcard1.jpg" contain max-height="500" max-width="1200"> </v-img>
                     </v-tab-item>
 
                     <v-tab-item>
-                       <v-img src="../assets/appcard2.jpg" contain height="375" width="800"> </v-img>
+                       <v-img src="../assets/appcard2.jpg" contain max-height="500" max-width="1200"> </v-img>
                     </v-tab-item>
                     
                     <v-tab-item>
-                        <v-img src="../assets/appcard3.jpg" contain height="375" width="800"> </v-img>
+                        <v-img src="../assets/appcard3.jpg" contain max-height="500" max-width="1200"> </v-img>
                     </v-tab-item>
 
                     <v-tab-item>
-                        <v-img src="../assets/appcard4.jpg" contain height="375" width="800"> </v-img>
+                        <v-img src="../assets/appcard4.jpg" contain max-height="500" max-width="1200"> </v-img>
                     </v-tab-item>
 
                     <v-tab-item>
-                        <v-img src="../assets/appcard5.jpg" contain height="375" width="800"> </v-img>
+                        <v-img src="../assets/appcard5.jpg" contain max-height="500" max-width="1200"> </v-img>
                     </v-tab-item>
                 </v-tabs>
 
@@ -58,10 +58,12 @@
 export default {
 methods:{
     home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "FacilitatorHomePage"});
         },
     invitemembers() {
-        this.$router.push({ name: "InviteMembers"});  
+        this.$store
+        .dispatch("updateTabs", this.tabs)
+        .then(() => this.$router.push({ name: 'InviteMembers'}))
         },
     }
 }
@@ -84,5 +86,9 @@ p{
     padding-left: 5px;
     padding-right: 5px;
     font-weight: bold;
+}
+
+.v-tabs{
+    height: 500px;
 }
 </style>

@@ -80,6 +80,8 @@
                </v-row>
             </v-card>
         </v-container>
+        <p>{{this.$store.getters.tabs}}</p>
+        <p>{{this.$store.getters.projects}}</p>
     </v-main> 
 </template>
 
@@ -92,7 +94,7 @@ export default {
     },
     methods: {
         home() {
-            this.$router.push({ name: "HomePageOP" });
+            this.$router.push({ name: "FacilitatorHomePage" });
         },
     }
 }

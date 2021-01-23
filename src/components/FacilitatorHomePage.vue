@@ -23,7 +23,7 @@
                     </v-menu>
 
                     <v-btn 
-                     @click="createproject" 
+                     @click="create" 
                      class="ml-4" 
                      color="success"
                      >
@@ -166,8 +166,8 @@ data(){
     }
 },
  methods: {
-        createproject() {
-            this.$router.push({ name: "CreateProject" });
+        create() {
+            this.$router.push({ name: "Create" });
         },
         editteam(){
         this.$router.push({ name: "EditProjects"});

@@ -31,8 +31,8 @@
                 </v-row>
 
                 <v-flex row wrap class="justify-center">
-                     <v-img :src="selectedImage.front" contain max-height="300" max-width="450" @click="Flip" v-if="showFront"></v-img>
-                     <v-img :src="selectedImage.back" contain max-height="300" max-width="450" @click="Flip" v-if="!showFront"></v-img>
+                     <v-img :src="selectedImage.front" contain max-height="300" max-width="450" @click="flip" v-if="showFront"></v-img>
+                     <v-img :src="selectedImage.back" contain max-height="300" max-width="450" @click="flip" v-if="!showFront"></v-img>
                 </v-flex>
 
                 <v-flex class="justify-end pa-2" row wrap>

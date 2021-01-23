@@ -5,7 +5,7 @@ import HomePagePR from "../components/HomePagePR.vue";
 import FacilitatorHomePage from "../components/FacilitatorHomePage.vue";
 import LoginPage from "../components/LoginPage.vue";
 import EditProjects from "../components/EditProjects.vue";
-import CreateProject from "../components/CreateProject.vue";
+import Create from "../components/Create.vue";
 import DesignProject from "../components/DesignProject.vue";
 import InviteMembers from "../components/InviteMembers.vue";
 import Profile from "../components/Profile.vue";
@@ -45,11 +45,6 @@ const routes = [
     path: "/editprojects",
     name: "EditProjects",
     component: EditProjects,
-  },
-  {
-    path: "/createproject",
-    name: "CreateProject",
-    component: CreateProject,
   },
   {
     path: "/designproject",
@@ -110,6 +105,11 @@ const routes = [
     path: "/facilitatorhomepage",
     name: "FacilitatorHomePage",
     component: FacilitatorHomePage
+  },
+  {
+    path: "/create",
+    name: "Create",
+    component: Create
   },
   /*{
     path: "/registerstep1",
