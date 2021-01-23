@@ -21,8 +21,7 @@
                             class="centered-input" 
                             placeholder="Eg. Design Project 1" 
                             filled 
-                            >
-                            </v-text-field>
+                            />
                         </v-col>
                     </v-row>
 
@@ -36,8 +35,8 @@
                             placeholder="What is the application that will be the focus of the discussion? It can be your product or a fictional one. Indicate which component of the product is related to the fairness." 
                             filled 
                             v-model="appscenario"
-                            required>
-                            </v-textarea>
+                            required
+                            />
                         </v-col>
                     </v-row>
 					
@@ -91,8 +90,9 @@ p{
       width: 700px;
 }
 
+/*
 /deep/ .centered-input input {
   text-align: center
-}
+}*/
 
 </style>

@@ -5,28 +5,28 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        tabs:'',
+        apptype:'',
         projects: '',
     },
     getters: {
-        tabs(state) {
-            return state.tabs
+        apptype(state) {
+            return state.apptype
         },
         projects(state) {
             return state.projects
         },
     },
     mutations: {
-        updateTabs(state, tabs){
-            state.tabs=tabs
+        updateApptype(state, apptype){
+            state.apptype=apptype
         },
         updateProjects(state, projects){
             state.projects=projects
         },
     },
     actions: {
-        updateTabs({commit},tabs){
-            commit('updateTabs',tabs);
+        updateApptype({commit},apptype){
+            commit('updateApptype',apptype);
         },
         updateProjects({commit},projects){
             commit('updateProjects',projects);
