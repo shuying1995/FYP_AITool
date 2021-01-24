@@ -160,7 +160,7 @@
             </v-card-text>
         </v-form>
     </validation-observer>
-          </v-card>
+</v-card>
 
           <v-dialog
             v-model="successdialog"
@@ -183,9 +183,9 @@
                 <v-btn
                     color="primary"
                     text
-                    @click="successdialog = false"
+                    @click="reregister"
                 >
-                    Close
+                    Register another account!
                 </v-btn>
                 </v-card-actions>
           </v-card>
@@ -208,7 +208,6 @@
         </v-btn>
         </template>
       </v-snackbar>
-
       </v-container>
     </v-main>
 </template>
@@ -285,7 +284,7 @@ export default {
                 roles: this.roles
             })
             .then((response) => {
-                this.dialog=true;
+                this.successdialog=true;
                 console.log(response)
             })
             .catch((error) => {
@@ -293,6 +292,17 @@ export default {
                 this.color="error";
                 console.log(error)
             })
+        },
+        reregister(){
+            this.successdialog = false
+            this.firstname = ''
+            this.lastname = ''
+            this.username = ''
+            this.email = ''
+            this.password = ''
+            this.repassword = ''
+            this.roles = ''
+            this.$refs.observer.reset()
         }
     }
 }

@@ -27,6 +27,7 @@
               filled
               chips
               multiple
+              label="Type or select members"
             >
               <template v-slot:selection="data">
                 <v-chip
@@ -88,32 +89,41 @@
                 dark
                 text
                 v-bind="attrs"
-                @click="back"
+                @click="failback"
                 >
                 Head back to change
                 </v-btn>
             </template>
             </v-snackbar>
 
-            <v-snackbar
-            v-model="successfulsnackbar"
-            :vertical="vertical"
-            :color="color"
-            :top="true"
+            <v-dialog
+            v-model="successdialog"
+            width="500"
             >
-            {{ successMessages }}
+          <v-card>
+              <v-card-title class="headline success justify-center">
+              Project has been created!
+              </v-card-title>
 
-            <template v-slot:action="{ attrs }">
+                <v-card-actions>
                 <v-btn
-                dark
-                text
-                v-bind="attrs"
-                @click="home"
+                    color="primary"
+                    text
+                    @click="successback"
                 >
-                Back to home
+                    Create another project!
                 </v-btn>
-            </template>
-            </v-snackbar>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="primary"
+                    text
+                    @click="home"
+                >
+                    Back to home
+                </v-btn>
+                </v-card-actions>
+          </v-card>
+          </v-dialog>
         </v-container>
     </v-main> 
 </template>
@@ -130,20 +140,26 @@ export default {
         failsnackbar: false,
         color: 'general',
         successMessages: "Project created successfully",
-        successfulsnackbar: false,
+        successdialog:false,
         }
     },
     methods: {
         home() {
-            this.$store.dispatch('resetState')
+            this.$store
+            .dispatch('resetState')
             .then(this.$router.push({ name: "FacilitatorHomePage" }));
         },
         remove (item) {
         const index = this.members.indexOf(item)
         if (index >= 0) this.members.splice(index, 1)
         },
-        back(){
+        failback(){
             this.$router.push({ name: "Create"})
+        },
+        successback(){
+            this.$store
+            .dispatch('resetState')
+            .then(this.$router.push({ name: "Create"}))
         },
         create(){
             let members = this.members
@@ -160,8 +176,7 @@ export default {
                 message: message,
             })
             .then((response) => {
-                this.successfulsnackbar=true;
-                this.color="success"
+                this.successdialog=true;
                 console.log(response)
             })
             .catch((error) => {

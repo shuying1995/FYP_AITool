@@ -50,6 +50,7 @@ exports.login = async (req, res) => {
     if (!validPassword) {
         return res.status(400).send('Incorrect username or password.');
     }
-    const token = jwt.sign({ _id: user._id }, config.get('PrivateKey'));
-    res.send(_.pick(token,user, ['_id', 'firstname', 'roles']));
+    const token = jwt.sign({ _id: user._id}, config.get('PrivateKey'));
+    const roles = user.roles
+    res.json({token, roles})
 };

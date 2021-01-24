@@ -130,9 +130,6 @@ export default {
             //window.localStorage.setItem('activetab', 0);
             this.$router.push({ name: "FacilitatorHomePage"});
         },
-        inviteMembers() {
-            this.$router.push({ name: "InviteMembers"});
-        },
         profile() {
             this.$router.push({ name:"Profile"});
         },
