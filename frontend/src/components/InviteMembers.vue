@@ -74,6 +74,46 @@
                     </v-btn>
                </v-row>
             </v-card>
+
+            <v-snackbar
+            v-model="failsnackbar"
+            :vertical="vertical"
+            :color="color"
+            :top="true"
+            >
+            {{ errorMessages }}
+
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                dark
+                text
+                v-bind="attrs"
+                @click="back"
+                >
+                Head back to change
+                </v-btn>
+            </template>
+            </v-snackbar>
+
+            <v-snackbar
+            v-model="successfulsnackbar"
+            :vertical="vertical"
+            :color="color"
+            :top="true"
+            >
+            {{ successMessages }}
+
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                dark
+                text
+                v-bind="attrs"
+                @click="home"
+                >
+                Back to home
+                </v-btn>
+            </template>
+            </v-snackbar>
         </v-container>
     </v-main> 
 </template>
@@ -84,33 +124,51 @@ export default {
     data() {
         return {
         memberlist: ['Martin James', 'Marsgirl', 'Danielle Mardina'],
-        members: '',
-        message: ''
+        members: this.$store.getters.members.members,
+        message: this.$store.getters.members.message,
+        errorMessages: "Project name has been taken",
+        failsnackbar: false,
+        color: 'general',
+        successMessages: "Project created successfully",
+        successfulsnackbar: false,
         }
     },
     methods: {
         home() {
-            this.$router.push({ name: "FacilitatorHomePage" });
+            this.$store.dispatch('resetState')
+            .then(this.$router.push({ name: "FacilitatorHomePage" }));
         },
         remove (item) {
         const index = this.members.indexOf(item)
         if (index >= 0) this.members.splice(index, 1)
         },
+        back(){
+            this.$router.push({ name: "Create"})
+        },
         create(){
-            axios
+            let members = this.members
+            let message = this.message
+            this.$store
+            .dispatch(
+              "updateMembers", {members, message})
+            .then( axios
             .post('api/create', {
                 name: this.$store.getters.projects.projectname,
                 appscenario: this.$store.getters.projects.appscenario,
                 apptype: this.$store.getters.apptype,
-                members: this.members,
-                message: this.message,
+                members: members,
+                message: message,
             })
             .then((response) => {
+                this.successfulsnackbar=true;
+                this.color="success"
                 console.log(response)
             })
             .catch((error) => {
+                this.failsnackbar=true;
+                this.color="error";
                 console.log(error)
-            })
+            }))
         }
     }
 }

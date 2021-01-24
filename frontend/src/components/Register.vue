@@ -159,7 +159,7 @@
              >Submit</v-btn>
             </v-card-text>
         </v-form>
-            </validation-observer>
+    </validation-observer>
           </v-card>
 
           <v-dialog

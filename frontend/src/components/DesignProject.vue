@@ -56,9 +56,16 @@
 
 <script>
 export default {
+data(){
+    return{
+        apptype: this.$store.getters.apptype
+    }
+},
 methods:{
     home(){
-        this.$router.push({ name: "FacilitatorHomePage"});
+        this.$store
+        .dispatch('resetState')
+        .then(this.$router.push({ name: "FacilitatorHomePage"}))
         },
     invitemembers() {
         this.$store

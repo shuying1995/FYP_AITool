@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         apptype:'',
         projects: '',
+        members: ''
     },
     getters: {
         apptype(state) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
         },
         projects(state) {
             return state.projects
+        },
+        members(state) {
+            return state.members
         },
     },
     mutations: {
@@ -23,6 +27,14 @@ export default new Vuex.Store({
         updateProjects(state, projects){
             state.projects=projects
         },
+        updateMembers(state, members){
+            state.members=members
+        },
+        resetState(state){
+            state.apptype = '';
+            state.members = '';
+            state.projects = '';
+        }
     },
     actions: {
         updateApptype({commit},apptype){
@@ -31,5 +43,11 @@ export default new Vuex.Store({
         updateProjects({commit},projects){
             commit('updateProjects',projects);
         },
+        updateMembers({commit},members){
+            commit('updateMembers',members);
+        },
+        resetState({commit}){
+            commit('resetState')
+        }
     }
 })
