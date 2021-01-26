@@ -48,7 +48,7 @@
                         </v-avatar>
                         </v-col>
                         <v-col md='4'>
-                        <h2>{{username}}</h2>
+                        <h2>{{firstname}}</h2>
                     </v-col>
                     </v-row>
 
@@ -102,7 +102,7 @@ export default {
           { title: 'Completed Project', icon: 'mdi-calendar-check', action: this.completedprojects},
           { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
         ],
-        username: window.$cookies.get("username")
+        firstname: window.$cookies.get("firstname")
       }
     },
     methods: {

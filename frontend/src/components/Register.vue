@@ -43,22 +43,6 @@
             />
             </validation-provider>
 
-             <validation-provider
-                v-slot="{ errors }"
-                name="Username"
-                rules="required|min:5"
-            >
-            <v-text-field 
-            placeholder="Username"
-            label="Username"
-            v-model="username"
-            outlined
-            dense
-            :error-messages="errors"
-            v-on:keyup.enter="register"
-            />
-             </validation-provider>
-
             <validation-provider
                 v-slot="{ errors }"
                 name="Email"
@@ -129,7 +113,7 @@
                            Facilitator account allows you to create projects and invite members only. 
                            Member account allows you to participate in projects only. 
                            Having both facilitator and member account gives you the flexibility to do both and 
-                           you can switch between the accounts using the same username.
+                           you can switch between the accounts using the same email.
                         </div>
                         </v-flex>
                         </v-card-text>
@@ -250,13 +234,12 @@ export default {
             showpw:false,
             showcpw:false,
             name: '',
-            username:'',
             email:'',
             password:'',
             repassword:'',
             roles:[],
             roleitems:['Facilitator','Member','Facilitator, Member'],
-            errorMessages: "Username or email already registered",
+            errorMessages: "Email already registered",
             snackbar: false,
             color: 'general'
         }
@@ -278,7 +261,6 @@ export default {
             .post('api/register', {
                 firstname: this.firstname,
                 lastname: this.lastname,
-                username: this.username,
                 email: this.email,
                 password: this.password,
                 roles: this.roles
@@ -297,7 +279,6 @@ export default {
             this.successdialog = false
             this.firstname = ''
             this.lastname = ''
-            this.username = ''
             this.email = ''
             this.password = ''
             this.repassword = ''

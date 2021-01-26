@@ -72,7 +72,7 @@
                           <span class="headline">Invite Members</span>
                         </v-card-title>
                         <v-card-text>
-                          <a>Username/Email*</a>
+                          <a>Email*</a>
                           <v-text-field filled required></v-text-field>
                           <a>Message (Optional)</a>
                           <v-text-field filled required></v-text-field>

@@ -25,13 +25,11 @@
             v-model="members"
             :items="memberlist"
             item-value="_id"
-            outlined
-            dense
             filled
             chips
-            @change = "select()"
             label="Type or select members"
             multiple
+            @change = "select()"
           >
           <template v-slot:selection="data">
                <v-chip
@@ -39,7 +37,7 @@
                   :input-value="data.selected"
                   close
                   @click="data.select"
-                  @click:close="remove(data.item)"
+                  @click:close="remove(data.item._id)"
                 >
                   {{ data.item.firstname }}
                 </v-chip>
@@ -49,38 +47,8 @@
                     {{ data.item.firstname }} {{ data.item.lastname }} ({{ data.item.email}})
               </template>
           </v-autocomplete>
-
-          
-            
-            <v-autocomplete
-              v-model="members"
-              :items="memberlist"
-              filled
-              chips
-              multiple
-              label="Type or select members"
-            >
-              <template v-slot:selection="data">
-                <v-chip
-                  v-bind="data.attrs"
-                  :input-value="data.selected"
-                  close
-                  @click="data.select"
-                  @click:close="remove(data.item)"
-                >
-                  {{ data.item}}
-                </v-chip>
-              </template>
-              <template v-slot:item="data">
-                <template v-if="typeof data.item !== 'object'">
-                  <v-list-item-content v-text="data.item"></v-list-item-content>
-                </template>
-              </template>
-            </v-autocomplete>
-
                     </v-col>
                </v-row>
-
 
                <v-row justify="center">
                    Message (Optional):
@@ -209,7 +177,8 @@ export default {
         },
         remove (item) {
         const index = this.members.indexOf(item)
-        if (index >= 0) this.members.splice(index, 1)
+        this.members.splice(index, 1)
+        this.members = [...this.members]
         },
         failback(){
             this.$router.push({ name: "Create"})
