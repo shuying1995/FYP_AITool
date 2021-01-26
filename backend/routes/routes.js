@@ -4,15 +4,14 @@ const router = express.Router();
 var userController = require('../controllers/user')
 var projectController = require('../controllers/project')
 
-router.post('/register', userController.register)
 
-//members login route
-router.post('/login', userController.login)
+router.post('/users', userController.register) //create users
+router.get('/users', userController.getAllUsers) //get all users
+router.put('/users/:userId', userController.updateUsersProject) //Update a user with projectId
 
-//get all users
-router.get('/register', userController.getAllUsers)
+router.post('/login', userController.login) //users login route
 
-//create project
-router.post('/create', projectController.createproject)
+
+router.post('/create', projectController.createProject) //create project
 
 module.exports = router;

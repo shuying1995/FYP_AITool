@@ -63,3 +63,9 @@ exports.getAllUsers = function (req, res) {
         }
     }).select("-password")
 };
+
+exports.updateUsersProject = function (req, res) {
+    User.findByIdAndUpdate(req.params._id, {
+        
+    })
+}

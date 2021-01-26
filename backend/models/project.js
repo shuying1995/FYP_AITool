@@ -2,9 +2,6 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const Project = mongoose.model('Project', new mongoose.Schema({
-    projectid:{
-        type: Number
-    },
     name:{
         type: String,
         required: true,
@@ -29,7 +26,6 @@ const Project = mongoose.model('Project', new mongoose.Schema({
 
 const validateProject = function (project) {
     const schema = Joi.object({
-        projectid: Joi.number(),
         name: Joi.string().required(),
         appscenario: Joi.string().required(),
         apptype: Joi.number().required(),

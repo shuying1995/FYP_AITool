@@ -25,6 +25,9 @@ const User = mongoose.model('User', new mongoose.Schema({
     roles: {
         type: String,
         required: true
+    },
+    projectid: {
+        type: Number
     }
 }));
 

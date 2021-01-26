@@ -143,24 +143,10 @@ export default {
         }
     },
     created(){
-        axios.get('api/register')
+        axios.get('api/users')
         .then((response) => {
-            /*var memberfname = response.data.firstname;
-            var memberlname = response.data.lastname;
-            var memberemail = response.data.email;
-
-            var size = memberfname.length;
-            for (var i=0; i<size; i++){
-                memberemail[i] = " (" + memberemail[i] + ")";
-            }
-            
-            var memberlist = []
-            for(var j=0; j<size; j++){
-                memberlist.push(memberfname[j]+" "+memberlname[j]+memberemail[j]);
-            }
-            this.memberlist= memberlist;*/
-            console.log(response)
             this.memberlist = response.data
+            console.log(this.memberlist)
         })
         .catch((error) => {
             console.log(error)

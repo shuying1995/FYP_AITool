@@ -258,7 +258,7 @@ export default {
         register(){
             this.$refs.observer.validate()
             axios
-            .post('api/register', {
+            .post('api/users', {
                 firstname: this.firstname,
                 lastname: this.lastname,
                 email: this.email,
