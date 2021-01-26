@@ -15,12 +15,43 @@
                 </v-row>
 
                 <v-row justify="center">
-                    <p>Input in their names or username</p>
+                    <p>Input in their names or email</p>
                 </v-row>
 
                <v-row justify="center">
                     <v-col cols="4">
                         
+            <v-autocomplete
+            v-model="members"
+            :items="memberlist"
+            item-value="_id"
+            outlined
+            dense
+            filled
+            chips
+            @change = "select()"
+            label="Type or select members"
+            multiple
+          >
+          <template v-slot:selection="data">
+               <v-chip
+                  v-bind="data.attrs"
+                  :input-value="data.selected"
+                  close
+                  @click="data.select"
+                  @click:close="remove(data.item)"
+                >
+                  {{ data.item.firstname }}
+                </v-chip>
+              </template>
+
+                <template v-slot:item="data">
+                    {{ data.item.firstname }} {{ data.item.lastname }} ({{ data.item.email}})
+              </template>
+          </v-autocomplete>
+
+          
+            
             <v-autocomplete
               v-model="members"
               :items="memberlist"
@@ -146,7 +177,7 @@ export default {
     created(){
         axios.get('api/register')
         .then((response) => {
-            var memberfname = response.data.firstname;
+            /*var memberfname = response.data.firstname;
             var memberlname = response.data.lastname;
             var memberemail = response.data.email;
 
@@ -159,13 +190,18 @@ export default {
             for(var j=0; j<size; j++){
                 memberlist.push(memberfname[j]+" "+memberlname[j]+memberemail[j]);
             }
-            this.memberlist= memberlist;
+            this.memberlist= memberlist;*/
+            console.log(response)
+            this.memberlist = response.data
         })
         .catch((error) => {
             console.log(error)
         })
     },
     methods: {
+        select(){
+            console.log(this.members)
+        },
         home() {
             this.$store
             .dispatch('resetState')

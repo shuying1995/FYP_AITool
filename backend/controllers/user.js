@@ -17,18 +17,14 @@ exports.register = async (req, res) => {
     if (userEmail) {
         return res.status(500).send('Email is already registered!');
     } 
-    let userName = await User.findOne({ username: req.body.username});
-    if (userName) {
-        return res.status(400).send('Username is already registered!');
-    }
     else {
         // Insert the new user if they do not exist yet
-        user = new User(_.pick(req.body, ['firstname','lastname','username', 'email', 'password','roles']));
+        user = new User(_.pick(req.body, ['firstname','lastname', 'email', 'password','roles']));
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
         await user.save();
         const token = jwt.sign({ _id: user._id }, config.get('PrivateKey'));
-        res.header('x-auth-token', token).send(_.pick(user, ['_id', 'username', 'email']));
+        res.header('x-auth-token', token).send(_.pick(user, ['_id', 'email']));
     }
 };
 
@@ -39,21 +35,22 @@ exports.login = async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
  
-    //  Now find the user by their username
-    let user = await User.findOne({ username: req.body.username });
+    //  Now find the user by their email
+    let user = await User.findOne({ email: req.body.email });
     if (!user) {
-        return res.status(400).send('Incorrect username or password.');
+        return res.status(400).send('Incorrect email or password.');
     }
  
     // Then validate the Credentials in MongoDB match
     // those provided in the request
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) {
-        return res.status(400).send('Incorrect username or password.');
+        return res.status(400).send('Incorrect email or password.');
     }
     const token = jwt.sign({ _id: user._id}, config.get('PrivateKey'));
     const roles = user.roles
-    res.json({token, roles})
+    const firstname = user.firstname
+    res.json({token, roles, firstname})
 };
 
 exports.getAllUsers = function (req, res) {
@@ -61,10 +58,8 @@ exports.getAllUsers = function (req, res) {
         if (error) {
             return next(error)
         } else {
-            const firstname = data.map(users => users.firstname)
-            const lastname = data.map(users => users.lastname)
-            const email = data.map(users => users.email)
-            res.json({firstname, lastname, email})
+            console.log(data)
+            res.json(data)
         }
-    })
+    }).select("-password")
 };

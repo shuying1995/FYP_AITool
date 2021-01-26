@@ -28,9 +28,9 @@
                   <v-form class="mt-10">
                     <v-text-field
                       class="pa-0 ma-0"
-                      name="username"
-                      v-model="username"
-                      placeholder="Username"
+                      name="email"
+                      v-model="email"
+                      placeholder="Email"
                       filled
                       full-width
                       single-line
@@ -118,7 +118,7 @@ export default {
   data() {
     return {
         show:false,
-        username: "",
+        email: "",
         password: "",
         errorMessages: "Incorrect login info",
         snackbar: false,
@@ -129,16 +129,16 @@ export default {
     login(){
             axios
             .post('api/login', {
-                username: this.username,
+                email: this.email,
                 password: this.password
             })
             .then((response) => {
-                const username = response.data.username
+                const email = response.data.email
                 const roles = response.data.roles
-                console.log(roles)
-                window.$cookies.set("username", username, Infinity)
+                const firstname = response.data.firstname
+                window.$cookies.set("email", email, Infinity)
                 window.$cookies.set("roles",roles,Infinity)
-                console.log(window.$cookies.get("roles"))
+                window.$cookies.set("firstname",firstname,Infinity)
                 if(window.$cookies.get(roles)=="Member")
                 this.$router.push({ name: "HomePageOP"})
                 else

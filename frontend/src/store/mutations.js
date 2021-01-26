@@ -10,7 +10,7 @@ export default {
     },
     resetState(state){
         state.apptype = '';
-        state.members = '';
+        state.members = [];
         state.projects = '';
     }
 }
