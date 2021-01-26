@@ -18,8 +18,11 @@
           <v-icon @click="profile" color="orange">mdi-account-outline</v-icon>
         </v-btn>
 
-        <v-col cols="2" class="pb-0">
+        <v-col 
+         cols="2"
+         class="pb-0">
         <v-select
+          v-model="select"
           :items="items"
           menu-props="auto"
           single-line
@@ -34,6 +37,12 @@
 <script>
 export default {
     name: "Appbar",
+    data() {
+    return {
+      select: 'Facilitator',
+      items: window.$cookies.get("roles"),
+      }
+    },
     methods: {
         home() {
             this.$router.push({ name: "HomePageOP" });
@@ -42,10 +51,5 @@ export default {
             this.$router.push({ name: "Profile"});
         }
     },
-    data() {
-    return {
-      items: ['Member', 'Facilitator'],
-  }
-}
 }
 </script>  

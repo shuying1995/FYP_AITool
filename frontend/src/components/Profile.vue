@@ -48,7 +48,7 @@
                         </v-avatar>
                         </v-col>
                         <v-col md='4'>
-                        <h2>User name</h2>
+                        <h2>{{username}}</h2>
                     </v-col>
                     </v-row>
 
@@ -92,6 +92,19 @@
 
 <script>
 export default {
+    data() {
+    return {
+        dialog: false,
+        items: [
+          { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
+          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
+          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
+          { title: 'Completed Project', icon: 'mdi-calendar-check', action: this.completedprojects},
+          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
+        ],
+        username: window.$cookies.get("username")
+      }
+    },
     methods: {
         home() {
             this.$router.push({ name: "HomePageOP" });
@@ -106,18 +119,6 @@ export default {
             this.$router.push({ name: "CompletedProjects"});
         }
     },
-    data() {
-    return {
-        dialog: false,
-        items: [
-          { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
-          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
-          { title: 'Completed Project', icon: 'mdi-calendar-check', action: this.completedprojects},
-          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
-        ],
-      }
-    }
 }
 </script>
 

@@ -3,6 +3,7 @@ const _ = require('lodash');
 const { User, validate, validateLogin } = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const { first } = require('lodash');
 
 exports.register = async (req, res) => {
     // First Validate The Request
@@ -53,4 +54,17 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ _id: user._id}, config.get('PrivateKey'));
     const roles = user.roles
     res.json({token, roles})
+};
+
+exports.getAllUsers = function (req, res) {
+    User.find((error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            const firstname = data.map(users => users.firstname)
+            const lastname = data.map(users => users.lastname)
+            const email = data.map(users => users.email)
+            res.json({firstname, lastname, email})
+        }
+    })
 };

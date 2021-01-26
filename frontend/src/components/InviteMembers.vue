@@ -133,7 +133,7 @@ const axios = require('axios');
 export default {
     data() {
         return {
-        memberlist: ['Martin James', 'Marsgirl', 'Danielle Mardina'],
+        memberlist: [],
         members: this.$store.getters.members.members,
         message: this.$store.getters.members.message,
         errorMessages: "Project name has been taken",
@@ -142,6 +142,28 @@ export default {
         successMessages: "Project created successfully",
         successdialog:false,
         }
+    },
+    created(){
+        axios.get('api/register')
+        .then((response) => {
+            var memberfname = response.data.firstname;
+            var memberlname = response.data.lastname;
+            var memberemail = response.data.email;
+
+            var size = memberfname.length;
+            for (var i=0; i<size; i++){
+                memberemail[i] = " (" + memberemail[i] + ")";
+            }
+            
+            var memberlist = []
+            for(var j=0; j<size; j++){
+                memberlist.push(memberfname[j]+" "+memberlname[j]+memberemail[j]);
+            }
+            this.memberlist= memberlist;
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     },
     methods: {
         home() {
@@ -161,6 +183,7 @@ export default {
             .dispatch('resetState')
             .then(this.$router.push({ name: "Create"}))
         },
+        //create project
         create(){
             let members = this.members
             let message = this.message

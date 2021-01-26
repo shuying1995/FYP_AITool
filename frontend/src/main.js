@@ -5,12 +5,14 @@ import vuetify from "./plugins/vuetify";
 import titleMixin from "./mixins/titleMixin";
 import axios from "axios";
 import store from "./store/index";
+import VueCookies from 'vue-cookies';
 
 // Sync router with store
 import { sync } from "vuex-router-sync";
 
 Vue.mixin(titleMixin);
 Vue.use(axios);
+Vue.use(VueCookies)
 
 // Sync store with router
 sync(store, router);
