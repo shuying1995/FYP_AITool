@@ -17,7 +17,6 @@ exports.createProject = async (req, res) => {
         // Insert the new project if the name is not taken yet
         project = new Project(_.pick(req.body, ['name', 'appscenario', 'apptype', 'members','message']));
         await project.save();
-        console.log(typeof members)
-        res.status(200).send(req.body)
+        res.status(200).send(project._id)
     }
 };

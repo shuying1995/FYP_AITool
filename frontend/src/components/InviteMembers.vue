@@ -29,7 +29,6 @@
             chips
             label="Type or select members"
             multiple
-            @change = "select()"
           >
           <template v-slot:selection="data">
                <v-chip
@@ -146,16 +145,12 @@ export default {
         axios.get('api/users')
         .then((response) => {
             this.memberlist = response.data
-            console.log(this.memberlist)
         })
         .catch((error) => {
             console.log(error)
         })
     },
     methods: {
-        select(){
-            console.log(this.members)
-        },
         home() {
             this.$store
             .dispatch('resetState')
@@ -190,18 +185,19 @@ export default {
                 message: message,
             })
             .then((response) => {
+                const projectid = response.data
                 this.successdialog=true;
-                console.log(response)
-                axios
-                .put('/users/:userId', {
-                    members : members
-                })
-                .then((response)=> {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+                for (var i =0; i<members.length; i++){
+                    axios
+                    .put('api/users/' + members[i], {
+                        projectid: projectid
+                    })
+                    .then((response) => {
+                    })
+                    .catch((error) =>{
+                        console.log(error)
+                    })
+                }
             })
             .catch((error) => {
                 this.failsnackbar=true;

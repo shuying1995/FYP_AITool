@@ -58,7 +58,6 @@ exports.getAllUsers = function (req, res) {
         if (error) {
             return next(error)
         } else {
-            console.log(data)
             res.json(data)
         }
     }).select("-password")
@@ -69,22 +68,22 @@ exports.insertProjectId = function (req, res) {
         //Userid does not exist
         if (error) 
             return res.status(400).send("User id not found");
-        //split string into array (projectId)
+        //split string into array (projectid)
         
         //if array is empty
-        if(user.projectid == undefined)
-            user.projectid = req.body.projectId;
-            
+        if(user.projectid == undefined){
+            user.projectid = req.body.projectid;
+        }
         //else add project id into existing array
         else { 
             var projectid = user.projectid;
             var result = projectid.split(",");
             //check that projectid will not exist twice in user
             for (var i=0; i<result.length; i++){
-                if(result[i] == req.body.projectId)
+                if(result[i] == req.body.projectid)
                     return res.status(400).send("project id already added")
                 else
-                user.projectid = user.projectid + "," + req.body.projectId;
+                user.projectid = user.projectid + "," + req.body.projectid;
             }
         }
             user.save((error, updatedUser) => {
@@ -93,5 +92,5 @@ exports.insertProjectId = function (req, res) {
                 return res.status(400).end();
             return res.status(200).json(updatedUser);
         })
-    })
+    }).select("-password")
 }
