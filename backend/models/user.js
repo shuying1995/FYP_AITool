@@ -27,7 +27,7 @@ const User = mongoose.model('User', new mongoose.Schema({
         required: true
     },
     projectid: {
-        type: Number
+        type: String
     }
 }));
 
@@ -46,7 +46,8 @@ const validateUser = function (user) {
         lastname: Joi.string().required(),
         email: Joi.string().max(255).required().email(),
         password: passwordComplexity(complexityOptions).required(),
-        roles: Joi.string().required()
+        roles: Joi.string().required(),
+        projectid: Joi.string()
     });
     return schema.validate(user);
 }

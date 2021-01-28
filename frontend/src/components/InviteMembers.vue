@@ -192,6 +192,16 @@ export default {
             .then((response) => {
                 this.successdialog=true;
                 console.log(response)
+                axios
+                .put('/users/:userId', {
+                    members : members
+                })
+                .then((response)=> {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             })
             .catch((error) => {
                 this.failsnackbar=true;

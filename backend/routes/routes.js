@@ -7,7 +7,7 @@ var projectController = require('../controllers/project')
 
 router.post('/users', userController.register) //create users
 router.get('/users', userController.getAllUsers) //get all users
-router.put('/users/:userId', userController.updateUsersProject) //Update a user with projectId
+router.put('/users/:userId', userController.insertProjectId) //Insert projectid into user
 
 router.post('/login', userController.login) //users login route
 

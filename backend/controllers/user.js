@@ -3,7 +3,7 @@ const _ = require('lodash');
 const { User, validate, validateLogin } = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { first } = require('lodash');
+const { first, result } = require('lodash');
 
 exports.register = async (req, res) => {
     // First Validate The Request
@@ -64,8 +64,34 @@ exports.getAllUsers = function (req, res) {
     }).select("-password")
 };
 
-exports.updateUsersProject = function (req, res) {
-    User.findByIdAndUpdate(req.params._id, {
+exports.insertProjectId = function (req, res) {
+    User.findById(req.params.userId, (error, user)=> {
+        //Userid does not exist
+        if (error) 
+            return res.status(400).send("User id not found");
+        //split string into array (projectId)
         
+        //if array is empty
+        if(user.projectid == undefined)
+            user.projectid = req.body.projectId;
+            
+        //else add project id into existing array
+        else { 
+            var projectid = user.projectid;
+            var result = projectid.split(",");
+            //check that projectid will not exist twice in user
+            for (var i=0; i<result.length; i++){
+                if(result[i] == req.body.projectId)
+                    return res.status(400).send("project id already added")
+                else
+                user.projectid = user.projectid + "," + req.body.projectId;
+            }
+        }
+            user.save((error, updatedUser) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedUser);
+        })
     })
 }
