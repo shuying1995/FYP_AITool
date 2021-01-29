@@ -267,7 +267,6 @@ export default {
             })
             .then((response) => {
                 this.successdialog=true;
-                console.log(response)
             })
             .catch((error) => {
                 this.snackbar=true;

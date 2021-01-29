@@ -1,5 +1,7 @@
 const _ = require('lodash');
+const { ObjectId } = require('mongodb');
 const { Project, validate } = require('../models/project');
+const mongoose = require('mongoose')
 
 exports.createProject = async (req, res) => {
     // First Validate The Request
@@ -20,3 +22,21 @@ exports.createProject = async (req, res) => {
         res.status(200).send(project._id)
     }
 };
+
+exports.getMemberProjects = function (req, res){
+    Project.find((error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            var array = []
+            for (var i=0; i<data.length; i++) {
+                var members = data[i].members 
+                for (var j=0; j<members.length; j++){
+                    if(members[j] == req.body.members)
+                        array.push(data[i])  
+                }
+            }
+            res.json(array)
+        }
+    })
+}

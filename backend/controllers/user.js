@@ -68,8 +68,8 @@ exports.insertProjectId = function (req, res) {
         //Userid does not exist
         if (error) 
             return res.status(400).send("User id not found");
-        //split string into array (projectid)
         
+        //split string into array (projectid)
         //if array is empty
         if(user.projectid == undefined){
             user.projectid = req.body.projectid;
