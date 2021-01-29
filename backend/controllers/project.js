@@ -17,22 +17,22 @@ exports.createProject = async (req, res) => {
     } 
     else {
         // Insert the new project if the name is not taken yet
-        project = new Project(_.pick(req.body, ['name', 'appscenario', 'apptype', 'members','message']));
+        project = new Project(_.pick(req.body, ['name', 'appscenario', 'apptype', 'invitedmembers','message']));
         await project.save();
         res.status(200).send(project._id)
     }
 };
 
-exports.getMemberProjects = function (req, res){
+exports.getInvitedMemberProjects = function (req, res){
     Project.find((error, data) => {
         if (error) {
             return next(error)
         } else {
             var array = []
             for (var i=0; i<data.length; i++) {
-                var members = data[i].members 
+                var members = data[i].invitedmembers 
                 for (var j=0; j<members.length; j++){
-                    if(members[j] == req.body.members)
+                    if(members[j] == req.body.invitedmembers)
                         array.push(data[i])  
                 }
             }

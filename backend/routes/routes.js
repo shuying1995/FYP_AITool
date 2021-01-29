@@ -7,9 +7,9 @@ var projectController = require('../controllers/project')
 router.post('/login', userController.login) //users login route
 router.post('/users', userController.register) //create users
 router.get('/users', userController.getAllUsers) //get all users
-router.put('/users/:userId', userController.insertProjectId) //Insert projectid into user
+router.put('/users/:userId', userController.insertInvitedProjectId) //Insert inviteprojectid into user
 
 router.post('/create', projectController.createProject) //create project
-router.get('/create', projectController.getMemberProjects) //get all projects members have
+router.get('/create', projectController.getInvitedMemberProjects) //get all invitedprojects members have
 
 module.exports = router;

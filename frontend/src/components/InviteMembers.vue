@@ -181,7 +181,7 @@ export default {
                 name: this.$store.getters.projects.projectname,
                 appscenario: this.$store.getters.projects.appscenario,
                 apptype: this.$store.getters.apptype,
-                members: members,
+                invitedmembers: members,
                 message: message,
             })
             .then((response) => {
@@ -190,7 +190,7 @@ export default {
                 for (var i =0; i<members.length; i++){
                     axios
                     .put('api/users/' + members[i], {
-                        projectid: projectid
+                        invitedprojectid: projectid
                     })
                     .then((response) => {
                     })
