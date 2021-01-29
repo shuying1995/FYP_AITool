@@ -48,9 +48,7 @@ exports.login = async (req, res) => {
         return res.status(400).send('Incorrect email or password.');
     }
     const token = jwt.sign({ _id: user._id}, config.get('PrivateKey'));
-    const roles = user.roles
-    const firstname = user.firstname
-    res.json({token, roles, firstname})
+    res.json({token, user})
 };
 
 exports.getAllUsers = function (req, res) {

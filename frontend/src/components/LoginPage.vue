@@ -133,12 +133,14 @@ export default {
                 password: this.password
             })
             .then((response) => {
-                const email = response.data.email
-                const roles = response.data.roles
-                const firstname = response.data.firstname
+                const email = response.data.user.email
+                const roles = response.data.user.roles
+                const firstname = response.data.user.firstname
+                const userid = response.data.user._id
                 window.$cookies.set("email", email, Infinity)
                 window.$cookies.set("roles",roles,Infinity)
                 window.$cookies.set("firstname",firstname,Infinity)
+                window.$cookies.set("userid", userid, Infinity)
                 if(window.$cookies.get(roles)=="Member")
                 this.$router.push({ name: "HomePageOP"})
                 else

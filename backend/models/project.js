@@ -25,6 +25,10 @@ const Project = mongoose.model('Project', new mongoose.Schema({
     message: {
         type:String,
     },
+    facilitator: {
+        type: String,
+        required: true
+    },
     createdate: {
         type: String,
         default: Date
@@ -39,6 +43,7 @@ const validateProject = function (project) {
         invitedmembers: Joi.array().required(),
         acceptedmembers: Joi.array(),
         message: Joi.string().allow(''),
+        facilitator: Joi.string().required(),
         createdate: Joi.string()
     });
     return schema.validate(project);

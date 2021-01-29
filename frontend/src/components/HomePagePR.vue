@@ -93,6 +93,7 @@ data(){
       ],
     }
 },
+
 methods: {
     desdesignproject(){
         this.$router.push({ name: "DesDesignProject" });

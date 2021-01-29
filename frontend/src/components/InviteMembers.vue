@@ -183,6 +183,7 @@ export default {
                 apptype: this.$store.getters.apptype,
                 invitedmembers: members,
                 message: message,
+                facilitator: window.$cookies.get("userid")
             })
             .then((response) => {
                 const projectid = response.data
