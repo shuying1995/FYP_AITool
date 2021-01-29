@@ -1,7 +1,9 @@
 <template>
     <v-main>
         <v-container fluid>
-            <v-card>
+            <v-card 
+             min-height="650px"
+             >
                 <v-layout row wrap ml-7 mr-8>
                   <v-flex row wrap class="custom ma-3 mt-6">
                     <v-btn @click="homepageop" text>Ongoing Projects</v-btn>
@@ -29,17 +31,21 @@
                   <v-flex v-for="item in this.PRCards" :key="item.ID">
                     <v-card 
                      class="ma-2" 
-                     max-width="350" 
+                     max-width="350"
+                     min-height="200px"
+                     max-height="250px" 
+                     height="100%"
                      outlined
                      color="orange"
                      >
                       <v-list-item three-line>
                         <v-list-item-content>
-                          <p class="pt-2 pb-2">{{ item.Name }}</p>
+                          <h3 class="pt-2 pb-2">{{ item.name }}</h3>
+                          <p>{{ item.facilitator }}</p>
                           <v-sheet outlined color="white" rounded>
                           <v-card height="120px" color="orange">
                             <v-card-text class="text-center white--text">
-                                {{ item.Message }}
+                                {{ item.message }}
                             </v-card-text>
                           </v-card>
                           </v-sheet>
@@ -64,6 +70,8 @@
 </template>
 
 <script>
+import InviteMembersVue from './InviteMembers.vue';
+const axios = require('axios');
 export default {
 data(){
     return{
@@ -74,26 +82,23 @@ data(){
         { title: "Progress: Low to high" },
         { title: "Favourited" },
       ],
-      PRCards: [
-        {
-          ID: "1",
-          Name: "XX",
-          Message: "Project Description",
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          Message: "Project Description",
-        },
-        {
-          ID: "3",
-          Name: "YY",
-          Message: "Project Description",
-        },
-      ],
+      PRCards: [],
     }
 },
-
+created(){
+        axios
+        .get('api/create', { 
+          params:{
+            invitedmembers: window.$cookies.get("userid")
+          }})
+        .then((response) => {
+            this.PRCards = response.data
+            console.log(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },
 methods: {
     desdesignproject(){
         this.$router.push({ name: "DesDesignProject" });

@@ -136,15 +136,17 @@ export default {
                 const email = response.data.user.email
                 const roles = response.data.user.roles
                 const firstname = response.data.user.firstname
-                const userid = response.data.user._id
+                const lastname = response.data.user.lastname
+                const fullname = firstname.concat(' ', lastname)
                 window.$cookies.set("email", email, Infinity)
-                window.$cookies.set("roles",roles,Infinity)
-                window.$cookies.set("firstname",firstname,Infinity)
-                window.$cookies.set("userid", userid, Infinity)
-                if(window.$cookies.get(roles)=="Member")
-                this.$router.push({ name: "HomePageOP"})
+                window.$cookies.set("roles", roles, Infinity)
+                window.$cookies.set("firstname", firstname, Infinity)
+                window.$cookies.set("fullname", fullname, Infinity)
+
+                if(window.$cookies.get("roles")=="Member")
+                  this.$router.push({ name: "HomePageOP"})
                 else
-                this.$router.push({ name: "FacilitatorHomePage"})
+                  this.$router.push({ name: "FacilitatorHomePage"})
             })
             .catch((error) => {
               this.snackbar = true;

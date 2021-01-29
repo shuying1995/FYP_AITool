@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-container fluid>
-      <v-card>
+      <v-card min-height="650px">
         <v-layout row wrap ml-7 mr-8>
             <v-flex row wrap class="custom ma-3 mt-6">
               <v-btn text class="orange--text">Ongoing Projects</v-btn>

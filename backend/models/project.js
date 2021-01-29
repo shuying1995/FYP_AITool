@@ -24,6 +24,7 @@ const Project = mongoose.model('Project', new mongoose.Schema({
     },
     message: {
         type:String,
+        default: "No Message"
     },
     facilitator: {
         type: String,

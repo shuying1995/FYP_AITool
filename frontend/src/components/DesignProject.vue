@@ -1,7 +1,7 @@
 <template>
     <v-main>
         <v-container fluid>
-            <v-card>
+            <v-card min-height="650px">
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
                         <a @click="home">HOME</a>

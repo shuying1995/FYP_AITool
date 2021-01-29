@@ -30,9 +30,9 @@ exports.getInvitedMemberProjects = function (req, res){
         } else {
             var array = []
             for (var i=0; i<data.length; i++) {
-                var members = data[i].invitedmembers 
+                var members = data[i].invitedmembers
                 for (var j=0; j<members.length; j++){
-                    if(members[j] == req.body.invitedmembers)
+                    if(members[j] == req.query.invitedmembers)
                         array.push(data[i])  
                 }
             }
