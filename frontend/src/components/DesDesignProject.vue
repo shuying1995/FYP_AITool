@@ -12,14 +12,38 @@
 
                 <v-row>
                     <v-flex xs12 sm6 md6 class="pl-7">
+                        <v-col md="12">
                         <div>
                         <h3>This is your application scenario.</h3>
+                        <div class="pl-15 pt-4">
+                        <v-card 
+                         min-height="400px" 
+                         max-width="600px"
+                         color="grey"
+                         >
+                            <v-card-text class="text-center white--text headline">
+                                {{appscenario}}
+                            </v-card-text>
+                          </v-card>
                         </div>
+                        </div>
+                        </v-col>
                     </v-flex>
                     <v-flex xs12 sm6 md6>
+                        <v-col>
                         <div>
                         <h3>This is your application type that can guide you later on.</h3>
+                        <div>
                         </div>
+                        <v-card 
+                         min-height="400px" 
+                         max-width="600px"
+                         color="grey"
+                         >
+                            <v-img v-bind:src="require('../assets/' + image)" contain max-height="500" max-width="1200"/> 
+                          </v-card>
+                        </div>
+                        </v-col>
                     </v-flex>
                 </v-row>
 
@@ -34,12 +58,36 @@
 <script>
 const axios = require('axios');
 export default {
+data(){
+    return{
+    appscenario: window.$cookies.get("acceptedprojectappscenario"),
+    apptype: window.$cookies.get("acceptedprojectapptype")
+    }
+},
+computed: {
+    image(){
+        return this.apptype
+    }
+},
 created(){
-    const projectid = window.$cookies.get("selectedprojectid")
+    const projectid = window.$cookies.get("acceptedprojectid")
         axios
         .get('api/create/' + projectid)
         .then((response) => {
-            console.log(response)
+            let appscenario = response.data.appscenario
+            window.$cookies.set("acceptedprojectappscenario", appscenario, Infinity)
+            let apptype = response.data.apptype
+            if(apptype == '0')
+                apptype = "appcard1.jpg"
+            else if(apptype == '1')
+                apptype = "appcard2.jpg"
+            else if(apptype == '2')
+                apptype = "appcard3.jpg"
+            else if(apptype == '3')
+                apptype = "appcard4.jpg"
+            else
+                apptype = "appcard5.jpg" 
+            window.$cookies.set("acceptedprojectapptype", apptype, Infinity)
         })
         .catch((error) =>{
             console.log(error)

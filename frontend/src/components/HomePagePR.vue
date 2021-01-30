@@ -105,7 +105,7 @@ created(){
 methods: {
     desdesignproject(e){
         let projectid = this.PRCards[e]._id
-        window.$cookies.set("selectedprojectid", projectid, Infinity)
+        window.$cookies.set("acceptedprojectid", projectid, Infinity)
         this.$router.push({ name: "DesDesignProject" })
     },
     homepageop(){
