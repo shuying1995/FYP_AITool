@@ -9,6 +9,9 @@ export default {
         commit('updateMembers',members);
     },
     resetState({commit}){
-        commit('resetState')
+        commit('resetState');
+    },
+    updateAcceptProjectid({commit},acceptprojectid){
+        commit('updateAcceptProjectid',acceptprojectid);
     }
 }

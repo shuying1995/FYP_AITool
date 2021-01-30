@@ -62,7 +62,7 @@ exports.getAllUsers = function (req, res) {
 };
 
 exports.insertInvitedProjectId = function (req, res) {
-    User.findById(req.params.userId, (error, user)=> {
+    User.findById(req.params.userid, (error, user)=> {
         //Userid does not exist
         if (error) 
             return res.status(400).send("User id not found");

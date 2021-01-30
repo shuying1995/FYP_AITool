@@ -12,5 +12,8 @@ export default {
         state.apptype = '';
         state.members = [];
         state.projects = '';
+    },
+    updateAcceptProjectid(state, acceptprojectid){
+        state.acceptprojectid = acceptprojectid
     }
 }

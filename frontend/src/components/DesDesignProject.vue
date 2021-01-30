@@ -22,13 +22,27 @@
                 <v-flex class="justify-end pa-2" row wrap>
                     <v-btn color="warning" @click="desstakeholders">Next</v-btn>
                 </v-flex>
+
+                <p>{{this.$store.getters.acceptprojectid}}</p>
             </v-card>
         </v-container>
     </v-main>
 </template>
 
 <script>
+const axios = require('axios');
 export default {
+created(){
+    const projectid = this.$store.getters.acceptprojectid
+        axios
+        .get('api/create/' + projectid)
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) =>{
+            console.log(error)
+        })
+},
 methods:{
     home(){
         this.$router.push({ name: "HomePageOP"});

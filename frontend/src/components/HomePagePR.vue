@@ -28,7 +28,7 @@
                 </v-layout>
 
                 <v-layout row wrap ml-8>
-                  <v-flex v-for="item in this.PRCards" :key="item.ID">
+                  <v-flex v-for="(item, e) in PRCards" :key="item.ID">
                     <v-card 
                      class="ma-2" 
                      max-width="350"
@@ -45,12 +45,16 @@
                           <v-sheet outlined color="white" rounded>
                           <v-card height="120px" color="orange">
                             <v-card-text class="text-center white--text">
-                                {{ item.message }}
+                                {{ item.message }} 
                             </v-card-text>
                           </v-card>
                           </v-sheet>
                           <v-flex row wrap class="justify-center pt-2">
-                            <v-btn color="success" @click="desdesignproject">
+                            <v-btn 
+                             color="success" 
+                             @click="desdesignproject(e)"
+                             :key="item._id"
+                             >
                               Accept
                               <v-icon>mdi-check-circle-outline</v-icon>
                             </v-btn>
@@ -70,7 +74,6 @@
 </template>
 
 <script>
-import InviteMembersVue from './InviteMembers.vue';
 const axios = require('axios');
 export default {
 data(){
@@ -83,6 +86,7 @@ data(){
         { title: "Favourited" },
       ],
       PRCards: [],
+
     }
 },
 created(){
@@ -93,15 +97,17 @@ created(){
           }})
         .then((response) => {
             this.PRCards = response.data
-            console.log(response.data)
         })
         .catch((error) => {
             console.log(error)
         })
     },
 methods: {
-    desdesignproject(){
-        this.$router.push({ name: "DesDesignProject" });
+    desdesignproject(e){
+        let projectid = this.PRCards[e]._id
+        this.$store
+        .dispatch('updateAcceptProjectid',projectid)
+        .then(() => this.$router.push({ name: "DesDesignProject" }))
     },
     homepageop(){
         this.$router.push({ name: "HomePageOP" });

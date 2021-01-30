@@ -40,3 +40,13 @@ exports.getInvitedMemberProjects = function (req, res){
         }
     })
 }
+
+exports.getProjectDetails = function (req, res){
+    Project.findById(req.params.projectid, (error, project)=> {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(project)
+        }
+    })
+}
