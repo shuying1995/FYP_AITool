@@ -11,14 +11,39 @@
                 </v-layout>
 
                 <v-flex row wrap class="justify-start pb-6">
-                    <v-btn color="warning">
-                        Application Scenario
-                    </v-btn>
-                    <v-btn color="warning">
-                        Application Type
-                    </v-btn>
+                    <v-dialog v-model="asdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Scenario
+                        </v-btn>
+                      </template>
+                      <v-card 
+                       class="text-center white--text headline"
+                       min-height="270px"
+                       color="grey"
+                       >
+                          {{appscenario}}
+                      <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="asdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                      </v-card>
+                    </v-dialog>
 
-                    <v-dialog v-model="dialog" persistent max-width="400px">
+                    <v-dialog v-model="apdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Type
+                        </v-btn>
+                      </template>
+                      <v-img v-bind:src="require('../assets/' + image)" contain max-height="350">
+                      <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="apdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                       </v-img>
+                    </v-dialog>
+
+
+                    <v-dialog v-model="dsdialog" persistent max-width="400px">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn color="warning" dark v-bind="attrs" v-on="on">
                           Direct Stakeholder
@@ -26,12 +51,12 @@
                       </template>
                       <v-img src="../assets/direct.jpg" contain max-height="350">
                       <v-row justify="end" class="ma-0">
-                        <v-btn icon @click="dialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                        <v-btn icon @click="dsdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
                       </v-row>
                        </v-img>
                     </v-dialog>
 
-                    <v-dialog v-model="dialog" persistent max-width="400px">
+                    <v-dialog v-model="isdialog" persistent max-width="400px">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn color="warning" dark v-bind="attrs" v-on="on">
                           Indirect Stakeholder
@@ -39,7 +64,7 @@
                       </template>
                       <v-img src="../assets/indirect.jpg" contain max-height="350">
                       <v-row justify="end" class="ma-0">
-                        <v-btn icon @click="dialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                        <v-btn icon @click="isdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
                       </v-row>
                        </v-img>
                     </v-dialog>
@@ -56,8 +81,10 @@
                 <v-flex row wrap class="justify-center">
                     <v-img src="../assets/inputstakeholder.jpg" contain max-height="300" max-width="400">
                     <v-row justify="center">
-                    <v-col cols="6">
-                    <v-text-field></v-text-field>
+                    <v-col cols="7">
+                    <v-text-field 
+                     v-model="stakeholder"
+                    />
                     </v-col>
                     </v-row>
                     </v-img>
@@ -73,19 +100,32 @@
 
 <script>
 export default {
+data() {
+    return {
+        apdialog: false,
+        asdialog: false,
+        dsdialog: false,
+        isdialog: false,
+        appscenario: window.$cookies.get("acceptedprojectappscenario"),
+        apptype: window.$cookies.get("acceptedprojectapptype"),
+        stakeholder: ''
+        }
+    },
+computed:{
+    image(){
+        return this.apptype
+    }
+},
 methods:{
     home(){
         this.$router.push({ name: "HomePageOP"});
     },
     randomfairness(){
-        this.$router.push({ name: "RandomFairness"});
+        this.$store
+        .dispatch("updateStakeholder",this.stakeholder)
+        .then(()=>this.$router.push({ name: "RandomFairness"}))
     }
-},
- data() {
-    return {
-        dialog: false,
-        }
-    }
+}
 }
 </script>
 

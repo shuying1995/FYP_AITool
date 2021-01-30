@@ -10,9 +10,8 @@
                     </v-flex>
                 </v-layout>
 
-                <v-row>
+                <v-flex row wrap>
                     <v-flex xs12 sm6 md6 class="pl-7">
-                        <v-col md="12">
                         <div>
                         <h3>This is your application scenario.</h3>
                         <div class="pl-15 pt-4">
@@ -27,25 +26,16 @@
                           </v-card>
                         </div>
                         </div>
-                        </v-col>
                     </v-flex>
-                    <v-flex xs12 sm6 md6>
-                        <v-col>
+                    <v-flex xs12 sm6 md6 class="pr-7">
                         <div>
                         <h3>This is your application type that can guide you later on.</h3>
-                        <div>
+                        <div class="pt-4">
                         </div>
-                        <v-card 
-                         min-height="400px" 
-                         max-width="600px"
-                         color="grey"
-                         >
-                            <v-img v-bind:src="require('../assets/' + image)" contain max-height="500" max-width="1200"/> 
-                          </v-card>
+                            <v-img v-bind:src="require('../assets/' + image)" contain max-height="400" max-width="1200"/> 
                         </div>
-                        </v-col>
                     </v-flex>
-                </v-row>
+                </v-flex>
 
                 <v-flex class="justify-end pa-2" row wrap>
                     <v-btn color="warning" @click="desstakeholders">Next</v-btn>

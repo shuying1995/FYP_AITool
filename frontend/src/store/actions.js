@@ -11,4 +11,7 @@ export default {
     resetState({commit}){
         commit('resetState');
     },
+    updateStakeholder({commit},stakeholder){
+        commit('updateStakeholder',stakeholder)
+    }
 }

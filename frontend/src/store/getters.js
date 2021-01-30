@@ -8,4 +8,7 @@ export default {
     members(state) {
         return state.members
     },
+    stakeholder(state) {
+        return state.stakeholder
+    }
 }

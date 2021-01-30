@@ -13,4 +13,7 @@ export default {
         state.members = [];
         state.projects = '';
     },
+    updateStakeholder(state, stakeholder){
+        state.stakeholder=stakeholder
+    }
 }
