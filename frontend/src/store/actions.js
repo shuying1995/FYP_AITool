@@ -11,7 +11,4 @@ export default {
     resetState({commit}){
         commit('resetState');
     },
-    updateAcceptProjectid({commit},acceptprojectid){
-        commit('updateAcceptProjectid',acceptprojectid);
-    }
 }

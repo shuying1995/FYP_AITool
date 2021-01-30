@@ -13,7 +13,4 @@ export default {
         state.members = [];
         state.projects = '';
     },
-    updateAcceptProjectid(state, acceptprojectid){
-        state.acceptprojectid = acceptprojectid
-    }
 }

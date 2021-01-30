@@ -8,7 +8,4 @@ export default {
     members(state) {
         return state.members
     },
-    acceptprojectid(state) {
-        return state.acceptprojectid
-    }
 }
