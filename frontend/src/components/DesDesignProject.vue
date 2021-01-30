@@ -10,20 +10,22 @@
                     </v-flex>
                 </v-layout>
 
-                <v-flex row wrap>
-                    <v-col md="6">
+                <v-row>
+                    <v-flex xs12 sm6 md6 class="pl-7">
+                        <div>
                         <h3>This is your application scenario.</h3>
-                    </v-col>
-                    <v-col md="6">
+                        </div>
+                    </v-flex>
+                    <v-flex xs12 sm6 md6>
+                        <div>
                         <h3>This is your application type that can guide you later on.</h3>
-                    </v-col>
-                </v-flex>
+                        </div>
+                    </v-flex>
+                </v-row>
 
                 <v-flex class="justify-end pa-2" row wrap>
                     <v-btn color="warning" @click="desstakeholders">Next</v-btn>
                 </v-flex>
-
-                <p>{{this.$store.getters.acceptprojectid}}</p>
             </v-card>
         </v-container>
     </v-main>
@@ -33,7 +35,7 @@
 const axios = require('axios');
 export default {
 created(){
-    const projectid = this.$store.getters.acceptprojectid
+    const projectid = window.$cookies.get("selectedprojectid")
         axios
         .get('api/create/' + projectid)
         .then((response) => {
@@ -71,5 +73,9 @@ p{
     padding-left: 5px;
     padding-right: 5px;
     font-weight: bold;
+}
+
+div {
+    text-align: center;
 }
 </style>

@@ -21,7 +21,6 @@ import Register from "../components/Register.vue";
 //import RegisterStep2 from "../components/RegisterStep2.vue";
 //import RegisterStep3 from "../components/RegisterStep3.vue";
 //import RegisterStep4 from "../components/RegisterStep4.vue";
-//import RegisterStep5 from "../components/RegisterStep5.vue";
 
 Vue.use(VueRouter);
 
@@ -130,11 +129,6 @@ const routes = [
     path: "/registerstep4",
     name: "RegisterStep4",
     component: RegisterStep4
-  },
-  {
-    path: "/registerstep5",
-    name: "RegisterStep5",
-    component: RegisterStep5
   },*/
 ];
 
