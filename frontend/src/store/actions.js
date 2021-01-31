@@ -13,5 +13,8 @@ export default {
     },
     updateStakeholder({commit},stakeholder){
         commit('updateStakeholder',stakeholder)
+    },
+    updateFairnesscard({commit},fairnesscard){
+        commit('updateFairnesscard',fairnesscard)
     }
 }

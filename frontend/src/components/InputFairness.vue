@@ -24,7 +24,7 @@
 
                 <v-row>
                     <v-col md="6">
-                        <v-img :src="selectedImage.front" contain max-height="350px"></v-img>
+                        <v-img :src="fairnesscard" contain max-height="450"></v-img>
                     </v-col>
                     <v-col md="5">
                         <h3>Using the perspective of your Stakeholder role,</h3>
@@ -44,9 +44,14 @@
 <script>
 export default {
 name: 'InputFairness',
-props: {
-    selectedImage: {
-        type: String
+data(){
+    return { 
+        selectedimage: this.$store.getters.fairnesscard 
+    }
+},
+computed: {
+    fairnesscard(){
+        return this.selectedimage
     }
 },
 methods:{

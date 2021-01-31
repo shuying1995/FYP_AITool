@@ -12,5 +12,6 @@ router.put('/users/:userid', userController.insertInvitedProjectId) //Insert inv
 router.post('/create', projectController.createProject) //create project
 router.get('/create', projectController.getInvitedMemberProjects) //get all invitedprojects members have
 router.get('/create/:projectid', projectController.getProjectDetails) //get selected projectdetails members accept
+router.put('/create/:userid',projectController.insertProjectDetails) //Insert details into project by users
 
 module.exports = router;

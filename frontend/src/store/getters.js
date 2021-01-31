@@ -10,5 +10,8 @@ export default {
     },
     stakeholder(state) {
         return state.stakeholder
+    },
+    fairnesscard(state) {
+        return state.fairnesscard
     }
 }

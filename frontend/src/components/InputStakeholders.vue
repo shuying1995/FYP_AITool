@@ -22,14 +22,14 @@
                        min-height="270px"
                        color="grey"
                        >
-                          {{appscenario}}
-                      <v-row justify="end" class="ma-0">
+                       <v-row justify="end" class="ma-0">
                         <v-btn icon @click="asdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
                       </v-row>
+                          {{appscenario}}
                       </v-card>
                     </v-dialog>
 
-                    <v-dialog v-model="apdialog" persistent max-width="400px">
+                    <v-dialog v-model="atdialog" persistent max-width="400px">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn color="warning" dark v-bind="attrs" v-on="on">
                           Application Type
@@ -37,11 +37,10 @@
                       </template>
                       <v-img v-bind:src="require('../assets/' + image)" contain max-height="350">
                       <v-row justify="end" class="ma-0">
-                        <v-btn icon @click="apdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                        <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
                       </v-row>
                        </v-img>
                     </v-dialog>
-
 
                     <v-dialog v-model="dsdialog" persistent max-width="400px">
                       <template v-slot:activator="{ on, attrs }">
@@ -79,7 +78,7 @@
                 </v-row>
 
                 <v-flex row wrap class="justify-center">
-                    <v-img src="../assets/inputstakeholder.jpg" contain max-height="300" max-width="400">
+                    <v-img src="../assets/inputstakeholder.jpg" contain max-height="600" max-width="600">
                     <v-row justify="center">
                     <v-col cols="7">
                     <v-text-field 
@@ -102,7 +101,7 @@
 export default {
 data() {
     return {
-        apdialog: false,
+        atdialog: false,
         asdialog: false,
         dsdialog: false,
         isdialog: false,

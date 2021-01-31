@@ -15,5 +15,8 @@ export default {
     },
     updateStakeholder(state, stakeholder){
         state.stakeholder=stakeholder
+    },
+    updateFairnesscard(state, fairnesscard){
+        state.fairnesscard=fairnesscard
     }
 }

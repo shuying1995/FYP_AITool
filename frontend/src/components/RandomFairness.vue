@@ -11,12 +11,37 @@
                 </v-layout>  
 
                 <v-flex row wrap class="justify-start pb-6">
-                    <v-btn color="warning">
-                        Application Scenario
-                    </v-btn>
-                    <v-btn color="warning">
-                        Application Type
-                    </v-btn>
+                    <v-dialog v-model="asdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Scenario
+                        </v-btn>
+                      </template>
+                      <v-card 
+                       class="text-center white--text headline"
+                       min-height="270px"
+                       color="grey"
+                       >
+                       <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="asdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                          {{appscenario}}
+                      </v-card>
+                    </v-dialog>
+
+                     <v-dialog v-model="atdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Type
+                        </v-btn>
+                      </template>
+                      <v-img v-bind:src="require('../assets/' + image)" contain max-height="350">
+                      <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                       </v-img>
+                    </v-dialog>
+
                     <v-btn color="warning"> 
                         Stakeholder Role
                     </v-btn>
@@ -31,8 +56,8 @@
                 </v-row>
 
                 <v-flex row wrap class="justify-center">
-                     <v-img :src="selectedImage.front" contain max-height="300" max-width="450" @click="flip" v-if="showFront"></v-img>
-                     <v-img :src="selectedImage.back" contain max-height="300" max-width="450" @click="flip" v-if="!showFront"></v-img>
+                     <v-img :src="selectedImage.front" contain max-height="600" max-width="600" @click="flip" v-if="showFront"></v-img>
+                     <v-img :src="selectedImage.back" contain max-height="600" max-width="600" @click="flip" v-if="!showFront"></v-img>
                 </v-flex>
 
                 <v-flex class="justify-end pa-2" row wrap>
@@ -40,21 +65,19 @@
                 </v-flex>
             </v-card>
 
-            <InputFairness v-if="showComponent" v-bind:selectedImage="selectedImage" />
         </v-container>
     </v-main>
 </template>
 
 <script>
-import InputFairness from '@/components/InputFairness.vue';
 export default {
-components: {
-    InputFairness,
-},
 data() {
     return {
+    asdialog: false,
+    atdialog: false,
+    appscenario: window.$cookies.get("acceptedprojectappscenario"),
+    apptype: window.$cookies.get("acceptedprojectapptype"),
     showFront:true,
-    showComponent:false,
     images: [
       {index: 1, front: require('../assets/fcard1.jpg'), back: require('../assets/fcardb1.jpg')},
       {index: 2, front: require('../assets/fcard2.jpg'), back: require('../assets/fcardb2.jpg')},
@@ -70,6 +93,11 @@ data() {
     selectedImage: null
   }
 },
+computed:{
+    image(){
+        return this.apptype
+    }
+},
   methods: {
     randomItem (items) {
       return items[Math.floor(Math.random()*items.length)];
@@ -78,7 +106,10 @@ data() {
         this.$router.push({ name: "HomePageOP"});
     },
     inputfairness(){
-        this.showComponent=!this.showComponent;
+        let image = this.selectedImage.front
+        this.$store
+        .dispatch("updateFairnesscard",image)
+        this.$router.push({ name: "InputFairness"})
     },
     flip(){
         this.showFront=!this.showFront;
