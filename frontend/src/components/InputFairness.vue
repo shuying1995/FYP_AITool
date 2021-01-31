@@ -106,7 +106,9 @@ methods:{
     ratingfairness(){
         const projectid = window.$cookies.get("acceptedprojectid")
         axios
-        .put('api/create/' + projectid, {
+        .post('api/projectdetails', {
+                        userid: window.$cookies.get("userid"),
+                        projectid: window.$cookies.get("acceptedprojectid"),
                         stakeholder: this.$store.getters.stakeholder,
                         fairnesscard: this.selectedimage,
                         goright: this.goright,
@@ -114,11 +116,11 @@ methods:{
                     })
                     .then((response) => {
                         console.log(response)
+                        this.$router.push({ name: "RatingFairness"});
                     })
                     .catch((error) =>{
                         console.log(error)
                     })
-        this.$router.push({ name: "RatingFairness"});
         },
     }
 }
