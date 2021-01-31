@@ -52,33 +52,3 @@ exports.getProjectDetails = function (req, res){
         }
     })
 }
-
-exports.insertProjectDetails = function (req, res){
-    Project.findById(req.params.projectid, (error, project)=>{
-    //projectid does not exist
-    if (error) 
-    return res.status(400).send("Project id not found");
-
-    if(project.stakeholder == undefined)
-        project.stakeholder = req.body.stakeholder;
-    if(project.fairnesscard == undefined)
-        project.fairnesscard == req.body.fairnesscard;
-    if(project.goright == undefined)
-        project.goright == req.body.goright;
-    if(project.gowrong == undefined)
-        project.gowrong == req.body.gowrong;
-
-    else {
-        project.stakeholder = project.stakeholder + ',' + req.body.stakeholder;
-        project.fairnesscard = project.fairnesscard + ',' + req.body.fairnesscard;
-        project.goright = project.goright + ',' + req.body.goright;
-        project.gowrong = project.gowrong + ',' + req.body.gowrong;
-        }
-        project.save((error, updatedProject) => {
-            //Wrong input
-            if(error) 
-                return res.status(400).end();
-            return res.status(200).json(updatedProject);
-        })
-    })
-}

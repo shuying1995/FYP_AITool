@@ -11,12 +11,37 @@
                 </v-layout>  
 
                 <v-flex row wrap class="justify-start pb-6">
-                    <v-btn color="warning">
-                        Application Scenario
-                    </v-btn>
-                    <v-btn color="warning">
-                        Application Type
-                    </v-btn>
+                    <v-dialog v-model="asdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Scenario
+                        </v-btn>
+                      </template>
+                      <v-card 
+                       class="text-center white--text headline"
+                       min-height="270px"
+                       color="grey"
+                       >
+                       <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="asdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                          {{appscenario}}
+                      </v-card>
+                    </v-dialog>
+
+                    <v-dialog v-model="atdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Type
+                        </v-btn>
+                      </template>
+                      <v-img v-bind:src="require('../assets/' + image)" contain max-height="350">
+                      <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                       </v-img>
+                    </v-dialog>
+
                     <v-btn color="warning"> 
                         Stakeholder Role
                     </v-btn>
@@ -30,9 +55,19 @@
                         <h3>Using the perspective of your Stakeholder role,</h3>
                         <h3 class="pb-2">If this definition is used, think deeply about</h3>
                         <h3>What can go right?</h3>
-                        <v-textarea placeholder="Placeholder" outlined height="70px"></v-textarea>
+                        <v-textarea
+                         v-model="goright"
+                         placeholder="Placeholder" 
+                         outlined 
+                         height="70px"
+                         />
                         <h3>What can go wrong?</h3>
-                        <v-textarea placeholder="Placeholder" outlined height="70px"></v-textarea>
+                        <v-textarea 
+                         v-model="gowrong"
+                         placeholder="Placeholder" 
+                         outlined 
+                         height="70px"
+                         />
                         <v-btn color="warning" @click="ratingfairness">Next</v-btn>
                     </v-col>
                 </v-row>
@@ -42,16 +77,26 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
 name: 'InputFairness',
 data(){
     return { 
-        selectedimage: this.$store.getters.fairnesscard 
+        selectedimage: this.$store.getters.fairnesscard,
+        asdialog: false,
+        atdialog: false,
+        appscenario: window.$cookies.get("acceptedprojectappscenario"),
+        apptype: window.$cookies.get("acceptedprojectapptype"), 
+        goright: '',
+        gowrong: ''
     }
 },
 computed: {
     fairnesscard(){
         return this.selectedimage
+    },
+    image(){
+        return this.apptype
     }
 },
 methods:{
@@ -59,6 +104,20 @@ methods:{
         this.$router.push({ name: "HomePageOP"});
         },
     ratingfairness(){
+        const projectid = window.$cookies.get("acceptedprojectid")
+        axios
+        .put('api/create/' + projectid, {
+                        stakeholder: this.$store.getters.stakeholder,
+                        fairnesscard: this.selectedimage,
+                        goright: this.goright,
+                        gowrong: this.gowrong
+                    })
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) =>{
+                        console.log(error)
+                    })
         this.$router.push({ name: "RatingFairness"});
         },
     }
