@@ -29,8 +29,10 @@ exports.getInvitedMemberProjects = function (req, res){
             return next(error)
         } else {
             var array = []
+            //data is array, need to loop through to find all invitedmembers columns
             for (var i=0; i<data.length; i++) {
                 var members = data[i].invitedmembers
+                //invitedmembers is array also, loop through to check if found
                 for (var j=0; j<members.length; j++){
                     if(members[j] == req.query.invitedmembers)
                         array.push(data[i])  
@@ -48,5 +50,35 @@ exports.getProjectDetails = function (req, res){
         } else {
             res.json(project)
         }
+    })
+}
+
+exports.insertProjectDetails = function (req, res){
+    Project.findById(req.params.projectid, (error, project)=>{
+    //projectid does not exist
+    if (error) 
+    return res.status(400).send("Project id not found");
+
+    if(project.stakeholder == undefined)
+        project.stakeholder = req.body.stakeholder;
+    if(project.fairnesscard == undefined)
+        project.fairnesscard == req.body.fairnesscard;
+    if(project.goright == undefined)
+        project.goright == req.body.goright;
+    if(project.gowrong == undefined)
+        project.gowrong == req.body.gowrong;
+
+    else {
+        project.stakeholder = project.stakeholder + ',' + req.body.stakeholder;
+        project.fairnesscard = project.fairnesscard + ',' + req.body.fairnesscard;
+        project.goright = project.goright + ',' + req.body.goright;
+        project.gowrong = project.gowrong + ',' + req.body.gowrong;
+        }
+        project.save((error, updatedProject) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedProject);
+        })
     })
 }

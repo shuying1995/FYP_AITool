@@ -63,11 +63,10 @@ exports.getAllUsers = function (req, res) {
 
 exports.insertInvitedProjectId = function (req, res) {
     User.findById(req.params.userid, (error, user)=> {
-        //Userid does not exist
+        //userid does not exist
         if (error) 
             return res.status(400).send("User id not found");
         
-        //split string into array (projectid)
         //if array is empty
         if(user.invitedprojectid == undefined){
             user.invitedprojectid = req.body.invitedprojectid;
@@ -75,6 +74,7 @@ exports.insertInvitedProjectId = function (req, res) {
         //else add project id into existing array
         else { 
             var projectid = user.invitedprojectid;
+            //split string into array (projectid)
             var result = projectid.split(",");
             //check that projectid will not exist twice in user
             for (var i=0; i<result.length; i++){

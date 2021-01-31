@@ -30,6 +30,18 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         type: String,
         required: true
     },
+    stakeholder:{
+        type: String
+    },
+    fairnesscard:{
+        type: String
+    },
+    goright:{
+        type: String
+    },
+    gowrong:{
+        type: String
+    },
     createdate: {
         type: String,
         default: Date
@@ -45,6 +57,9 @@ const validateProject = function (project) {
         acceptedmembers: Joi.array(),
         message: Joi.string().allow(''),
         facilitator: Joi.string().required(),
+        stakeholder: Joi.string(),
+        goright: Joi.string(),
+        gowrong: Joi.string(),
         createdate: Joi.string()
     });
     return schema.validate(project);
