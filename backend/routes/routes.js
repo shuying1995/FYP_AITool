@@ -15,5 +15,7 @@ router.get('/create', projectController.getInvitedMemberProjects) //get all invi
 router.get('/create/:projectid', projectController.getProjectDetails) //get selected projectdetails members accept
 
 router.post('/projectdetails', projectdetailsController.createProjectDetails) //Create a collection to store member's project inputs
+router.put('/projectdetails', projectdetailsController.insertExtra) //Insert extra fairnesscard, goright and gowrong
+
 
 module.exports = router;
