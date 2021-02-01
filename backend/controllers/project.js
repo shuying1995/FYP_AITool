@@ -1,7 +1,8 @@
 const _ = require('lodash');
 const { ObjectId } = require('mongodb');
 const { Project, validate } = require('../models/project');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const c = require('config');
 
 exports.createProject = async (req, res) => {
     // First Validate The Request
@@ -24,18 +25,18 @@ exports.createProject = async (req, res) => {
 };
 
 exports.getInvitedMemberProjects = function (req, res){
-    Project.find((error, data) => {
+    Project.find((error, project) => {
         if (error) {
             return next(error)
         } else {
             var array = []
             //data is array, need to loop through to find all invitedmembers columns
-            for (var i=0; i<data.length; i++) {
-                var members = data[i].invitedmembers
+            for (var i=0; i<project.length; i++) {
+                var members = project[i].invitedmembers
                 //invitedmembers is array also, loop through to check if found
                 for (var j=0; j<members.length; j++){
                     if(members[j] == req.query.invitedmembers)
-                        array.push(data[i])  
+                        array.push(project[i])  
                 }
             }
             res.json(array)
