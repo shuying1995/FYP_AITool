@@ -64,7 +64,7 @@
                       <v-list-item three-line>
                         <v-list-item-content>
                           <v-flex row wrap class="ma-0">
-                            <p class="pt-2">Date created: {{ item.CreatedDate }}</p>
+                            <p class="pt-2">Date created: {{ item.createdate }}</p>
                             <v-spacer />
                             <v-btn icon @click="item.IsPinned = !item.IsPinned">
                               <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
@@ -76,7 +76,7 @@
                             </v-btn>
                           </v-flex>
                           <v-flex row wrap class="justify-center">
-                            <h2>{{item.Name}}</h2>
+                            <h2>{{item.name}}</h2>
                           </v-flex>
                           <p>Progress</p>
                           <div class="pb-3">
@@ -104,6 +104,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
 data(){
     return{
@@ -121,49 +122,22 @@ data(){
         { title: "Progress: Low to high" },
         { title: "Favourited" },
       ],
-        MyCards: [
-        {
-          ID: "1",
-          Name: "Project 1",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
-          Dayleft:"2",
-          IsPinned: false,
-          IsFavourite: false,
-        },
-        {
-          ID: "2",
-          Name: "Project 2",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
-          Dayleft:"3",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "Project 3",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "50",
-          Dayleft:"6",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "2",
-          Name: "Project 4",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "70",
-          Dayleft:"8",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-      ],
+        MyCards: [],
     }
+},
+created(){
+        axios
+        .get('api/create', { 
+          params:{
+            facilitator: window.$cookies.get("fullname")
+          }})
+        .then((response) => {
+            console.log(response)
+            this.MyCards = response.data
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 },
  methods: {
         create() {

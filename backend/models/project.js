@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { date } = require('joi');
+const moment = require('moment');
 
 const Project = mongoose.model('Project', new mongoose.Schema({
     name:{
@@ -30,6 +32,10 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         type: String,
         required: true
     },
+    createdate: {
+        type: String,
+        default: () => moment().format("DD-MM-YYYY")
+    }
 }))
 
 const validateProject = function (project) {
@@ -41,6 +47,7 @@ const validateProject = function (project) {
         acceptedmembers: Joi.array(),
         message: Joi.string().allow(''),
         facilitator: Joi.string().required(),
+        createdate: Joi.string()
     });
     return schema.validate(project);
 }
