@@ -17,7 +17,6 @@ import InputFairness from "../components/InputFairness.vue";
 import RatingFairness from "../components/RatingFairness.vue";
 import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
-import DeleteProjects from "../components/DeleteProjects.vue"
 //import RegisterStep1 from "../components/RegisterStep1.vue";
 //import RegisterStep2 from "../components/RegisterStep2.vue";
 //import RegisterStep3 from "../components/RegisterStep3.vue";
@@ -111,11 +110,6 @@ const routes = [
     name: "Create",
     component: Create
   },
-  {
-    path:"/deleteprojects",
-    name: "DeleteProjects",
-    component: DeleteProjects
-  }
   /*{
     path: "/registerstep1",
     name: "RegisterStep1",

@@ -172,9 +172,6 @@ data(){
         editteam(){
         this.$router.push({ name: "ProjectSettings"});
         },
-        deleteteam(){
-        this.$router.push({ name: "DeleteProjects"});
-        },
         show (e) {
         e.preventDefault()
         this.showMenu = false
