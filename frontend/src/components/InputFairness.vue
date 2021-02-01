@@ -35,7 +35,7 @@
                           Application Type
                         </v-btn>
                       </template>
-                      <v-img v-bind:src="require('../assets/' + image)" contain max-height="350">
+                      <v-img v-bind:src="require('../assets/' + image + '.jpg')" contain max-height="350">
                       <v-row justify="end" class="ma-0">
                         <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
                       </v-row>

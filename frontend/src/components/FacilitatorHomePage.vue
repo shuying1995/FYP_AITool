@@ -170,7 +170,7 @@ data(){
             this.$router.push({ name: "Create" });
         },
         editteam(){
-        this.$router.push({ name: "EditProjects"});
+        this.$router.push({ name: "ProjectSettings"});
         },
         deleteteam(){
         this.$router.push({ name: "DeleteProjects"});

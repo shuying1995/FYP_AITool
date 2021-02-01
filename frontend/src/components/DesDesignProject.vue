@@ -32,7 +32,7 @@
                         <h3>This is your application type that can guide you later on.</h3>
                         <div class="pt-4">
                         </div>
-                            <v-img v-bind:src="require('../assets/' + image)" contain max-height="400" max-width="1200"/> 
+                            <v-img v-bind:src="require('../assets/' + image + '.jpg')" contain max-height="400" max-width="1200"/> 
                         </div>
                     </v-flex>
                 </v-flex>
@@ -68,15 +68,15 @@ created(){
             window.$cookies.set("acceptedprojectappscenario", appscenario, Infinity)
             let apptype = response.data.apptype
             if(apptype == '0')
-                apptype = "appcard1.jpg"
+                apptype = "appcard1"
             else if(apptype == '1')
-                apptype = "appcard2.jpg"
+                apptype = "appcard2"
             else if(apptype == '2')
-                apptype = "appcard3.jpg"
+                apptype = "appcard3"
             else if(apptype == '3')
-                apptype = "appcard4.jpg"
+                apptype = "appcard4"
             else
-                apptype = "appcard5.jpg" 
+                apptype = "appcard5" 
             window.$cookies.set("acceptedprojectapptype", apptype, Infinity)
         })
         .catch((error) =>{

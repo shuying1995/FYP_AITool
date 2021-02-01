@@ -1,7 +1,7 @@
 <template>
     <v-main>
         <v-container fluid>
-            <v-card>
+            <v-card min-height="650px">
                 <v-layout>
                     <v-flex row wrap class="custom ma-3">
                         <a @click="home">HOME</a>
@@ -50,46 +50,6 @@
                   <v-col class="pa-0">
                     <p class="font-weight-light">Date Created:31/12/2020</p>
                   </v-col>
-                  <v-col class="pa-0">
-                    <v-dialog 
-                     v-model="dialog" 
-                     persistent 
-                     max-width="400px"
-                     >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn 
-                         color="success" 
-                         dark 
-                         v-bind="attrs" 
-                         v-on="on"
-                         >
-                          <v-icon>mdi-plus</v-icon>
-                          Invite Members
-                        </v-btn>
-                      </template>
-                      <v-card>
-                        <v-card-title>
-                          <span class="headline">Invite Members</span>
-                        </v-card-title>
-                        <v-card-text>
-                          <a>Email*</a>
-                          <v-text-field filled required></v-text-field>
-                          <a>Message (Optional)</a>
-                          <v-text-field filled required></v-text-field>
-                          <small>*indicates required field</small>
-                        </v-card-text>
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn color="red" text @click="dialog = false"
-                            >Cancel</v-btn
-                          >
-                          <v-btn color="green" text @click="dialog = false"
-                            >Invite</v-btn
-                          >
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
-                  </v-col>
                 </v-flex>
               </v-layout>
 
@@ -100,16 +60,72 @@
                       Application scenario
                     </v-card>
                   </v-col>
-
                 </v-flex>
               </v-layout>
-              <v-layout>
-                    <v-flex row wrap class="ml-4">
-                        <v-card max-width="200" height="150" outlined class="mb-4">
-                            Hello there ~~~~~~~~~~~~~
-                        </v-card>
-                    </v-flex>
-                </v-layout>
+              <p>Progress</p>
+
+              <hr class="solid">
+
+              <p>Deadline</p>
+
+              <p>Minimum number of fairness cards given to each member</p>
+              <div class="border">
+              <p class="font-weight-regular caption">
+              There are a total of 10 fairness cards in the library. You can choose how many cards each member
+              has to go through. The default is minimum 1 card per member. All cards should ideally be 
+              </p>
+              <p class="font-weight-regular caption">
+              For example, if you want all cards to be attempted at least once, and you have 2 members, you can choose 5. 
+              Or if you have 6 members, you can choose 2. 
+              </p>
+              <p class="font-weight-regular caption">
+              If you do not wish to have a minimum number, you can choose 1 which is the default. 
+              </p> 
+              </div>
+
+              <v-row class="pl-0">
+              <v-col
+                cols="12"
+                sm="3"
+              >
+              <v-select 
+                v-model="numcards"
+                :items="num" 
+                outlined 
+                dense
+                placeholder="1"
+              />
+              </v-col>
+              </v-row>
+
+              <p>Minimum reviews for each fairness cards</p>
+              <div class="border">
+              <p class="font-weight-regular caption">
+              There are a total of 10 fairness cards in the library. You can choose how many reviews you want for
+              each fairness card. The default will be 1 review for each fairness card. 
+              </p>
+              <p class="font-weight-regular caption">
+              For example, if you want each card to get at least 2 reviews, you can choose 2. 
+              </p>
+              <p class="font-weight-regular caption">
+              If you do not wish to have a minimum number, you can choose 1 which is the default.
+              </p>
+              </div>
+
+              <v-row class="pl-0">
+              <v-col
+                cols="12"
+                sm="3"
+              >
+              <v-text-field 
+              placeholder="Input a number"
+              v-model="numreviews"
+              outlined
+              dense
+              />
+              </v-col>
+              </v-row>
+
             </v-main>
           </v-col>
         </v-row>
@@ -120,6 +136,18 @@
 
 <script>
 export default {
+    data() {
+    return {
+        dialog: false,
+        num: ['1','2','3','4','5','6','7','8','9','10'],
+        numcards: '',
+        numreviews: '',
+        items: [
+          { title: 'Settings', icon: 'mdi-cog', action: this.projectsettings},
+          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
+        ],
+      }
+    },
     methods: {
         home() {
             //set active tab in local storage
@@ -133,21 +161,6 @@ export default {
         profile() {
             this.$router.push({ name:"Profile"});
         },
-        completedprojects() {
-            this.$router.push({ name: "CompletedProjects"});
-        }
-    },
-    data() {
-    return {
-        dialog: false,
-        items: [
-          { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
-          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
-          { title: 'Completed Projects', icon: 'mdi-calendar-check', action: this.completedprojects},
-          { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
-        ],
-      }
     },
 }
 </script>
@@ -177,5 +190,17 @@ p{
 
 .rounded-card{
     border-radius:30px;
+}
+
+hr.solid {
+  border-top: 3px solid lightgrey;
+  width: 800px;
+}
+
+div.border{
+    border-style: ridge;;
+    width: 700px;
+    background-color: #CFD8DC;
+    text-align: center;
 }
 </style>

@@ -4,7 +4,7 @@ import HomePageOP from "../components/HomePageOP.vue";
 import HomePagePR from "../components/HomePagePR.vue";
 import FacilitatorHomePage from "../components/FacilitatorHomePage.vue";
 import LoginPage from "../components/LoginPage.vue";
-import EditProjects from "../components/EditProjects.vue";
+import ProjectSettings from "../components/ProjectSettings.vue";
 import Create from "../components/Create.vue";
 import DesignProject from "../components/DesignProject.vue";
 import InviteMembers from "../components/InviteMembers.vue";
@@ -17,6 +17,7 @@ import InputFairness from "../components/InputFairness.vue";
 import RatingFairness from "../components/RatingFairness.vue";
 import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
+import DeleteProjects from "../components/DeleteProjects.vue"
 //import RegisterStep1 from "../components/RegisterStep1.vue";
 //import RegisterStep2 from "../components/RegisterStep2.vue";
 //import RegisterStep3 from "../components/RegisterStep3.vue";
@@ -41,9 +42,9 @@ const routes = [
     component: HomePagePR,
   },
   {
-    path: "/editprojects",
-    name: "EditProjects",
-    component: EditProjects,
+    path: "/projectsettings",
+    name: "ProjectSettings",
+    component: ProjectSettings,
   },
   {
     path: "/designproject",
@@ -110,6 +111,11 @@ const routes = [
     name: "Create",
     component: Create
   },
+  {
+    path:"/deleteprojects",
+    name: "DeleteProjects",
+    component: DeleteProjects
+  }
   /*{
     path: "/registerstep1",
     name: "RegisterStep1",
