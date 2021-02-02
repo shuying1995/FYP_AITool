@@ -12,7 +12,7 @@
     "mongodb": "^3.6.3",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
-    "vue-axios": "^3.2.2",
+    "vue-axios": "^3.2.4",
     "vue-cookies": "^1.7.4",
     "vue-flipcard": "^0.1.4",
     "vue-router": "^3.4.9",
@@ -50,7 +50,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {"no-unused-vars":"off"}
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",

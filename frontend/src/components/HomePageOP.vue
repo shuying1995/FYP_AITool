@@ -29,7 +29,7 @@
                       <v-flex v-for="item in this.OnCards" :key="item.ID">
                         <v-card 
                          class="ma-2" 
-                         max-width="350" 
+                         max-width="360" 
                          outlined
                          color="orange"
                          >

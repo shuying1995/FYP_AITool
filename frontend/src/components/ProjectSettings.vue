@@ -6,7 +6,7 @@
                     <v-flex row wrap class="custom ma-3">
                         <a @click="home">HOME</a>
                         <p>></p>
-                        <a @click="MyProjects">MY PROJECTS</a>
+                        <a @click="myprojects">MY PROJECTS</a>
                         <p>></p>
                         <p>TEAM MANAGEMENT</p>
                     </v-flex>
@@ -26,7 +26,6 @@
                   v-for="item in items"
                   :key="item.title"
                   link
-                  @click="item.action"
                 >
                   <v-list-item-icon>
                     <v-icon color="orange">{{ item.icon }}</v-icon>
@@ -67,6 +66,56 @@
               <hr class="solid">
 
               <p>Deadline</p>
+
+              <v-row>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-menu
+                  ref="menu1"
+                  v-model="menu1"
+                  :close-on-content-click="false"
+                  :return-value.sync="date"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      label="Picker in menu"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    no-title
+                    scrollable
+                  >
+                    <v-spacer/>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="menu1=false"
+                    >
+                      Cancel
+                    </v-btn>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="$refs.menu1.save(date)"
+                    >
+                      OK
+                    </v-btn>
+                  </v-date-picker>
+                </v-menu>
+              </v-col>
+              </v-row>
 
               <p>Minimum number of fairness cards given to each member</p>
               <div class="border">
@@ -126,6 +175,14 @@
               </v-col>
               </v-row>
 
+              <v-flex class="justify-end pa-2" row wrap>
+                        <v-btn 
+                         @click="savechanges" 
+                         color="warning"
+                         >
+                         Save changes
+                         </v-btn>
+                    </v-flex>
             </v-main>
           </v-col>
         </v-row>
@@ -139,6 +196,8 @@ export default {
     data() {
     return {
         dialog: false,
+        date: new Date().toISOString().substr(0, 10),
+        menu1:false,
         num: ['1','2','3','4','5','6','7','8','9','10'],
         numcards: '',
         numreviews: '',
@@ -158,8 +217,7 @@ export default {
             //window.localStorage.setItem('activetab', 0);
             this.$router.push({ name: "FacilitatorHomePage"});
         },
-        profile() {
-            this.$router.push({ name:"Profile"});
+        savechanges(){
         },
     },
 }

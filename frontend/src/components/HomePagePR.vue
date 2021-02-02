@@ -31,10 +31,9 @@
                   <v-flex v-for="(item, e) in PRCards" :key="item.ID">
                     <v-card 
                      class="ma-2" 
-                     max-width="350"
-                     min-height="200px"
-                     max-height="250px" 
-                     height="100%"
+                     max-width="360"
+                     min-height="200"
+                     max-height="200" 
                      outlined
                      color="orange"
                      >
@@ -43,7 +42,7 @@
                           <h3 class="pt-2 pb-2">{{ item.name }}</h3>
                           <p>{{ item.facilitator }}</p>
                           <v-sheet outlined color="white" rounded>
-                          <v-card height="120px" color="orange">
+                          <v-card height="80px" color="orange">
                             <v-card-text class="text-center white--text">
                                 {{ item.message }} 
                             </v-card-text>

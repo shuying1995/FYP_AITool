@@ -37,29 +37,13 @@
                   <v-flex v-for="item in this.MyCards" :key="item.ID" row wrap>
                     <v-card 
                      class="ma-2" 
-                     max-width="350" 
+                     max-width="360"
+                     max-height="200" 
+                     min-height="200"
                      outlined 
                      @contextmenu="show" 
                      color="orange"
                      >
-                      <v-menu
-                        v-model="showMenu"
-                        :position-x="x"
-                        :position-y="y"
-                        absolute
-                        offset-y
-                      >
-                        <v-list>
-                          <v-list-item
-                            v-for="(item, index) in menuitems"
-                            :key="index"
-                            link
-                            @click="item.action"
-                          >
-                            <v-list-item-title>{{ item.title }}</v-list-item-title>
-                          </v-list-item>
-                        </v-list>
-                      </v-menu>
                       
                       <v-list-item three-line>
                         <v-list-item-content>
@@ -74,7 +58,31 @@
                               <v-icon v-if="!item.IsFavourite">mdi-heart-outline</v-icon>
                               <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
                             </v-btn>
+                            <v-menu>
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                  icon
+                                  color="primary"
+                                  dark
+                                  v-bind="attrs"
+                                  v-on="on"
+                                >
+                                <v-icon>mdi-dots-horizontal</v-icon>
+                                </v-btn>
+                              </template>
+                              <v-list>
+                                <v-list-item
+                                  v-for="(item, index) in menuitems"
+                                  :key="index"
+                                  link
+                                  @click="item.action"
+                                >
+                                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                </v-list-item>
+                              </v-list>
+                            </v-menu>
                           </v-flex>
+
                           <v-flex row wrap class="justify-center">
                             <h2>{{item.name}}</h2>
                           </v-flex>
@@ -108,9 +116,6 @@ const axios = require('axios');
 export default {
 data(){
     return{
-    showMenu: false,
-        x: 0,
-        y: 0,
     menuitems: [
         { title: 'Edit', action: this.editteam },
         { title: 'Delete', action: this.deleteteam },

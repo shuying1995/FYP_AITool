@@ -4,6 +4,7 @@ import router from "./router";
 import vuetify from "./plugins/vuetify";
 import titleMixin from "./mixins/titleMixin";
 import axios from "axios";
+import VueAxios from 'vue-axios'
 import store from "./store/index";
 import VueCookies from 'vue-cookies';
 
@@ -11,7 +12,7 @@ import VueCookies from 'vue-cookies';
 import { sync } from "vuex-router-sync";
 
 Vue.mixin(titleMixin);
-Vue.use(axios);
+Vue.use(VueAxios, axios);
 Vue.use(VueCookies)
 
 // Sync store with router

@@ -27,6 +27,7 @@
                         </div>
                         </div>
                     </v-flex>
+                    
                     <v-flex xs12 sm6 md6 class="pr-7">
                         <div>
                         <h3>This is your application type that can guide you later on.</h3>
