@@ -32,9 +32,18 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         type: String,
         required: true
     },
+    deadline: {
+        type: String
+    },
+    mincards: {
+        type: Number
+    },
+    minreviews:{
+        type: Number
+    },
     createdate: {
         type: String,
-        default: () => moment().format("DD-MM-YYYY")
+        default: () => moment().format("YYYY-MM-DD")
     }
 }))
 
@@ -47,6 +56,9 @@ const validateProject = function (project) {
         acceptedmembers: Joi.array(),
         message: Joi.string().allow(''),
         facilitator: Joi.string().required(),
+        deadline: Joi.string(),
+        mincards: Joi.number(),
+        minreviews: Joi.number(),
         createdate: Joi.string()
     });
     return schema.validate(project);

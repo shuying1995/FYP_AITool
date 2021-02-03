@@ -24,7 +24,7 @@ exports.createProject = async (req, res) => {
     }
 };
 
-exports.getInvitedMemberProjects = function (req, res){
+exports.getProjects = function (req, res){
     Project.find((error, project) => {
         if (error) {
             return next(error)
@@ -77,5 +77,24 @@ exports.getFacilitatorProjects = function (req, res){
             }
             res.json(array)
         }
+    })
+}
+
+exports.insertProjectSettings = function (req, res){
+    Project.findById(req.params.projectid, (error,project)=> {
+        if (error) {
+            return next(error)
+        } else {
+            console.log('e')
+            project.deadline = req.body.deadline;
+            project.mincards = req.body.mincards;
+            project.minreviews = req.body.minreviews;
+        }
+        project.save((error, updatedProject) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedProject);
+        })
     })
 }

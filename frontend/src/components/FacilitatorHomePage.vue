@@ -34,7 +34,7 @@
                 </v-layout>
 
                 <v-layout row wrap ml-8>
-                  <v-flex v-for="item in this.MyCards" :key="item.ID" row wrap>
+                  <v-flex v-for="(item, e) in MyCards" :key="item.ID" row wrap>
                     <v-card 
                      class="ma-2" 
                      max-width="360"
@@ -71,14 +71,22 @@
                                 </v-btn>
                               </template>
                               <v-list>
+                                <v-list-item-group>
                                 <v-list-item
-                                  v-for="(item, index) in menuitems"
-                                  :key="index"
                                   link
-                                  @click="item.action"
+                                  @click="editteam(e)"
+                                  :key="item._id"
                                 >
-                                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                  <v-list-item-title>Edit</v-list-item-title>
                                 </v-list-item>
+                                <v-list-item
+                                  :key="item._id"
+                                  link
+                                  @click="deleteteam"
+                                >
+                                  <v-list-item-title>Delete</v-list-item-title>
+                                </v-list-item>
+                                </v-list-item-group>
                               </v-list>
                             </v-menu>
                           </v-flex>
@@ -116,10 +124,6 @@ const axios = require('axios');
 export default {
 data(){
     return{
-    menuitems: [
-        { title: 'Edit', action: this.editteam },
-        { title: 'Delete', action: this.deleteteam },
-        ],
     items: [
         { title: "Date: New to old" },
         { title: "Date: Old to new" },
@@ -137,19 +141,20 @@ created(){
             facilitator: window.$cookies.get("fullname")
           }})
         .then((response) => {
-            console.log(response)
             this.MyCards = response.data
-        })
-        .catch((error) => {
-            console.log(error)
         })
 },
  methods: {
         create() {
             this.$router.push({ name: "Create" });
         },
-        editteam(){
+        editteam(e){
+        let selectedprojectid = this.MyCards[e]._id
+        window.$cookies.set("selectedprojectid", selectedprojectid, Infinity)
         this.$router.push({ name: "ProjectSettings"});
+        },
+        deleteteam(){
+
         },
         show (e) {
         e.preventDefault()

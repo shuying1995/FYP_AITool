@@ -11,9 +11,9 @@ router.get('/users', userController.getAllUsers) //get all users
 router.put('/users/:userid', userController.insertInvitedProjectId) //Insert inviteprojectid into user
 
 router.post('/create', projectController.createProject) //create project
-router.get('/create', projectController.getInvitedMemberProjects) //get all invitedprojects members have
+router.get('/create', projectController.getProjects) //get all invitedprojects members have
 router.get('/create/:projectid', projectController.getProjectDetails) //get selected projectdetails members accept
-router.get('create', projectController.getFacilitatorProjects)
+router.put('/create/:projectid', projectController.insertProjectSettings) //facilitator inserts projectsettings
 
 router.post('/projectdetails', projectdetailsController.createProjectDetails) //Create a collection to store member's project inputs
 router.put('/projectdetails', projectdetailsController.insertExtra) //Insert extra fairnesscard, goright and gowrong

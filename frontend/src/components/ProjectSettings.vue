@@ -44,10 +44,10 @@
               <v-layout>
                 <v-flex row wrap class="ml-3">
                   <v-col class="pa-0">
-                    <p>Project 1</p>
+                    <p>{{projectitem.name}}</p>
                   </v-col>
                   <v-col class="pa-0">
-                    <p class="font-weight-light">Date Created:31/12/2020</p>
+                    <p class="font-weight-light">Date Created: {{projectitem.createdate}}</p>
                   </v-col>
                 </v-flex>
               </v-layout>
@@ -56,7 +56,7 @@
                 <v-flex row wrap class="ml-4 mt-4">
                   <v-col md="6" class="pa-0 mb-4">
                     <v-card max-width="600" height="100" outlined class="scroll rounded-card text-center">
-                      Application scenario
+                      {{projectitem.appscenario}}
                     </v-card>
                   </v-col>
                 </v-flex>
@@ -74,10 +74,9 @@
                 md="4"
               >
                 <v-menu
-                  ref="menu1"
                   v-model="menu1"
                   :close-on-content-click="false"
-                  :return-value.sync="date"
+                  :nudge-right="40"
                   transition="scale-transition"
                   offset-y
                   min-width="auto"
@@ -85,7 +84,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="date"
-                      label="Picker in menu"
+                      label="Picker without buttons"
                       prepend-icon="mdi-calendar"
                       readonly
                       v-bind="attrs"
@@ -95,24 +94,8 @@
                   <v-date-picker
                     v-model="date"
                     no-title
-                    scrollable
-                  >
-                    <v-spacer/>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="menu1=false"
-                    >
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="$refs.menu1.save(date)"
-                    >
-                      OK
-                    </v-btn>
-                  </v-date-picker>
+                    @input="menu1 = false"
+                  ></v-date-picker>
                 </v-menu>
               </v-col>
               </v-row>
@@ -138,11 +121,11 @@
                 sm="3"
               >
               <v-select 
-                v-model="numcards"
+                v-model="mincards"
                 :items="num" 
                 outlined 
                 dense
-                placeholder="1"
+                menu-props="auto"
               />
               </v-col>
               </v-row>
@@ -168,7 +151,7 @@
               >
               <v-text-field 
               placeholder="Input a number"
-              v-model="numreviews"
+              v-model="minreviews"
               outlined
               dense
               />
@@ -192,20 +175,32 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
     data() {
     return {
         dialog: false,
-        date: new Date().toISOString().substr(0, 10),
+        date: '',
         menu1:false,
         num: ['1','2','3','4','5','6','7','8','9','10'],
-        numcards: '',
-        numreviews: '',
+        mincards: '',
+        minreviews: '',
         items: [
           { title: 'Settings', icon: 'mdi-cog', action: this.projectsettings},
           { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
         ],
+        projectitem: []
       }
+    },
+    created(){
+      let selectedprojectid = window.$cookies.get("selectedprojectid")
+        axios.get('api/create/' + selectedprojectid)
+        .then((response) => {
+            this.date = response.data.deadline
+            this.mincards = response.data.mincards
+            this.minreviews = response.data.minreviews
+            this.projectitem = response.data
+        })
     },
     methods: {
         home() {
@@ -218,6 +213,19 @@ export default {
             this.$router.push({ name: "FacilitatorHomePage"});
         },
         savechanges(){
+          let selectedprojectid = window.$cookies.get("selectedprojectid")
+          axios
+            .put('api/create/' + selectedprojectid, {
+                  deadline: this.date,
+                  mincards: this.mincards,
+                  minreviews: this.minreviews
+            })
+            .then((response) => {
+                console.log(response)
+              })
+            .catch((error) =>{
+                console.log(error)
+            })
         },
     },
 }

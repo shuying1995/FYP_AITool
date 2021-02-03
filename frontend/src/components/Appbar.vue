@@ -24,7 +24,6 @@
         <v-select
           v-model="select"
           :items="items"
-          menu-props="auto"
           single-line
         ></v-select>
       </v-col>
