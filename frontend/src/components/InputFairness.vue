@@ -143,8 +143,15 @@ methods:{
                         gowrong: this.$store.getters.gowrong
                     })
                     .then((response) => {
-                        console.log(response)
-                        this.$router.push({ name: "RatingFairness"});
+                        let userid = window.$cookies.get("userid")
+                        axios
+                         .put('api/users/' + userid + '/update', {
+                             invitedprojectid: window.$cookies.get("acceptedprojectid"),
+                         })
+                         .then((response)=>{
+                            console.log(response)
+                            this.$router.push({ name: "RatingFairness"});
+                         })
                     })
                     .catch((error) =>{
                         console.log(error)

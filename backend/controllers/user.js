@@ -92,3 +92,33 @@ exports.insertInvitedProjectId = function (req, res) {
         })
     }).select("-password")
 }
+
+exports.insertAcceptedProjectId = function (req, res) {
+    User.findById(req.params.userid, (error, user)=> {
+        //userid does not exist
+        if (error) 
+            return res.status(400).send("User id not found");
+         //if array is empty
+         if(user.acceptedprojectid == undefined){
+            user.acceptedprojectid = req.body.invitedprojectid;
+        }
+        //else add project id into existing array
+        else { 
+            user.acceptedprojectid = user.acceptedprojectid + "," + req.body.invitedprojectid;
+        }
+        let projectid = user.invitedprojectid
+        //split string into array (projectid)
+        var array = projectid.split(",");
+        const index = array.indexOf(req.body.invitedprojectid)
+        if(index > -1){
+            array.splice(index, 1)
+        }
+        user.invitedprojectid = array.toString()
+        user.save((error, updatedUser) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedUser);
+        })
+    })
+}
