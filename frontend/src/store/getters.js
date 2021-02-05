@@ -13,5 +13,14 @@ export default {
     },
     fairnesscard(state) {
         return state.fairnesscard
+    },
+    fairnesscards(state){
+        return state.fairnesscards
+    },
+    goright(state){
+        return state.goright
+    },
+    gowrong(state){
+        return state.gowrong
     }
 }

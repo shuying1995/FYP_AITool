@@ -17,28 +17,4 @@ exports.createProjectDetails = (req, res) => {
     res.status(200).send(projectdetails._id)
 }
 
-exports.insertExtra = (req, res) => {
-    Projectdetails.find((error, projectdetails) => {
-        if (error)
-            return next(error)
-        else {
-            for(var i=0; i<projectdetails.length; i++){
-            if(projectdetails[i].userid == req.body.userid && projectdetails[i].projectid == req.body.projectid) {
-                console.log(projectdetails[i])
-                console.log(req.body)
-                projectdetails[i].fairnesscard = projectdetails[i].fairnesscard + ',' + req.body.fairnesscard;
-                projectdetails[i].goright = projectdetails[i].goright + ',' + req.body.goright;
-                projectdetails[i].gowrong = projectdetails[i].gowrong + ',' + req.body.gowrong;
-                projectdetails = projectdetails[i]
 
-            }
-        }
-        projectdetails.save((error, updatedProjectdetails) => {
-            //Wrong input
-            if(error) 
-                return res.status(400).end();
-            return res.status(200).json(updatedProjectdetails);
-        })
-        }
-    })
-}

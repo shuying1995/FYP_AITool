@@ -16,5 +16,14 @@ export default {
     },
     updateFairnesscard({commit},fairnesscard){
         commit('updateFairnesscard',fairnesscard)
+    },
+    updateFairnesscards({commit},fairnesscards){
+        commit('updateFairnesscards',fairnesscards)
+    },
+    updateGoright({commit},goright){
+        commit('updateGoright',goright)
+    },
+    updateGowrong({commit},gowrong){
+        commit('updateGowrong',gowrong)
     }
 }

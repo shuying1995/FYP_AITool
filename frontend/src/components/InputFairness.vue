@@ -88,7 +88,11 @@ data(){
         appscenario: window.$cookies.get("acceptedprojectappscenario"),
         apptype: window.$cookies.get("acceptedprojectapptype"), 
         goright: '',
-        gowrong: ''
+        gowrong: '',
+        mincards: '',
+        arrayfc:[],
+        arraygr:[],
+        arraygw:[]
     }
 },
 computed: {
@@ -99,20 +103,44 @@ computed: {
         return this.apptype
     }
 },
+created(){
+    const projectid = window.$cookies.get("acceptedprojectid")
+        axios
+        .get('api/create/' + projectid) 
+        .then((response) => {
+            this.mincards = response.data.mincards
+        })
+},
 methods:{
     home(){
         this.$router.push({ name: "HomePageOP"});
         },
     ratingfairness(){
+        this.arrayfc.push(this.selectedimage)
+        this.$store
+          .dispatch(
+              "updateFairnesscards", this.arrayfc)
+        this.arraygr.push(this.goright)
+        this.$store
+          .dispatch(
+              "updateGoright", this.goright)
+        this.arraygw.push(this.gowrong)
+        this.$store
+          .dispatch(
+              "updateGowrong",this.gowrong)
         const projectid = window.$cookies.get("acceptedprojectid")
+        if(this.$store.getters.fairnesscards.length < this.mincards){
+            this.$router.push({name: "RandomFairness"})
+        }
+        else{
         axios
         .post('api/projectdetails', {
                         userid: window.$cookies.get("userid"),
                         projectid: window.$cookies.get("acceptedprojectid"),
                         stakeholder: this.$store.getters.stakeholder,
-                        fairnesscard: this.selectedimage,
-                        goright: this.goright,
-                        gowrong: this.gowrong
+                        fairnesscard: this.$store.getters.fairnesscards,
+                        goright: this.$store.getters.goright,
+                        gowrong: this.$store.getters.gowrong
                     })
                     .then((response) => {
                         console.log(response)
@@ -121,7 +149,8 @@ methods:{
                     .catch((error) =>{
                         console.log(error)
                     })
-        },
+            }
+        }
     }
 }
 </script>

@@ -16,7 +16,6 @@ router.get('/create/:projectid', projectController.getProjectDetails) //get sele
 router.put('/create/:projectid', projectController.insertProjectSettings) //facilitator inserts projectsettings
 
 router.post('/projectdetails', projectdetailsController.createProjectDetails) //Create a collection to store member's project inputs
-router.put('/projectdetails', projectdetailsController.insertExtra) //Insert extra fairnesscard, goright and gowrong
 
 
 module.exports = router;

@@ -61,7 +61,21 @@
                   </v-col>
                 </v-flex>
               </v-layout>
+
               <p>Progress</p>
+              <v-row class="pl-0">
+              <v-col
+                cols="12"
+                sm="3"
+              >
+              <v-text-field 
+              placeholder="Input % in terms of number"
+              v-model="progress"
+              outlined
+              dense
+              />
+              </v-col>
+              </v-row>
 
               <hr class="solid">
 
@@ -185,6 +199,7 @@ export default {
         num: ['1','2','3','4','5','6','7','8','9','10'],
         mincards: '',
         minreviews: '',
+        progress: '',
         items: [
           { title: 'Settings', icon: 'mdi-cog', action: this.projectsettings},
           { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
@@ -200,6 +215,7 @@ export default {
             this.mincards = response.data.mincards
             this.minreviews = response.data.minreviews
             this.projectitem = response.data
+            this.progress = response.data.progress
         })
     },
     methods: {
@@ -216,6 +232,7 @@ export default {
           let selectedprojectid = window.$cookies.get("selectedprojectid")
           axios
             .put('api/create/' + selectedprojectid, {
+                  progress: this.progress,
                   deadline: this.date,
                   mincards: this.mincards,
                   minreviews: this.minreviews
@@ -248,6 +265,7 @@ p{
     padding-left: 5px;
     padding-right: 5px;
     font-weight: bold;
+    margin-bottom: 1px;
 }
 
 .scroll {
@@ -260,6 +278,7 @@ p{
 
 hr.solid {
   border-top: 3px solid lightgrey;
+  margin-bottom: 25px;
   width: 800px;
 }
 

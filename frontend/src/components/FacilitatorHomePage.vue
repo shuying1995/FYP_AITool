@@ -41,7 +41,6 @@
                      max-height="200" 
                      min-height="200"
                      outlined 
-                     @contextmenu="show" 
                      color="orange"
                      >
                       
@@ -62,7 +61,6 @@
                               <template v-slot:activator="{ on, attrs }">
                                 <v-btn
                                   icon
-                                  color="primary"
                                   dark
                                   v-bind="attrs"
                                   v-on="on"
@@ -99,15 +97,15 @@
                           <v-progress-linear
                             background-color="grey lighten-2"
                             color="red"
-                            v-model="item.Progress"
+                            v-model="item.progress"
                             height="10"
                             />
                           </div>
                             <hr class="solid">
                           <v-flex row wrap class="pt-2">
-                          <p class="pt-2 ml-4 underline">Member: {{ item.Member }}</p>
+                          <p class="pt-2 ml-4 underline">Member: {{ item.member }}</p>
                           <v-spacer/>
-                          <p class="pt-2 round orange--text">{{ item.Dayleft }} Days Left</p>
+                          <p class="pt-2 round orange--text">{{ item.dayleft }} Days Left</p>
                           </v-flex>
                         </v-list-item-content>
                       </v-list-item>
@@ -154,17 +152,7 @@ created(){
         this.$router.push({ name: "ProjectSettings"});
         },
         deleteteam(){
-
         },
-        show (e) {
-        e.preventDefault()
-        this.showMenu = false
-        this.x = e.clientX
-        this.y = e.clientY
-        this.$nextTick(() => {
-          this.showMenu = true
-        })
-      },
     }
 }
 </script>

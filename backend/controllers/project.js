@@ -85,7 +85,7 @@ exports.insertProjectSettings = function (req, res){
         if (error) {
             return next(error)
         } else {
-            console.log('e')
+            project.progress = req.body.progress;
             project.deadline = req.body.deadline;
             project.mincards = req.body.mincards;
             project.minreviews = req.body.minreviews;

@@ -15,15 +15,15 @@ const Projectdetails = mongoose.model('Projectdetails', new mongoose.Schema({
         required: true
     },
     fairnesscard:{
-        type: String,
+        type: Array,
         required: true
     },
     goright:{
-        type: String,
+        type: Array,
         required: true
     },
     gowrong:{
-        type: String,
+        type: Array,
         required: true
     },
     createdate: {
@@ -37,9 +37,9 @@ const validateProjectdetails = function (projectdetails) {
         userid: Joi.string().required(),
         projectid: Joi.string().required(),
         stakeholder: Joi.string().required(),
-        fairnesscard: Joi.string().required(),
-        goright: Joi.string().required(),
-        gowrong: Joi.string().required(),
+        fairnesscard: Joi.array().required(),
+        goright: Joi.array().required(),
+        gowrong: Joi.array().required(),
         createdate: Joi.string()
     })
     return schema.validate(projectdetails);

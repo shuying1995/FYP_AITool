@@ -32,6 +32,9 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         type: String,
         required: true
     },
+    progress: {
+        type: Number
+    },
     deadline: {
         type: String
     },
@@ -56,6 +59,7 @@ const validateProject = function (project) {
         acceptedmembers: Joi.array(),
         message: Joi.string().allow(''),
         facilitator: Joi.string().required(),
+        progress: Joi.number(),
         deadline: Joi.string(),
         mincards: Joi.number(),
         minreviews: Joi.number(),

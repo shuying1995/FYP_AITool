@@ -18,5 +18,14 @@ export default {
     },
     updateFairnesscard(state, fairnesscard){
         state.fairnesscard=fairnesscard
+    },
+    updateFairnesscards(state, fairnesscards){
+        state.fairnesscards.push(fairnesscards)
+    },
+    updateGoright(state, goright){
+        state.goright.push(goright)
+    },
+    updateGowrong(state, gowrong){
+        state.gowrong.push(gowrong)
     }
 }
