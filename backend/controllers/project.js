@@ -24,34 +24,64 @@ exports.createProject = async (req, res) => {
     }
 };
 
-exports.getProjects = function (req, res){
+exports.getPRProjects = function (req, res){
     Project.find((error, project) => {
         if (error) {
             return next(error)
-        } else {
-            if(req.query.invitedmembers == undefined){
-                var array = []
-                for(var i=0; i<project.length; i++){
-                    if(project[i].facilitator == req.query.facilitator)
-                        array.push(project[i])
+        } 
+        else {
+            var array = []
+            //project is array, need to loop through to find all invitedmembers columns
+            for (var i=0; i<project.length; i++) {
+            var members = project[i].invitedmembers
+            //invitedmembers is array also, loop through to check if found
+            for (var j=0; j<members.length; j++){
+                if(members[j] == req.query.invitedmembers)
+                    array.push(project[i])  
                 }
+            }
         }
-            else{
-                var array = []
-                //project is array, need to loop through to find all invitedmembers columns
+        res.json(array)
+    })
+}
+
+exports.getFProjects = function (req, res){
+    Project.find((error, project) => {
+        if (error) {
+            return next(error)
+        } 
+        else {
+            var array = []
+            for(var i=0; i<project.length; i++){
+                if(project[i].facilitator == req.query.facilitator)
+                    array.push(project[i])
+                }
+            }
+        res.json(array)
+    })
+}
+
+exports.getOGProjects = function (req, res){
+    Project.find((error, project) => {
+        if (error) {
+            return next(error)
+        } 
+        else {
+            var array = []
+                //project is array, need to loop through to find all acceptedmembers columns
                 for (var i=0; i<project.length; i++) {
-                var members = project[i].invitedmembers
-                //invitedmembers is array also, loop through to check if found
+                var members = project[i].acceptedmembers
+                //acceptedmembers is array also, loop through to check if found
                 for (var j=0; j<members.length; j++){
-                    if(members[j] == req.query.invitedmembers)
+                    if(members[j] == req.query.acceptedmembers)
                         array.push(project[i])  
                     }
                 }
             }
-            res.json(array)
-        }
+        res.json(array)
     })
 }
+
 
 exports.getProjectDetails = function (req, res){
     Project.findById(req.params.projectid, (error, project)=> {
@@ -59,23 +89,6 @@ exports.getProjectDetails = function (req, res){
             return next(error)
         } else {
             res.json(project)
-        }
-    })
-}
-
-exports.getFacilitatorProjects = function (req, res){
-    Project.find((error, project) =>{
-        if (error) {
-            return next(error)
-        } else {
-            console.log(req.query.facilitator)
-            var array = []
-            //project is array, need to loop through to find all facilitator columns
-            for (var i=0; i<project.length; i++) {
-                if(project[i].facilitator == req.query.facilitator)
-                    array.push(project[i])
-            }
-            res.json(array)
         }
     })
 }
@@ -127,3 +140,4 @@ exports.updateUserid = function (req, res){
         })
     })
 }
+

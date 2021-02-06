@@ -36,7 +36,7 @@
                           <v-list-item three-line>
                             <v-list-item-content>
                               <v-flex row wrap class="ma-0">
-                                <p class="pt-2">{{ item.Name }}</p>
+                                <p class="pt-2">{{ item.name }}</p>
                                 <v-spacer />
                                 <v-btn icon @click="item.IsPinned = !item.IsPinned">
                                   <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
@@ -47,8 +47,8 @@
                                   <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
                                 </v-btn>
                               </v-flex>
-                              <p class="pt-2">Date of creation: {{ item.CreatedDate }}</p>
-                              <p class="pt-2">Member: {{ item.Member }}</p>
+                              <p class="pt-2">Date of creation: {{ item.createdate }}</p>
+                              <p class="pt-2">Member: {{ item.member }}</p>
                               <v-progress-linear
                                 background-color="grey lighten-2"
                                 color="red"
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-
+const axios = require('axios');
 export default {
   name: "HomePageOP",
   title: "Home",
@@ -79,46 +79,22 @@ export default {
         { title: "Progress: Low to high" },
         { title: "Favourited" },
       ],
-      OnCards: [
-        {
-          ID: "1",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
-          IsPinned: false,
-          IsFavourite: false,
-        },
-        {
-          ID: "2",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "30",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "3",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "50",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-        {
-          ID: "4",
-          Name: "XX",
-          CreatedDate: "10 Oct",
-          Member: "2",
-          Progress: "70",
-          IsPinned: true,
-          IsFavourite: true,
-        },
-      ],
-    };
+      OnCards: []
+    }
   },
+  created(){
+        axios
+        .get('api/create/membersog', { 
+          params:{
+            acceptedmembers: window.$cookies.get("userid")
+          }})
+        .then((response) => {
+            this.OnCards = response.data
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },
   methods:{
     homepagepr(){
       this.$router.push({ name: "HomePagePR" });

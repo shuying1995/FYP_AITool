@@ -90,7 +90,7 @@ data(){
 },
 created(){
         axios
-        .get('api/create', { 
+        .get('api/create/memberspr', { 
           params:{
             invitedmembers: window.$cookies.get("userid")
           }})

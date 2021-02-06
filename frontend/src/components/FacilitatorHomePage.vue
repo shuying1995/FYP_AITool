@@ -134,7 +134,7 @@ data(){
 },
 created(){
         axios
-        .get('api/create', { 
+        .get('api/create/facilitator', { 
           params:{
             facilitator: window.$cookies.get("fullname")
           }})
