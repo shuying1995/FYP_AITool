@@ -98,3 +98,32 @@ exports.insertProjectSettings = function (req, res){
         })
     })
 }
+
+exports.updateUserid = function (req, res){
+    Project.findById(req.params.projectid, (error,project) =>{
+        //projectid does not exist
+        if (error) 
+            return res.status(400).send("Project id not found");
+
+         //if array is empty
+         if(project.acceptedmembers.length == 0){
+            project.acceptedmembers = req.body.userid;
+        }
+        //else add user id into existing array
+        else { 
+            console.log(project.acceptedmembers)
+            project.acceptedmembers = project.acceptedmembers + "," + req.body.userid;
+        }
+        let userid = project.invitedmembers
+        const index = userid.indexOf(req.body.userid)
+        if(index > -1){
+            userid.splice(index, 1)
+        }
+        project.save((error, updatedProject) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedProject);
+        })
+    })
+}

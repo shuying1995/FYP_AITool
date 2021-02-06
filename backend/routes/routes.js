@@ -15,6 +15,7 @@ router.post('/create', projectController.createProject) //create project
 router.get('/create', projectController.getProjects) //get all invitedprojects members have
 router.get('/create/:projectid', projectController.getProjectDetails) //get selected projectdetails members accept
 router.put('/create/:projectid', projectController.insertProjectSettings) //facilitator inserts projectsettings
+router.put('/create/:projectid/update', projectController.updateUserid) //Remove userid from invitedmembers and insert into acceptedmembers
 
 router.post('/projectdetails', projectdetailsController.createProjectDetails) //Create a collection to store member's project inputs
 

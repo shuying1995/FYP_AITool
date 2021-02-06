@@ -149,8 +149,14 @@ methods:{
                              invitedprojectid: window.$cookies.get("acceptedprojectid"),
                          })
                          .then((response)=>{
-                            console.log(response)
-                            this.$router.push({ name: "RatingFairness"});
+                            let projectid = window.$cookies.get("acceptedprojectid")
+                            axios
+                             .put('api/create/' + projectid + '/update', {
+                                 userid: window.$cookies.get("userid") 
+                             })
+                             .then((response)=>{
+                                this.$router.push({ name: "RatingFairness"});
+                             })
                          })
                     })
                     .catch((error) =>{
