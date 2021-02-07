@@ -17,6 +17,7 @@ import InputFairness from "../components/InputFairness.vue";
 import RatingFairness from "../components/RatingFairness.vue";
 import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
+import ForgetPW from "../components/ForgetPW.vue";
 //import RegisterStep1 from "../components/RegisterStep1.vue";
 //import RegisterStep2 from "../components/RegisterStep2.vue";
 //import RegisterStep3 from "../components/RegisterStep3.vue";
@@ -109,6 +110,11 @@ const routes = [
     path: "/create",
     name: "Create",
     component: Create
+  },
+  {
+    path: "/forgetpw",
+    name: "ForgetPW",
+    component: ForgetPW
   },
   /*{
     path: "/registerstep1",

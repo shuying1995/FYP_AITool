@@ -74,7 +74,7 @@
                     </v-flex>
                   </v-form>
                   <v-row class="justify-end mt-2">
-                    <span><a href="/forgot">Forget password?</a></span>
+                    <span><a @click="forgetpw">Forget password?</a></span>
                   </v-row>
                   <v-row class="justify-center mt-8">
                     <span
@@ -158,6 +158,9 @@ export default {
     },
     register(){
       this.$router.push({ name: "Register"});
+    },
+    forgetpw(){
+      this.$router.push({ name: "ForgetPW"});
     }
   },
 };

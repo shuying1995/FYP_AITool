@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div id="nav" v-if="!['LoginPage','Register'].includes($route.name)">
+    <div id="nav" v-if="!['LoginPage','Register','ForgetPW'].includes($route.name)">
       <AppBar />
     </div>
     <router-view/>
