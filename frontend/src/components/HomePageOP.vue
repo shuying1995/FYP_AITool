@@ -36,25 +36,36 @@
                           <v-list-item three-line>
                             <v-list-item-content>
                               <v-flex row wrap class="ma-0">
-                                <p class="pt-2">{{ item.name }}</p>
-                                <v-spacer />
-                                <v-btn icon @click="item.IsPinned = !item.IsPinned">
-                                  <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
-                                  <v-icon v-if="item.IsPinned">mdi-pin</v-icon>
-                                </v-btn>
-                                <v-btn icon @click="item.IsFavourite = !item.IsFavourite">
-                                  <v-icon v-if="!item.IsFavourite">mdi-heart-outline</v-icon>
-                                  <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
-                                </v-btn>
+                            <p class="pt-2">Date created: {{ item.createdate }}</p>
+                            <v-spacer />
+                            <v-btn icon @click="item.IsPinned = !item.IsPinned">
+                              <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
+                              <v-icon v-if="item.IsPinned">mdi-pin</v-icon>
+                            </v-btn>
+                            <v-btn icon @click="item.IsFavourite = !item.IsFavourite">
+                              <v-icon v-if="!item.IsFavourite">mdi-heart-outline</v-icon>
+                              <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
+                            </v-btn>
                               </v-flex>
-                              <p class="pt-2">Date of creation: {{ item.createdate }}</p>
-                              <p class="pt-2">Member: {{ item.member }}</p>
-                              <v-progress-linear
-                                background-color="grey lighten-2"
-                                color="red"
-                                v-model="item.Progress"
-                                height="10"
-                                />
+
+                              <v-flex row wrap class="justify-center">
+                            <h2>{{item.name}}</h2>
+                          </v-flex>
+                          <p>Progress</p>
+                          <div class="pb-3">
+                          <v-progress-linear
+                            background-color="grey lighten-2"
+                            color="red"
+                            v-model="item.progress"
+                            height="10"
+                            />
+                          </div>
+                            <hr class="solid">
+                          <v-flex row wrap class="pt-2">
+                          <p class="pt-2 ml-4 underline">Member: {{ item.member }}</p>
+                          <v-spacer/>
+                          <p class="pt-2 round orange--text">{{ item.dayleft }} Days Left</p>
+                          </v-flex>
                             </v-list-item-content>
                           </v-list-item>
                         </v-card>
@@ -106,5 +117,13 @@ export default {
 <style scoped>
 .v-btn {
   margin-left: 10px;
+}
+
+p.round{
+  border-radius: 8px;
+  background-color: white;
+  width: 90px;
+  height: 30px;
+  padding-left: 5px;
 }
 </style>
