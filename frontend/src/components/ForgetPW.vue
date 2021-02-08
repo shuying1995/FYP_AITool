@@ -8,6 +8,7 @@
                 <v-card-text class="pb-0">Please enter your email address.</v-card-text>
                     <v-col cols="9">
                     <v-text-field 
+                     v-model="email"
                      placeholder="Email Address"
                      outlined
                      dense
@@ -16,6 +17,7 @@
                     <v-flex class="justify-end pa-2" row wrap>
                         <v-btn 
                          color="success"
+                         @click="submit"
                          >
                          Submit
                          </v-btn>
@@ -32,10 +34,28 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
+data(){
+    return{
+        email: ''
+    }
+},
 methods:{
     login(){
         this.$router.push({ name: "LoginPage"})
+    },
+    submit(){
+        axios
+         .post('api/users/forget',{
+             email: this.email
+         })
+         .then((response)=>{
+             console.log(response)
+         })
+         .catch((error)=>{
+             console.log(error)
+         })
     }
 }
 }

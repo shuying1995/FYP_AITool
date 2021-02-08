@@ -10,6 +10,7 @@ router.post('/users', userController.register) //create users
 router.get('/users', userController.getAllUsers) //get all users
 router.put('/users/:userid', userController.insertInvitedProjectId) //Insert inviteprojectid into user
 router.put('/users/:userid/update', userController.insertAcceptedProjectId) //Insert acceptedprojectid and remove inviteprojectid from user
+router.post('/users/forget',userController.forgetPW)
 
 router.post('/create', projectController.createProject) //create project
 router.get('/create/facilitator', projectController.getFProjects) //get projects by members/facilitator

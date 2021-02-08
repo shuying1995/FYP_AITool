@@ -1,9 +1,12 @@
 const bcrypt = require('bcrypt');
+require('dotenv').config()
 const _ = require('lodash');
 const { User, validate, validateLogin } = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { first, result } = require('lodash');
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 exports.register = async (req, res) => {
     // First Validate The Request
@@ -121,4 +124,23 @@ exports.insertAcceptedProjectId = function (req, res) {
             return res.status(200).json(updatedUser);
         })
     })
+}
+
+exports.forgetPW = function (req, res) {
+    const msg = {
+        to: req.body.email, // Change to your recipient
+        from: 'suppfyp@mail.com', // Change to your verified sender
+        subject: 'Password reset',
+        text: 'Go to this link to reset password http://localhost:8080/resetpw',
+      }    
+      
+      sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+        return res.status(200).end();
+      })
+      .catch((error) => {
+        console.error(error)
+      })
 }
