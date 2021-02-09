@@ -12,6 +12,7 @@
                      placeholder="Email Address"
                      outlined
                      dense
+                     v-on:keyup.enter="submit"
                      ></v-text-field>
                     </v-col>
                     <v-flex class="justify-end pa-2" row wrap>

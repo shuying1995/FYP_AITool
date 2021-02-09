@@ -12,6 +12,7 @@
                      placeholder="Email Address"
                      outlined
                      dense
+                     v-on:keyup.enter="submit"
                      ></v-text-field>
                     <v-text-field 
                      v-model="password"
@@ -21,6 +22,7 @@
                      :append-icon="showpw ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
                      :type="showpw ? 'text' : 'password'"
                      @click:append="showpw = !showpw"
+                     v-on:keyup.enter="submit"
                      ></v-text-field>
                      <v-text-field 
                      v-model="repassword"
