@@ -31,7 +31,7 @@ const User = mongoose.model('User', new mongoose.Schema({
     },
     acceptedprojectid: {
         type: String
-    }
+    },
 }));
 
 const complexityOptions = {

@@ -18,6 +18,7 @@ import RatingFairness from "../components/RatingFairness.vue";
 import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
 import ForgetPW from "../components/ForgetPW.vue";
+import ResetPW from "../components/ResetPW.vue";
 //import RegisterStep1 from "../components/RegisterStep1.vue";
 //import RegisterStep2 from "../components/RegisterStep2.vue";
 //import RegisterStep3 from "../components/RegisterStep3.vue";
@@ -115,6 +116,11 @@ const routes = [
     path: "/forgetpw",
     name: "ForgetPW",
     component: ForgetPW
+  },
+  {
+    path: "/resetpw",
+    name: "ResetPW",
+    component: ResetPW
   },
   /*{
     path: "/registerstep1",

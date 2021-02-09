@@ -144,3 +144,23 @@ exports.forgetPW = function (req, res) {
         console.error(error)
       })
 }
+
+exports.resetPW = function (req, res){
+    User.find((error, user) => {
+        if (error) {
+            return next(error)
+        } 
+        else {
+            //email is an array, loop through to find if specific email is equal req.body.email
+            for(var i=0; i<user.length;i++){
+            if(user[i].email == req.body.email){
+                user[i].password = req.body.password
+                const salt = bcrypt.genSaltSync(10);
+                user[i].password = bcrypt.hashSync(user[i].password, salt);
+                user[i].save()
+                return res.status(200).send("Password reset")
+            }
+        }
+        }
+    })
+}
