@@ -43,12 +43,56 @@
                          </v-btn>
                     </v-flex>
           </v-card>
+          <v-snackbar
+        v-model="snackbar"
+        :color="color"
+        :top="true"
+      >
+        {{ errorMessages }}
+        <template v-slot:action="{ attrs }">
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
+          @click="login"
+        >
+          Login Now!
+        </v-btn>
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+        </template>
+      </v-snackbar>
+
+      <v-snackbar
+        v-model="failsnackbar"
+        :color="color"
+        :top="true"
+      >
+        {{ failErrorMessages }}
+        <template v-slot:action="{ attrs }">
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
+          @click="failsnackbar = false"
+        >
+          Close
+        </v-btn>
+        </template>
+      </v-snackbar>
           </v-row>
       </v-container>
     </v-main>  
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 data(){
     return{
@@ -57,9 +101,34 @@ data(){
         repassword: '',
         showpw: false,
         showcpw: false,
+        snackbar: false,
+        color: 'general',
+        errorMessages: 'Password successfully changed!',
+        failsnackbar: false,
+        failErrorMessages: 'Account with such email does not exist!'
     }
 },
-    
+methods:{
+    submit(){
+        axios
+         .put('api/users/reset',{
+             email: this.email,
+             password: this.password
+         })
+         .then((response)=>{
+             this.snackbar=true;
+             this.color='success'
+         })
+         .catch((error)=>{
+             this.failsnackbar=true;
+             this.color='error'
+         })
+    },
+    login(){
+        this.$router.push({ name: "LoginPage"})
+        this.snackbar=false;
+    }
+},
 computed: {
     passwordConfirmationRule() {
       return this.password === this.repassword || 'Password do not match'

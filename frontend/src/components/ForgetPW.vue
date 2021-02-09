@@ -28,6 +28,23 @@
                          </v-btn>
                     </v-flex>
           </v-card>
+          <v-snackbar
+        v-model="snackbar"
+        :color="color"
+        :top="true"
+      >
+        {{ errorMessages }}
+        <template v-slot:action="{ attrs }">
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+        </template>
+      </v-snackbar>
           </v-row>
       </v-container>
     </v-main>  
@@ -38,7 +55,10 @@ const axios = require('axios');
 export default {
 data(){
     return{
-        email: ''
+        email: '',
+        snackbar: false,
+        color: 'general',
+        errorMessages: 'An email would be sent to this email address if there is an account with this email address found'
     }
 },
 methods:{
@@ -51,10 +71,8 @@ methods:{
              email: this.email
          })
          .then((response)=>{
-             console.log(response)
-         })
-         .catch((error)=>{
-             console.log(error)
+             this.snackbar=true;
+             this.color='success'
          })
     }
 }

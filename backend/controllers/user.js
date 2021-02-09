@@ -160,6 +160,8 @@ exports.resetPW = function (req, res){
                 user[i].save()
                 return res.status(200).send("Password reset")
             }
+            else
+                return res.status(404).send("Account with this email does not exist")
         }
         }
     })
