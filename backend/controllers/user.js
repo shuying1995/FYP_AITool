@@ -131,7 +131,10 @@ exports.forgetPW = function (req, res) {
         to: req.body.email, // Change to your recipient
         from: 'suppfyp@mail.com', // Change to your verified sender
         subject: 'Password reset',
-        text: 'Go to this link to reset password http://localhost:8080/resetpw',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account. \n\n' +
+        'Please click on the following link, or paste this into your browser to complete the process: \n\n' +
+        'http://localhost:8080/resetpw \n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.'
       }    
       
       sgMail
@@ -158,11 +161,25 @@ exports.resetPW = function (req, res){
                 const salt = bcrypt.genSaltSync(10);
                 user[i].password = bcrypt.hashSync(user[i].password, salt);
                 user[i].save()
-                return res.status(200).send("Password reset")
+
+                const msg = {
+                    to: req.body.email, // Change to your recipient
+                    from: 'suppfyp@mail.com', // Change to your verified sender
+                    subject: 'Password changed successfully',
+                    text: 'This is a confirmation that the password for your account has been changed.'
+                  }    
+                  
+                  sgMail
+                  .send(msg)
+                  .then(() => {
+                    console.log('Email sent')
+                    return res.status(200).end();
+                  })
+                  .catch((error) => {
+                    console.error(error)
+                  })
             }
-            else
-                return res.status(404).send("Account with this email does not exist")
-        }
+            }
         }
     })
 }
