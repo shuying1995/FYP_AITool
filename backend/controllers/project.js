@@ -124,7 +124,6 @@ exports.updateUserid = function (req, res){
         }
         //else add user id into existing array
         else { 
-            console.log(project.acceptedmembers)
             project.acceptedmembers = project.acceptedmembers + "," + req.body.userid;
         }
         let userid = project.invitedmembers

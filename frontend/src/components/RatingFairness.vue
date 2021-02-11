@@ -39,6 +39,40 @@
                         What can go wrong?
                     </v-col>
                 </v-flex>
+
+            <v-row justify="center">
+                <v-dialog
+                v-model="dialog"
+                persistent
+                max-width="290"
+                >
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                    color="warning"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                    >
+                    Next
+                    </v-btn>
+                </template>
+                <v-card>
+                    <v-card-text class="text-center">Congrats on completing!</v-card-text>
+                    <v-card-text class="text-center">We would love to hear your feedback! :)</v-card-text>
+                    <v-card-text class="text-center">Help us make it better!</v-card-text>
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="warning"
+                        text
+                        @click="survey"
+                    >
+                        Sure~
+                    </v-btn>
+                    </v-card-actions>
+                </v-card>
+                </v-dialog>
+            </v-row>    
             </v-card>
         </v-container>
     </v-main>
@@ -46,10 +80,19 @@
 
 <script>
 export default {
+data(){
+    return{
+        dialog: false
+    }
+},
 methods: {
     home(){
         this.$router.push({ name: "HomePageOP"});
     },
+    survey(){
+        this.dialog = false
+        this.$router.push({ name: 'Survey1'})
+    }
 }
 }
 </script>

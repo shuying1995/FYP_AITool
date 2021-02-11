@@ -19,10 +19,10 @@ import DesDesignProject from "../components/DesDesignProject.vue";
 import Register from "../components/Register.vue";
 import ForgetPW from "../components/ForgetPW.vue";
 import ResetPW from "../components/ResetPW.vue";
-//import RegisterStep1 from "../components/RegisterStep1.vue";
-//import RegisterStep2 from "../components/RegisterStep2.vue";
-//import RegisterStep3 from "../components/RegisterStep3.vue";
-//import RegisterStep4 from "../components/RegisterStep4.vue";
+import Survey1 from "../components/Survey1.vue";
+import Survey2 from "../components/Survey2.vue";
+//import Survey3 from "../components/Survey3.vue";
+//import Survey4 from "../components/Survey4.vue";
 
 Vue.use(VueRouter);
 
@@ -167,25 +167,37 @@ const routes = [
     name: "ResetPW",
     component: ResetPW
   },
+  {
+    path: "/survey1",
+    name: "Survey1",
+    component: Survey1,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/survey2",
+    name: "Survey2",
+    component: Survey2,
+    meta: {
+      requiresAuth: true
+    }
+  },
   /*{
-    path: "/registerstep1",
-    name: "RegisterStep1",
-    component: RegisterStep1
+    path: "/survey3",
+    name: "Survey3",
+    component: Survey3,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    path: "/registerstep2",
-    name: "RegisterStep2",
-    component: RegisterStep2
-  },
-  {
-    path: "/registerstep3",
-    name: "RegisterStep3",
-    component: RegisterStep3
-  },
-  {
-    path: "/registerstep4",
-    name: "RegisterStep4",
-    component: RegisterStep4
+    path: "/survey4",
+    name: "Survey4",
+    component: Survey4,
+    meta: {
+      requiresAuth: true
+    }
   },*/
 ];
 
