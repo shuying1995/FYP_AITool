@@ -27,6 +27,7 @@
           single-line
         ></v-select>
       </v-col>
+      <v-btn @click="logout">Log out</v-btn>
 
       </v-row>
     </v-toolbar>
@@ -48,6 +49,15 @@ export default {
         },
         profile() {
             this.$router.push({ name: "Profile"});
+        },
+        logout(){
+          window.$cookies.remove("userid")
+          window.$cookies.remove("email")
+          window.$cookies.remove("roles")
+          window.$cookies.remove("firstname")
+          window.$cookies.remove("fullname")
+          window.$cookies.remove("authenticated");
+          this.$router.push({ name: "LoginPage"})
         }
     },
 }

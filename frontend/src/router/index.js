@@ -36,66 +36,105 @@ const routes = [
     path: "/homepageop",
     name: "HomePageOP",
     component: HomePageOP,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/homepagepr",
     name: "HomePagePR",
     component: HomePagePR,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/projectsettings",
     name: "ProjectSettings",
     component: ProjectSettings,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/designproject",
     name: "DesignProject",
-    component: DesignProject
+    component: DesignProject,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/invitemembers",
     name: "InviteMembers",
-    component: InviteMembers
+    component: InviteMembers,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/profile",
     name: "Profile",
-    component: Profile
+    component: Profile,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/desstakeholders",
     name: "DesStakeholders",
-    component: DesStakeholders
+    component: DesStakeholders,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/completedprojects",
     name: "CompletedProjects",
-    component: CompletedProjects
+    component: CompletedProjects,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/inputstakeholders",
     name: "InputStakeholders",
-    component: InputStakeholders
+    component: InputStakeholders,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/randomfairness",
     name: "RandomFairness",
-    component: RandomFairness
+    component: RandomFairness,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/inputfairness",
     name: "InputFairness",
-    component: InputFairness
+    component: InputFairness,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/ratingfairness",
     name: "RatingFairness",
-    component: RatingFairness
+    component: RatingFairness,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/desdesignproject",
     name: "DesDesignProject",
-    component: DesDesignProject
+    component: DesDesignProject,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/register",
@@ -105,12 +144,18 @@ const routes = [
   {
     path: "/facilitatorhomepage",
     name: "FacilitatorHomePage",
-    component: FacilitatorHomePage
+    component: FacilitatorHomePage,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/create",
     name: "Create",
-    component: Create
+    component: Create,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/forgetpw",
@@ -149,5 +194,20 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+// Route guard checks to see if you are logged in, if not reroutes to login
+// to is where you are going, matched.some is to find which routes have requiresAuth
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (window.$cookies.get('authenticated')) {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
+})
+
 
 export default router;
