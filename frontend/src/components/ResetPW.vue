@@ -8,13 +8,6 @@
                 <v-card-text class="pb-0">Please enter your email and new password.</v-card-text>
                     <v-col cols="9">
                     <v-text-field 
-                     v-model="email"
-                     placeholder="Email Address"
-                     outlined
-                     dense
-                     v-on:keyup.enter="submit"
-                     ></v-text-field>
-                    <v-text-field 
                      v-model="password"
                      placeholder="New Password"
                      outlined
@@ -98,7 +91,6 @@ import axios from 'axios'
 export default {
 data(){
     return{
-        email: '',
         password: '',
         repassword: '',
         showpw: false,
@@ -113,8 +105,7 @@ data(){
 methods:{
     submit(){
         axios
-         .put('api/users/reset',{
-             email: this.email,
+         .post('api/users/reset/'+ this.$route.params.token,{
              password: this.password
          })
          .then((response)=>{
@@ -122,8 +113,7 @@ methods:{
              this.color='success'
          })
          .catch((error)=>{
-             this.failsnackbar=true;
-             this.color='error'
+             console.log(error)
          })
     },
     login(){

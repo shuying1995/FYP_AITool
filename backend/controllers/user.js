@@ -7,6 +7,10 @@ const config = require('config');
 const { first, result } = require('lodash');
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+var crypto = require('crypto');
+var async = require('async');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 exports.register = async (req, res) => {
     // First Validate The Request
@@ -126,60 +130,111 @@ exports.insertAcceptedProjectId = function (req, res) {
     })
 }
 
-exports.forgetPW = function (req, res) {
-    const msg = {
-        to: req.body.email, // Change to your recipient
-        from: 'suppfyp@mail.com', // Change to your verified sender
-        subject: 'Password reset',
-        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account. \n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process: \n\n' +
-        'http://localhost:8080/resetpw \n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.'
-      }    
-      
-      sgMail
-      .send(msg)
-      .then(() => {
-        console.log('Email sent')
-        return res.status(200).end();
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-}
+exports.forgetPW = function (req, res, next) {
+    async.waterfall([
+      function(done) {
+        crypto.randomBytes(20, function(err, buf) {
+          var token = buf.toString('hex');
+          done(err, token);
+        });
+      },
+      function(token, done) {
+        User.findOne({ email: req.body.email }, function(err, user) {
+          if (!user) {
+            res.status(400).send('error', 'No account with that email address exists.');
+            return res.redirect('/forgot');
+          }
+  
+          user.resetPasswordToken = token;
+          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+  
+          user.save(function(err) {
+            done(err, token, user);
+          });
+        });
+      },
+      function(token, user) {
+        const msg = {
+            to: user.email, // Change to your recipient
+            from: 'suppfyp@mail.com', // Change to your verified sender
+            subject: 'Password reset',
+            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account. \n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process: \n\n' +
+            'http://localhost:8080/' + token +  '\n\n' +
+            'If you did not request this, please ignore this email and your password will remain unchanged.'
+          }    
+          
+          sgMail
+          .send(msg)
+          .then(() => {
+            console.log('Email sent')
+            return res.status(200).end();
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }
+    ], function(err) {
+      if (err) return next(err);
+      res.redirect('/forgot');
+    });
+  };
 
-exports.resetPW = function (req, res){
-    User.find((error, user) => {
-        if (error) {
-            return next(error)
-        } 
-        else {
-            //email is an array, loop through to find if specific email is equal req.body.email
-            for(var i=0; i<user.length;i++){
-            if(user[i].email == req.body.email){
-                user[i].password = req.body.password
-                const salt = bcrypt.genSaltSync(10);
-                user[i].password = bcrypt.hashSync(user[i].password, salt);
-                user[i].save()
+exports.getUsers = function (req, res) {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      if (!user) {
+        res.status(400).send('error', 'Password reset token is invalid or has expired.');
+        return res.redirect('/forgot');
+      }
+      res.render('reset', {
+        user: req.user
+      });
+    });
+  };
 
-                const msg = {
-                    to: req.body.email, // Change to your recipient
-                    from: 'suppfyp@mail.com', // Change to your verified sender
-                    subject: 'Password changed successfully',
-                    text: 'This is a confirmation that the password for your account has been changed.'
-                  }    
-                  
-                  sgMail
-                  .send(msg)
-                  .then(() => {
-                    console.log('Email sent')
-                    return res.status(200).end();
-                  })
-                  .catch((error) => {
-                    console.error(error)
-                  })
-            }
-            }
-        }
-    })
-}
+  exports.resetPW = function (req, res) {
+    async.waterfall([
+      function(done) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+          if (!user) {
+            res.status(400).send('Password reset token is invalid or has expired.');
+          }
+  
+          user.password = req.body.password
+          const salt = bcrypt.genSaltSync(10);
+          user.password = bcrypt.hashSync(user.password, salt);
+
+          //set the token and expires to empty
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+
+          user.save(function(err) {
+          done(err, user);
+        });
+        })
+      },
+      function(user) {
+        const msg = {
+            to: user.email, // Change to your recipient
+            from: 'suppfyp@mail.com', // Change to your verified sender
+            subject: 'Password changed successfully',
+            text: 'This is a confirmation that the password for your account has been changed. \n\n' +
+            'Click to login now: \n\n' +
+            'http://localhost:8080 !'
+          }    
+          
+          sgMail
+          .send(msg)
+          .then(() => {
+            console.log('Email sent')
+            return res.status(200).end();
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }
+    ], function(err) {
+      if (err) return next(err); 
+      res.redirect('/');
+    });
+  };

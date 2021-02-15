@@ -32,6 +32,12 @@ const User = mongoose.model('User', new mongoose.Schema({
     acceptedprojectid: {
         type: String
     },
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordExpires: {
+        type: Date
+    }
 }));
 
 const complexityOptions = {
