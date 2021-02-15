@@ -75,6 +75,14 @@
           dark
           text
           v-bind="attrs"
+          @click="forget"
+        >
+          Forget Password
+        </v-btn>
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
           @click="failsnackbar = false"
         >
           Close
@@ -99,7 +107,7 @@ data(){
         color: 'general',
         errorMessages: 'Password successfully changed!',
         failsnackbar: false,
-        failErrorMessages: 'Account with such email does not exist!'
+        failErrorMessages: 'Reset password has expired please submit your email address again.'
     }
 },
 methods:{
@@ -113,12 +121,17 @@ methods:{
              this.color='success'
          })
          .catch((error)=>{
-             console.log(error)
+             this.failsnackbar=true;
+             this.color='error'
          })
     },
     login(){
         this.$router.push({ name: "LoginPage"})
         this.snackbar=false;
+    },
+    forget(){
+      this.failsnackbar=false;
+      this.$router.push({ name: 'ForgetPW'})
     }
 },
 computed: {

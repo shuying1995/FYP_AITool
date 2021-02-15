@@ -5,7 +5,7 @@
           <v-card class="justify-center" min-width="600px" max-width="600px">
               <v-card-title>Find your account</v-card-title>
                 <hr class="solid mx-4">  
-                <v-card-text class="pb-0">Please enter your email address.</v-card-text>
+                <v-card-text class="pb-0">To reset password, please provide your email address.</v-card-text>
                     <v-col cols="9">
                     <v-text-field 
                      v-model="email"
@@ -20,7 +20,7 @@
                          color="success"
                          @click="submit"
                          >
-                         Submit
+                         Send Reset Instruction
                          </v-btn>
                          <v-btn
                           @click="login"
@@ -29,23 +29,28 @@
                          </v-btn>
                     </v-flex>
           </v-card>
-          <v-snackbar
-        v-model="snackbar"
-        :color="color"
-        :top="true"
-      >
-        {{ errorMessages }}
-        <template v-slot:action="{ attrs }">
-        <v-btn
-          dark
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-        </template>
-      </v-snackbar>
+          <v-dialog
+              v-model="dialog"
+              persistent
+              max-width="290"
+            >
+              <v-card>
+                <v-card-title class="headline">
+                  Reset Password
+                </v-card-title>
+                <v-card-text>If we found an account associated with that email, we've sent password reset instructions to the email address.</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click='login'
+                  >
+                    Close
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-row>
       </v-container>
     </v-main>  
@@ -57,9 +62,7 @@ export default {
 data(){
     return{
         email: '',
-        snackbar: false,
-        color: 'general',
-        errorMessages: 'An email would be sent to this email address if there is an account with this email address found'
+        dialog: false
     }
 },
 methods:{
@@ -72,8 +75,7 @@ methods:{
              email: this.email
          })
          .then((response)=>{
-             this.snackbar=true;
-             this.color='success'
+             this.dialog=true;
          })
     }
 }

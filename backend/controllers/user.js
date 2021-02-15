@@ -141,8 +141,8 @@ exports.forgetPW = function (req, res, next) {
       function(token, done) {
         User.findOne({ email: req.body.email }, function(err, user) {
           if (!user) {
-            res.status(400).send('error', 'No account with that email address exists.');
-            return res.redirect('/forgot');
+            res.status(400).send('No account with that email address exists.');
+            return res.redirect('/forget');
           }
   
           user.resetPasswordToken = token;
@@ -176,15 +176,15 @@ exports.forgetPW = function (req, res, next) {
       }
     ], function(err) {
       if (err) return next(err);
-      res.redirect('/forgot');
+      res.redirect('/forget');
     });
   };
 
 exports.getUsers = function (req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
-        res.status(400).send('error', 'Password reset token is invalid or has expired.');
-        return res.redirect('/forgot');
+        res.status(400).send('Password reset token is invalid or has expired.');
+        return res.redirect('/forget');
       }
       res.render('reset', {
         user: req.user
@@ -198,6 +198,7 @@ exports.getUsers = function (req, res) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
             res.status(400).send('Password reset token is invalid or has expired.');
+            return res.end()
           }
   
           user.password = req.body.password
