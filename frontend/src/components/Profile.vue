@@ -97,8 +97,6 @@ export default {
         dialog: false,
         items: [
           { title: 'My Profile', icon: 'mdi-account-outline', action: this.profile},
-          { title: 'My Projects', icon: 'mdi-folder-outline', action: this.myprojects},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
           { title: 'Completed Project', icon: 'mdi-calendar-check', action: this.completedprojects},
           { title: 'FAQs', icon: 'mdi-help-circle-outline', action: this.faqs}
         ],

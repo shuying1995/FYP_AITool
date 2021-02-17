@@ -25,6 +25,7 @@
           v-model="item[0]"
           :items="item"
           single-line
+          @change="changerole"
         ></v-select>
       </v-col>
       <v-btn @click="logout">Log out</v-btn>
@@ -39,7 +40,7 @@ export default {
 name: "Appbar",
 data() {
   return {
-    items: window.$cookies.get("roles"),
+    items: window.$cookies.get("roles")
     }
   },
 computed:{
@@ -49,7 +50,16 @@ computed:{
 },
 methods: {
   home() {
-    this.$router.push({ name: "HomePageOP" });
+    if(this.item[0] == 'Facilitator')
+      this.$router.push({ name: "FacilitatorHomePage"})
+    else
+      this.$router.push({ name: "HomePageOP" });
+    },
+  changerole(role){
+     if(role == 'Facilitator')
+      this.$router.push({ name: "FacilitatorHomePage"})
+    else
+      this.$router.push({ name: "HomePageOP" });
     },
   profile() {
     this.$router.push({ name: "Profile"});
