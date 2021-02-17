@@ -105,7 +105,7 @@
                           <v-flex row wrap class="pt-2">
                           <p class="pt-2 ml-4 underline">Member: {{ item.acceptedmembers.length }}</p>
                           <v-spacer/>
-                          <p class="pt-2 round orange--text">{{ item.dayleft }} Days Left</p>
+                          <p class="pt-2 round orange--text">{{ Math.ceil(parseInt((new Date(item.deadline)-new Date(item.createdate))/(24*3600*1000))) }} Days Left</p>
                           </v-flex>
                         </v-list-item-content>
                       </v-list-item>
@@ -162,7 +162,7 @@ created(){
 p.round{
   border-radius: 8px;
   background-color: white;
-  width: 90px;
+  width: 100px;
   height: 30px;
   padding-left: 5px;
 }
