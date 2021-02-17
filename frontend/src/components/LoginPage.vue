@@ -139,7 +139,6 @@ export default {
                 const firstname = response.data.user.firstname
                 const lastname = response.data.user.lastname
                 const fullname = firstname.concat(' ', lastname)
-                const token = response.data.user.token
                 window.$cookies.set("userid", userid, Infinity)
                 window.$cookies.set("email", email, Infinity)
                 window.$cookies.set("roles", roles, Infinity)

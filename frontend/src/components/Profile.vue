@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import FacilitatorHomePageVue from './FacilitatorHomePage.vue';
 export default {
     data() {
     return {
@@ -105,13 +106,13 @@ export default {
     },
     methods: {
         home() {
-            this.$router.push({ name: "HomePageOP" });
+            if(window.$cookies.get('role')=='Facilitator')
+                this.$router.push({ name: "FacilitatorHomePage" })
+            else
+                this.$router.push({ name: "HomePageOP" });
         },
         account() {
             this.$router.push({ name: "Account"});
-        },
-        myprojects(){
-            this.$router.push({ name: "FacilitatorHomePage"});
         },
         completedprojects(){
             this.$router.push({ name: "CompletedProjects"});

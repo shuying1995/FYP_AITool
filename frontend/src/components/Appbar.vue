@@ -62,6 +62,7 @@ methods: {
       this.$router.push({ name: "HomePageOP" });
     },
   profile() {
+    window.$cookies.set("role", this.item[0], Infinity)
     this.$router.push({ name: "Profile"});
     },
   logout(){
