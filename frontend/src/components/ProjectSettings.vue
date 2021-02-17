@@ -98,7 +98,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="date"
-                      label="Picker without buttons"
+                      label="Select Date"
                       prepend-icon="mdi-calendar"
                       readonly
                       v-bind="attrs"
@@ -136,6 +136,7 @@
               >
               <v-select 
                 v-model="mincards"
+                placeholder="Select a number"
                 :items="num" 
                 outlined 
                 dense

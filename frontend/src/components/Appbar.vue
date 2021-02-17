@@ -22,8 +22,8 @@
          cols="2"
          class="pb-0">
         <v-select
-          v-model="select"
-          :items="items"
+          v-model="item[0]"
+          :items="item"
           single-line
         ></v-select>
       </v-col>
@@ -36,28 +36,32 @@
 
 <script>
 export default {
-    name: "Appbar",
-    data() {
-    return {
-      select: 'Facilitator',
-      items: window.$cookies.get("roles"),
-      }
+name: "Appbar",
+data() {
+  return {
+    items: window.$cookies.get("roles"),
+    }
+  },
+computed:{
+    item(){
+      return this.items.split(',')
+    }
+},
+methods: {
+  home() {
+    this.$router.push({ name: "HomePageOP" });
     },
-    methods: {
-        home() {
-            this.$router.push({ name: "HomePageOP" });
-        },
-        profile() {
-            this.$router.push({ name: "Profile"});
-        },
-        logout(){
-          window.$cookies.remove("userid")
-          window.$cookies.remove("email")
-          window.$cookies.remove("roles")
-          window.$cookies.remove("firstname")
-          window.$cookies.remove("fullname")
-          window.$cookies.remove("authenticated");
-          this.$router.push({ name: "LoginPage"})
+  profile() {
+    this.$router.push({ name: "Profile"});
+    },
+  logout(){
+    window.$cookies.remove("userid")
+    window.$cookies.remove("email")
+    window.$cookies.remove("roles")
+    window.$cookies.remove("firstname")
+    window.$cookies.remove("fullname")
+    window.$cookies.remove("authenticated");
+    this.$router.push({ name: "LoginPage"})
         }
     },
 }
