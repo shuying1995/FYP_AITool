@@ -140,7 +140,6 @@
                 :items="num" 
                 outlined 
                 dense
-                menu-props="auto"
               />
               </v-col>
               </v-row>
@@ -185,6 +184,23 @@
           </v-col>
         </v-row>
       </v-card>
+      <v-snackbar
+        v-model="snackbar"
+        :color="color"
+        :top="true"
+      >
+        {{ messages }}
+        <template v-slot:action="{ attrs }">
+        <v-btn
+          dark
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+        </template>
+      </v-snackbar>
     </v-container>
   </v-main>
 </template>
@@ -192,60 +208,64 @@
 <script>
 const axios = require('axios');
 export default {
-    data() {
-    return {
-        dialog: false,
-        date: '',
-        menu1:false,
-        num: ['1','2','3','4','5','6','7','8','9','10'],
-        mincards: '',
-        minreviews: '',
-        progress: '',
-        items: [
-          { title: 'Settings', icon: 'mdi-cog', action: this.projectsettings},
-          { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
-        ],
-        projectitem: []
-      }
+data() {
+  return {
+    dialog: false,
+    date: '',
+    menu1:false,
+    num: ['1','2','3','4','5','6','7','8','9','10'],
+    mincards: '',
+    minreviews: '',
+    progress: '',
+    items: [
+      { title: 'Settings', icon: 'mdi-cog', action: this.projectsettings},
+      { title: 'Team Management', icon: 'mdi-account-multiple-plus', action: this.teammanagement},
+    ],
+    projectitem: [],
+    snackbar: false,
+    color: 'general',
+    messages: 'Project settings has been saved!'
+  }
+},
+created(){
+  let selectedprojectid = window.$cookies.get("selectedprojectid")
+    axios.get('api/create/' + selectedprojectid)
+    .then((response) => {
+        this.date = response.data.deadline
+        this.mincards = response.data.mincards
+        this.minreviews = response.data.minreviews
+        this.projectitem = response.data
+        this.progress = response.data.progress
+    })
+},
+methods: {
+    home() {
+        //set active tab in local storage
+        //window.localStorage.setItem('activetab', 0);
+        this.$router.push({ name: "FacilitatorHomePage" });
     },
-    created(){
+    myprojects() {
+        //window.localStorage.setItem('activetab', 0);
+        this.$router.push({ name: "FacilitatorHomePage"});
+    },
+    savechanges(){
       let selectedprojectid = window.$cookies.get("selectedprojectid")
-        axios.get('api/create/' + selectedprojectid)
+      axios
+        .put('api/create/' + selectedprojectid, {
+              progress: this.progress,
+              deadline: this.date,
+              mincards: this.mincards,
+              minreviews: this.minreviews
+        })
         .then((response) => {
-            this.date = response.data.deadline
-            this.mincards = response.data.mincards
-            this.minreviews = response.data.minreviews
-            this.projectitem = response.data
-            this.progress = response.data.progress
+            this.snackbar = true;
+            this.color = 'success'
+          })
+        .catch((error) =>{
+            console.log(error)
         })
     },
-    methods: {
-        home() {
-            //set active tab in local storage
-            //window.localStorage.setItem('activetab', 0);
-            this.$router.push({ name: "FacilitatorHomePage" });
-        },
-        myprojects() {
-            //window.localStorage.setItem('activetab', 0);
-            this.$router.push({ name: "FacilitatorHomePage"});
-        },
-        savechanges(){
-          let selectedprojectid = window.$cookies.get("selectedprojectid")
-          axios
-            .put('api/create/' + selectedprojectid, {
-                  progress: this.progress,
-                  deadline: this.date,
-                  mincards: this.mincards,
-                  minreviews: this.minreviews
-            })
-            .then((response) => {
-                console.log(response)
-              })
-            .catch((error) =>{
-                console.log(error)
-            })
-        },
-    },
+  },
 }
 </script>
 

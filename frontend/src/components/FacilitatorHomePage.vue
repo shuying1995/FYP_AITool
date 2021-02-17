@@ -103,7 +103,7 @@
                           </div>
                             <hr class="solid">
                           <v-flex row wrap class="pt-2">
-                          <p class="pt-2 ml-4 underline">Member: {{ item.member }}</p>
+                          <p class="pt-2 ml-4 underline">Member: {{ item.acceptedmembers.length }}</p>
                           <v-spacer/>
                           <p class="pt-2 round orange--text">{{ item.dayleft }} Days Left</p>
                           </v-flex>
@@ -133,14 +133,15 @@ data(){
     }
 },
 created(){
-        axios
-        .get('api/create/facilitator', { 
-          params:{
-            facilitator: window.$cookies.get("fullname")
-          }})
-        .then((response) => {
-            this.MyCards = response.data
-        })
+  axios
+  .get('api/create/facilitator', { 
+    params:{
+      facilitator: window.$cookies.get("fullname")
+    }})
+  .then((response) => {
+      this.MyCards = response.data
+      console.log(this.MyCards[0].acceptedmembers.length)
+  })
 },
  methods: {
         create() {
