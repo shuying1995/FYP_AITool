@@ -83,6 +83,7 @@
                         <v-text-field filled rounded dense placeholder="Confirm new password"></v-text-field>
                         </v-col>
                     </v-row>
+                    <v-btn @click="logout">Log out</v-btn>
                 </v-col>
                 </v-row>
             </v-card>
@@ -116,6 +117,15 @@ export default {
         },
         completedprojects(){
             this.$router.push({ name: "CompletedProjects"});
+        },
+        logout(){
+            window.$cookies.remove("userid")
+            window.$cookies.remove("email")
+            window.$cookies.remove("roles")
+            window.$cookies.remove("firstname")
+            window.$cookies.remove("fullname")
+            window.$cookies.remove("authenticated");
+            this.$router.push({ name: "LoginPage"})
         }
     },
 }

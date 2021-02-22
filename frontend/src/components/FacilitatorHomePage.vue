@@ -16,7 +16,7 @@
                         </v-btn>
                       </template>
                       <v-list>
-                        <v-list-item v-for="(item, index) in items" :key="index" link>
+                        <v-list-item v-for="(item, index) in items" :key="index" link @click="item.action">
                           <v-list-item-title>{{ item.title }}</v-list-item-title>
                         </v-list-item>
                       </v-list>
@@ -80,7 +80,6 @@
                                 <v-list-item
                                   :key="item._id"
                                   link
-                                  @click="deleteteam"
                                 >
                                   <v-list-item-title>Delete</v-list-item-title>
                                 </v-list-item>
@@ -121,16 +120,16 @@
 const axios = require('axios');
 export default {
 data(){
-    return{
-    items: [
-        { title: "Date: New to old" },
-        { title: "Date: Old to new" },
-        { title: "Progress: High to low" },
-        { title: "Progress: Low to high" },
-        { title: "Favourited" },
-      ],
-        MyCards: [],
-    }
+  return{
+  items: [
+      { title: "Date: New to old" },
+      { title: "Date: Old to new" },
+      { title: "Progress: High to low" },
+      { title: "Progress: Low to high", action: this.ascendingProgress },
+      { title: "Favourited" },
+    ],
+      MyCards: [],
+  }
 },
 created(){
   axios
@@ -140,21 +139,31 @@ created(){
     }})
   .then((response) => {
       this.MyCards = response.data
-      console.log(this.MyCards[0].acceptedmembers.length)
   })
 },
  methods: {
-        create() {
-            this.$router.push({ name: "Create" });
-        },
-        editteam(e){
-        let selectedprojectid = this.MyCards[e]._id
-        window.$cookies.set("selectedprojectid", selectedprojectid, Infinity)
-        this.$router.push({ name: "ProjectSettings"});
-        },
-        deleteteam(){
-        },
-    }
+  create() {
+    this.$router.push({ name: "Create" });
+  },
+  editteam(e){
+    let selectedprojectid = this.MyCards[e]._id
+    window.$cookies.set("selectedprojectid", selectedprojectid, Infinity)
+    this.$router.push({ name: "ProjectSettings"});
+  },
+  ascendingProgress(){
+    console.log(this.MyCards.slice().sort((a,b)=>a.progress - b.progress))
+    return this.MyCards.slice().sort((a,b)=>a.progress - b.progress)
+  },
+  descendingProgress(){
+    return this.MyCards.slice().sort((a,b)=>b.progress - a.progress)
+  },
+  ascendingDate(){
+    return this.MyCards.slice().sort((a,b)=>new Date(a.createdate) - new Date(b.createdate))
+  },
+  descendingDate(){
+    return this.MyCards.slice().sort((a,b)=>new Date(b.createdate)-new Date(a.createdate))
+  }
+  }
 }
 </script>
 
