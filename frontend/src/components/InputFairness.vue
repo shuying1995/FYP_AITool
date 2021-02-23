@@ -72,6 +72,30 @@
                     </v-col>
                 </v-row>
             </v-card>
+            
+            <v-dialog
+              v-model="dialog"
+              persistent
+              max-width="500"
+            >
+              <v-card>
+                <v-card-title class="headline">
+                  Project Accepted
+                </v-card-title>
+                <v-card-text>You've be notified when all members accepts the project.</v-card-text>
+                <v-card-text>While waiting, you can add addition fairness card inputs by clicking on the specified project in the Ongoing Projects Tab.</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    text
+                    @click='home'
+                  >
+                    Close
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
         </v-container>
     </v-main>
 </template>
@@ -92,7 +116,8 @@ data(){
         mincards: '',
         arrayfc:[],
         arraygr:[],
-        arraygw:[]
+        arraygw:[],
+        dialog: false
     }
 },
 computed: {
@@ -155,7 +180,7 @@ methods:{
                                  userid: window.$cookies.get("userid") 
                              })
                              .then((response)=>{
-                                this.$router.push({ name: "RatingFairness"});
+                                this.dialog=true;
                              })
                          })
                     })

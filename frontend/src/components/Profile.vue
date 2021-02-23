@@ -6,7 +6,7 @@
                     <v-flex row wrap class="custom ma-3">
                         <a @click="home">HOME</a>
                         <p>></p>
-                        <a @click="myprojects">ACCOUNT</a>
+                        <p>ACCOUNT</p>
                         <p>></p>
                         <p>MY PROFILE</p>
                     </v-flex>
@@ -26,7 +26,6 @@
                             v-for="item in items"
                             :key="item.title"
                             link
-                            @click="item.action"
                             >
                             <v-list-item-icon>
                                 <v-icon>{{ item.icon }}</v-icon>
@@ -92,7 +91,6 @@
 </template>
 
 <script>
-import FacilitatorHomePageVue from './FacilitatorHomePage.vue';
 export default {
     data() {
     return {
