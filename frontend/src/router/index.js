@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePageOP from "../components/HomePageOP.vue";
 import HomePagePR from "../components/HomePagePR.vue";
+import HomePageNR from "../components/HomePageNR.vue";
+import HomePageCP from "../components/HomePageCP.vue";
 import FacilitatorHomePage from "../components/FacilitatorHomePage.vue";
 import LoginPage from "../components/LoginPage.vue";
 import ProjectSettings from "../components/ProjectSettings.vue";
@@ -44,6 +46,22 @@ const routes = [
     path: "/homepagepr",
     name: "HomePagePR",
     component: HomePagePR,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/homepagenr",
+    name: "HomePageNR",
+    component: HomePageNR,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/homepagecp",
+    name: "HomePageCP",
+    component: HomePageCP,
     meta: {
       requiresAuth: true
     }

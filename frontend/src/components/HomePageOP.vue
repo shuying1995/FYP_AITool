@@ -3,9 +3,11 @@
     <v-container fluid>
       <v-card min-height="650px">
         <v-layout row wrap ml-7 mr-8>
-            <v-flex row wrap class="custom ma-3 mt-6">
-              <v-btn text class="orange--text">Ongoing Projects</v-btn>
-              <v-btn text @click="homepagepr">Project Requests</v-btn>
+            <v-flex row wrap class="ma-3 mt-6">
+              <v-btn @click="homepagepr" text>Requests</v-btn>
+              <v-btn class="orange--text" text>In Progress</v-btn>
+              <v-btn @click="homepagenr" text>Needs Review</v-btn>
+              <v-btn @click="homepagecp" text>Completed</v-btn>
             </v-flex>
                   
                   <v-col class="text-right mt-3">
@@ -26,7 +28,7 @@
               </v-layout>
 
                     <v-layout row wrap ml-8>
-                      <v-flex v-for="item in this.OnCards" :key="item.ID">
+                      <v-flex v-for="item in this.OnCards" :key="item.ID" class="custom">
                         <v-card 
                          class="ma-2" 
                          max-width="360" 
@@ -106,13 +108,19 @@ export default {
   methods:{
     homepagepr(){
       this.$router.push({ name: "HomePagePR" });
+    },
+    homepagenr(){
+    this.$router.push({ name: "HomePageNR"});
+    },
+    homepagecp(){
+      this.$router.push({ name: "HomePageCP" })
     }
   }
 };
 </script>
 
 <style scoped>
-.flex{
+.flex.custom{
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 400px;

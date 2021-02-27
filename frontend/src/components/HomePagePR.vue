@@ -5,9 +5,11 @@
              min-height="650px"
              >
                 <v-layout row wrap ml-7 mr-8>
-                  <v-flex row wrap class="custom ma-3 mt-6">
-                    <v-btn @click="homepageop" text>Ongoing Projects</v-btn>
-                    <v-btn text class="orange--text">Project Requests</v-btn>
+                  <v-flex row wrap class="ma-3 mt-6">
+                    <v-btn text class="orange--text">Requests</v-btn>
+                    <v-btn @click="homepageop" text>In Progress</v-btn>
+                    <v-btn @click="homepagenr" text>Needs Review</v-btn>
+                    <v-btn @click="homepagecp" text>Completed</v-btn>
                   </v-flex>
                   
                   <v-col class="text-right mt-3">
@@ -28,7 +30,7 @@
                 </v-layout>
 
                 <v-layout row wrap ml-8>
-                  <v-flex v-for="(item, e) in PRCards" :key="item.ID">
+                  <v-flex v-for="(item, e) in PRCards" :key="item.ID" class="custom">
                     <v-card 
                      class="ma-2" 
                      max-width="360"
@@ -75,44 +77,50 @@
 <script>
 const axios = require('axios');
 export default {
-data(){
+  data(){
     return{
-        items: [
-        { title: "Date: New to old" },
-        { title: "Date: Old to new" },
-        { title: "Progress: High to low" },
-        { title: "Progress: Low to high" },
-        { title: "Favourited" },
+      items: [
+      { title: "Date: New to old" },
+      { title: "Date: Old to new" },
+      { title: "Progress: High to low" },
+      { title: "Progress: Low to high" },
+      { title: "Favourited" }
       ],
       PRCards: [],
 
     }
-},
-created(){
-        axios
-        .get('api/create/memberspr', { 
-          params:{
-            invitedmembers: window.$cookies.get("userid")
-          }})
-        .then((response) => {
-            this.PRCards = response.data
-        })
-    },
-methods: {
+  },
+  created(){
+    axios
+    .get('api/create/memberspr', { 
+      params:{
+        invitedmembers: window.$cookies.get("userid")
+      }})
+    .then((response) => {
+        this.PRCards = response.data
+    })
+  },
+  methods: {
     desdesignproject(e){
-        let projectid = this.PRCards[e]._id
-        window.$cookies.set("acceptedprojectid", projectid, Infinity)
-        this.$router.push({ name: "DesDesignProject" })
+      let projectid = this.PRCards[e]._id
+      window.$cookies.set("acceptedprojectid", projectid, Infinity)
+      this.$router.push({ name: "DesDesignProject" })
     },
     homepageop(){
-        this.$router.push({ name: "HomePageOP" });
-        },
+      this.$router.push({ name: "HomePageOP" });
+      },
+    homepagenr(){
+      this.$router.push({ name: "HomePageNR"});
+    },
+    homepagecp(){
+      this.$router.push({ name: "HomePageCP" })
     }
+  }
 }
 </script>
 
 <style scoped>
-.flex{
+.flex.custom{
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 400px;
