@@ -100,6 +100,7 @@ export default {
             acceptedmembers: window.$cookies.get("userid")
           }})
         .then((response) => {
+            console.log(response.data)
             this.OnCards = response.data
         })
         .catch((error) => {

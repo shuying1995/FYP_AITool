@@ -138,6 +138,7 @@ created(){
       facilitator: window.$cookies.get("fullname")
     }})
   .then((response) => {
+      console.log(response.data)
       this.MyCards = response.data
   })
 },

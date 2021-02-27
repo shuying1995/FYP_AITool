@@ -68,12 +68,12 @@
                 cols="12"
                 sm="3"
               >
-              <v-text-field 
-              placeholder="Input % in terms of number"
-              v-model="progress"
-              outlined
-              dense
-              />
+              <v-progress-linear
+                background-color="grey lighten-2"
+                color="red"
+                v-model="progress"
+                height="10"
+                />
               </v-col>
               </v-row>
 
@@ -252,7 +252,6 @@ methods: {
       let selectedprojectid = window.$cookies.get("selectedprojectid")
       axios
         .put('api/create/' + selectedprojectid, {
-              progress: this.progress,
               deadline: this.date,
               mincards: this.mincards,
               minreviews: this.minreviews

@@ -55,6 +55,9 @@ exports.getFProjects = function (req, res){
             for(var i=0; i<project.length; i++){
                 if(project[i].facilitator == req.query.facilitator)
                     array.push(project[i])
+                if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
+                    project[i].progress = 25
+                project[i].save()
                 }
             }
         res.json(array)
@@ -76,6 +79,9 @@ exports.getOGProjects = function (req, res){
                     if(members[j] == req.query.acceptedmembers)
                         array.push(project[i])  
                     }
+                if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
+                    project[i].progress = 25
+                project[i].save()
                 }
             }
         res.json(array)
@@ -98,7 +104,6 @@ exports.insertProjectSettings = function (req, res){
         if (error) {
             return next(error)
         } else {
-            project.progress = req.body.progress;
             project.deadline = req.body.deadline;
             project.mincards = req.body.mincards;
             project.minreviews = req.body.minreviews;
