@@ -1,6 +1,6 @@
 <template>
     <v-main>
-        <v-container fluid>
+        <v-container fluid grid-list-md>
             <v-card min-height="650px">
                 <v-layout row wrap ml-7 mr-8>
                   <v-flex row wrap class="custom ma-3 mt-6">
@@ -34,7 +34,7 @@
                 </v-layout>
 
                 <v-layout row wrap ml-8>
-                  <v-flex v-for="(item, e) in MyCards" :key="item.ID" row wrap>
+                  <v-flex v-for="(item, e) in MyCards" :key="item.ID">
                     <v-card 
                      class="ma-2" 
                      max-width="360"
@@ -168,6 +168,12 @@ created(){
 </script>
 
 <style scoped>
+.flex{
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 400px;
+}
+
 p.round{
   border-radius: 8px;
   background-color: white;

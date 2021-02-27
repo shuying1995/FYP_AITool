@@ -115,6 +115,12 @@ export default {
 </script>
 
 <style scoped>
+.flex{
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 400px;
+}
+
 .v-btn {
   margin-left: 10px;
 }
