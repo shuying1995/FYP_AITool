@@ -12,6 +12,10 @@ export default {
         state.apptype = '';
         state.members = [];
         state.projects = '';
+        state.stakeholder = [];
+        state.fairnesscards = [];
+        state.goright = [];
+        state.gowrong = [];
     },
     updateStakeholder(state, stakeholder){
         state.stakeholder.push(stakeholder)

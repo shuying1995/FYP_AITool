@@ -76,7 +76,7 @@
             <v-dialog
               v-model="moredialog"
               persistent
-              max-width="500"
+              max-width="350"
             >
               <v-card>
                 <v-card-text>Congrats on completing!</v-card-text>
@@ -85,11 +85,14 @@
                   <v-spacer></v-spacer>
                   <v-btn
                     text
+                    color="warning"
                     @click='inputstakeholder'
                   >
                     Next
                   </v-btn>
                 </v-card-actions>
+                <v-card-text>Stakeholder role count:</v-card-text>
+                <v-card-text>{{this.$store.getters.stakeholder.length}}/{{this.mincards}}</v-card-text>
               </v-card>
             </v-dialog>
 
@@ -178,7 +181,7 @@ methods:{
           .dispatch(
               "updateGowrong",this.gowrong)
         const projectid = window.$cookies.get("acceptedprojectid")
-        if(this.$store.getters.fairnesscards.length < this.mincards){
+        if(this.$store.getters.stakeholder.length < this.mincards){
             this.moredialog=true;
         }
         else{
@@ -192,6 +195,9 @@ methods:{
                         gowrong: this.$store.getters.gowrong
                     })
                     .then((response) => {
+                        this.$store
+                        .dispatch('resetState')
+                        .then(()=>{
                         let userid = window.$cookies.get("userid")
                         axios
                          .put('api/users/' + userid + '/update', {
@@ -207,6 +213,7 @@ methods:{
                                 this.dialog=true;
                              })
                          })
+                        })
                     })
                     .catch((error) =>{
                         console.log(error)
