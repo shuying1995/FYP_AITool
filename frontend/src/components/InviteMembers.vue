@@ -146,9 +146,6 @@ export default {
         .then((response) => {
             this.memberlist = response.data
         })
-        .catch((error) => {
-            console.log(error)
-        })
     },
     methods: {
         home() {
@@ -195,15 +192,11 @@ export default {
                     })
                     .then((response) => {
                     })
-                    .catch((error) =>{
-                        console.log(error)
-                    })
                 }
             })
             .catch((error) => {
                 this.failsnackbar=true;
                 this.color="error";
-                console.log(error)
             }))
         }
     }

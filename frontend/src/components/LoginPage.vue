@@ -154,7 +154,6 @@ export default {
             .catch((error) => {
               this.snackbar = true;
               this.color = "error";
-              console.log(error)
             })
     },
     register(){

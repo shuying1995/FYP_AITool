@@ -80,9 +80,6 @@ created(){
                 apptype = "appcard5" 
             window.$cookies.set("acceptedprojectapptype", apptype, Infinity)
         })
-        .catch((error) =>{
-            console.log(error)
-        })
 },
 methods:{
     home(){

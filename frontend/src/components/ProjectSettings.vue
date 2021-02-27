@@ -260,9 +260,6 @@ methods: {
             this.snackbar = true;
             this.color = 'success'
           })
-        .catch((error) =>{
-            console.log(error)
-        })
     },
   },
 }

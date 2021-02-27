@@ -97,9 +97,6 @@ created(){
         .then((response) => {
             this.PRCards = response.data
         })
-        .catch((error) => {
-            console.log(error)
-        })
     },
 methods: {
     desdesignproject(e){
