@@ -24,10 +24,10 @@
             <v-autocomplete
             v-model="members"
             :items="memberlist"
-            item-value="_id"
             filled
             chips
             label="Type or select members"
+            item-text="firstname"
             multiple
           >
           <template v-slot:selection="data">
@@ -76,7 +76,6 @@
 
             <v-snackbar
             v-model="failsnackbar"
-            :vertical="vertical"
             :color="color"
             :top="true"
             >
