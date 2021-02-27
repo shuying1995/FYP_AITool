@@ -74,6 +74,26 @@
             </v-card>
             
             <v-dialog
+              v-model="moredialog"
+              persistent
+              max-width="500"
+            >
+              <v-card>
+                <v-card-text>Congrats on completing!</v-card-text>
+                <v-card-text>Let's go with another stakeholder role!</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    text
+                    @click='inputstakeholder'
+                  >
+                    Next
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <v-dialog
               v-model="dialog"
               persistent
               max-width="500"
@@ -117,6 +137,7 @@ data(){
         arrayfc:[],
         arraygr:[],
         arraygw:[],
+        moredialog: false,
         dialog: false
     }
 },
@@ -140,6 +161,9 @@ methods:{
     home(){
         this.$router.push({ name: "HomePageOP"});
         },
+    inputstakeholder(){
+        this.$router.push({name: "InputStakeholders"})
+    },
     ratingfairness(){
         this.arrayfc.push(this.selectedimage)
         this.$store
@@ -155,7 +179,7 @@ methods:{
               "updateGowrong",this.gowrong)
         const projectid = window.$cookies.get("acceptedprojectid")
         if(this.$store.getters.fairnesscards.length < this.mincards){
-            this.$router.push({name: "RandomFairness"})
+            this.moredialog=true;
         }
         else{
         axios

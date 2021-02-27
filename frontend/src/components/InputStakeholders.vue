@@ -107,7 +107,8 @@ data() {
         isdialog: false,
         appscenario: window.$cookies.get("acceptedprojectappscenario"),
         apptype: window.$cookies.get("acceptedprojectapptype"),
-        stakeholder: ''
+        stakeholder: '',
+        arraysh:[]
         }
     },
 computed:{
@@ -120,8 +121,9 @@ methods:{
         this.$router.push({ name: "HomePageOP"});
     },
     randomfairness(){
+      this.arraysh.push(this.stakeholder)
         this.$store
-        .dispatch("updateStakeholder",this.stakeholder)
+        .dispatch("updateStakeholder",this.arraysh)
         .then(()=>this.$router.push({ name: "RandomFairness"}))
     }
 }

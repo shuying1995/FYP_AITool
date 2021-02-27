@@ -2,7 +2,7 @@ export default {
     apptype:'',
     projects: '',
     members: [],
-    stakeholder: '',
+    stakeholder: [],
     fairnesscard: '',
     fairnesscards: [],
     goright: [],

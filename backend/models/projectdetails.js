@@ -11,7 +11,7 @@ const Projectdetails = mongoose.model('Projectdetails', new mongoose.Schema({
         required: true
     },
     stakeholder:{
-        type: String,
+        type: Array,
         required: true
     },
     fairnesscard:{
@@ -36,7 +36,7 @@ const validateProjectdetails = function (projectdetails) {
     const schema = Joi.object({
         userid: Joi.string().required(),
         projectid: Joi.string().required(),
-        stakeholder: Joi.string().required(),
+        stakeholder: Joi.array().required(),
         fairnesscard: Joi.array().required(),
         goright: Joi.array().required(),
         gowrong: Joi.array().required(),

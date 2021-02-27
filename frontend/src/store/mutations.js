@@ -14,7 +14,7 @@ export default {
         state.projects = '';
     },
     updateStakeholder(state, stakeholder){
-        state.stakeholder=stakeholder
+        state.stakeholder.push(stakeholder)
     },
     updateFairnesscard(state, fairnesscard){
         state.fairnesscard=fairnesscard
