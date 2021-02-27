@@ -132,6 +132,7 @@ export default {
     acceptproject(e){
       let projectid = this.PRCards[e]._id
       let projectname = this.PRCards[e].name
+      window.$cookies.set("acceptedprojectid", projectid, Infinity)
       let userid = window.$cookies.get("userid")
       axios
         .put('api/users/' + userid + '/update', {

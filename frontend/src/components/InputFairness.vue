@@ -195,10 +195,10 @@ created(){
           gowrong: this.$store.getters.gowrong
         })
         .then((response) => {
+          console.log(response)
           this.$store
           .dispatch('resetState')
-          .then(()=>{
-          })
+          .then(()=>{this.dialog = true;})
         })
       }
     }
