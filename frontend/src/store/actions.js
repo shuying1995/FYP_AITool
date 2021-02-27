@@ -1,4 +1,7 @@
 export default {
+    updateProjectname({commit},projectname){
+        commit('updateProjectname',projectname);
+    },
     updateApptype({commit},apptype){
         commit('updateApptype',apptype);
     },

@@ -1,4 +1,7 @@
 export default {
+    updateProjectname(state, projectname){
+        state.projectname=projectname
+    },
     updateApptype(state, apptype){
         state.apptype=apptype
     },

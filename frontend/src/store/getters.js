@@ -1,4 +1,7 @@
 export default {
+    projectname(state) {
+        return state.projectname
+    },
     apptype(state) {
         return state.apptype
     },

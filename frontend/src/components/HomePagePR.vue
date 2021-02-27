@@ -77,13 +77,13 @@
               max-width="500"
             >
               <v-card>
-                <v-card-text>Do you want to start on {{this.PRCards.name}} now?</v-card-text>
+                <v-card-text>Do you want to start on {{this.$store.getters.projectname}} now?</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
                     text
                     color="warning"
-                    @click='dialog = false'
+                    @click='reload'
                   >
                     Later
                   </v-btn>
@@ -131,6 +131,7 @@ export default {
   methods: {
     acceptproject(e){
       let projectid = this.PRCards[e]._id
+      let projectname = this.PRCards[e].name
       let userid = window.$cookies.get("userid")
       axios
         .put('api/users/' + userid + '/update', {
@@ -142,12 +143,18 @@ export default {
               userid: window.$cookies.get("userid") 
           })
           .then((response)=>{
-            this.dialog=true;
+            this.$store
+            .dispatch(
+                "updateProjectname", projectname)
+            .then(() => this.dialog=true)
           })
       })
     },
     desdesignproject(){
       this.$router.push({ name: "DesDesignProject" })
+    },
+    reload(){
+      this.$router.go()
     },
     homepageop(){
       this.$router.push({ name: "HomePageOP" });
