@@ -53,7 +53,7 @@
                           <v-flex row wrap class="justify-center pt-2">
                             <v-btn 
                              color="success" 
-                             @click="desdesignproject(e)"
+                             @click="acceptproject(e)"
                              :key="item._id"
                              >
                               Accept
@@ -70,6 +70,34 @@
                   </v-flex>
                 </v-layout> 
             </v-card>
+
+            <v-dialog
+              v-model="dialog"
+              persistent
+              max-width="500"
+            >
+              <v-card>
+                <v-card-text>Do you want to start on {{this.PRCards.name}} now?</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    text
+                    color="warning"
+                    @click='dialog = false'
+                  >
+                    Later
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="success"
+                    @click='desdesignproject'
+                  >
+                    Yes
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
         </v-container>
 </v-main>
 </template>
@@ -87,7 +115,7 @@ export default {
       { title: "Favourited" }
       ],
       PRCards: [],
-
+      dialog: false
     }
   },
   created(){
@@ -101,9 +129,24 @@ export default {
     })
   },
   methods: {
-    desdesignproject(e){
+    acceptproject(e){
       let projectid = this.PRCards[e]._id
-      window.$cookies.set("acceptedprojectid", projectid, Infinity)
+      let userid = window.$cookies.get("userid")
+      axios
+        .put('api/users/' + userid + '/update', {
+            invitedprojectid: window.$cookies.get("acceptedprojectid"),
+        })
+        .then((response)=>{
+          axios
+          .put('api/create/' + projectid + '/update', {
+              userid: window.$cookies.get("userid") 
+          })
+          .then((response)=>{
+            this.dialog=true;
+          })
+      })
+    },
+    desdesignproject(){
       this.$router.push({ name: "DesDesignProject" })
     },
     homepageop(){

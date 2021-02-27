@@ -229,19 +229,20 @@ export default {
         ValidationObserver
     },
     data(){
-        return{
-            successdialog:false,
-            showpw:false,
-            showcpw:false,
-            name: '',
-            email:'',
-            password:'',
-            repassword:'',
-            roles:[],
-            roleitems:['Facilitator','Member','Facilitator, Member'],
-            errorMessages: "Email already registered",
-            snackbar: false,
-            color: 'general'
+      return{
+        successdialog:false,
+        showpw:false,
+        showcpw:false,
+        firstname: '',
+        lastname: '',
+        email:'',
+        password:'',
+        repassword:'',
+        roles:[],
+        roleitems:['Facilitator','Member','Facilitator, Member'],
+        errorMessages: "Email already registered",
+        snackbar: false,
+        color: 'general'
         }
     },
 

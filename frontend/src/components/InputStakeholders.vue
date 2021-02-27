@@ -118,7 +118,7 @@ computed:{
 },
 methods:{
     home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "HomePagePR"});
     },
     randomfairness(){
       this.arraysh.push(this.stakeholder)

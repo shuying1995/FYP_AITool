@@ -52,7 +52,7 @@
 export default {
   methods: {
         home() {
-            this.$router.push({ name: "HomePageOP" });
+            this.$router.push({ name: "HomePagePR" });
         },
         myprojects(){
             this.$router.push({ name: "HomePageOP"});

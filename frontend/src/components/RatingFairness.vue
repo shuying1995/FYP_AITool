@@ -87,7 +87,7 @@ data(){
 },
 methods: {
     home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "HomePagePR"});
     },
     survey(){
         this.dialog = false

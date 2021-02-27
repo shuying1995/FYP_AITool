@@ -83,7 +83,7 @@ created(){
 },
 methods:{
     home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "HomePagePR"});
         },
     desstakeholders() {
         this.$router.push({ name: "DesStakeholders"});  

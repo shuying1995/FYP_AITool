@@ -1,9 +1,9 @@
 <template>
   <v-main>
     <v-toolbar fixed height="70%">
-      <v-toolbar-side-icon class="ml-4">
-        <v-img src="../assets/logo.png" width="25%"> </v-img>
-      </v-toolbar-side-icon>
+        <v-avatar class="ml-6">
+        <v-img src="../assets/logo.png"> </v-img>
+        </v-avatar>
       <v-row justify="end">
         <v-btn icon>
           <v-icon @click="home" color="orange">mdi-home-outline</v-icon>
@@ -52,13 +52,13 @@ methods: {
     if(this.item[0] == 'Facilitator')
       this.$router.push({ name: "FacilitatorHomePage"})
     else
-      this.$router.push({ name: "HomePageOP" });
+      this.$router.push({ name: "HomePagePR" });
     },
   changerole(role){
      if(role == 'Facilitator')
       this.$router.push({ name: "FacilitatorHomePage"})
     else
-      this.$router.push({ name: "HomePageOP" });
+      this.$router.push({ name: "HomePagePR" });
     },
   profile() {
     window.$cookies.set("role", this.item[0], Infinity)

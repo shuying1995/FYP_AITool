@@ -160,9 +160,9 @@ created(){
             this.mincards = response.data.mincards
         })
 },
-methods:{
+  methods:{
     home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "HomePagePR"});
         },
     inputstakeholder(){
         this.$router.push({name: "InputStakeholders"})
@@ -187,37 +187,22 @@ methods:{
         else{
         axios
         .post('api/projectdetails', {
-                        userid: window.$cookies.get("userid"),
-                        projectid: window.$cookies.get("acceptedprojectid"),
-                        stakeholder: this.$store.getters.stakeholder,
-                        fairnesscard: this.$store.getters.fairnesscards,
-                        goright: this.$store.getters.goright,
-                        gowrong: this.$store.getters.gowrong
-                    })
-                    .then((response) => {
-                        this.$store
-                        .dispatch('resetState')
-                        .then(()=>{
-                        let userid = window.$cookies.get("userid")
-                        axios
-                         .put('api/users/' + userid + '/update', {
-                             invitedprojectid: window.$cookies.get("acceptedprojectid"),
-                         })
-                         .then((response)=>{
-                            let projectid = window.$cookies.get("acceptedprojectid")
-                            axios
-                             .put('api/create/' + projectid + '/update', {
-                                 userid: window.$cookies.get("userid") 
-                             })
-                             .then((response)=>{
-                                this.dialog=true;
-                             })
-                         })
-                        })
-                    })
-            }
-        }
+          userid: window.$cookies.get("userid"),
+          projectid: window.$cookies.get("acceptedprojectid"),
+          stakeholder: this.$store.getters.stakeholder,
+          fairnesscard: this.$store.getters.fairnesscards,
+          goright: this.$store.getters.goright,
+          gowrong: this.$store.getters.gowrong
+        })
+        .then((response) => {
+          this.$store
+          .dispatch('resetState')
+          .then(()=>{
+          })
+        })
+      }
     }
+  }
 }
 </script>
 

@@ -147,7 +147,7 @@ export default {
                 window.$cookies.set("authenticated", true, Infinity);
 
                 if(window.$cookies.get("roles")=="Member")
-                  this.$router.push({ name: "HomePageOP"})
+                  this.$router.push({ name: "HomePagePR"})
                 else
                   this.$router.push({ name: "FacilitatorHomePage"})
             })

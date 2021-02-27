@@ -108,7 +108,7 @@ export default {
             if(window.$cookies.get('role')=='Facilitator')
                 this.$router.push({ name: "FacilitatorHomePage" })
             else
-                this.$router.push({ name: "HomePageOP" });
+                this.$router.push({ name: "HomePagePR" });
         },
         account() {
             this.$router.push({ name: "Account"});

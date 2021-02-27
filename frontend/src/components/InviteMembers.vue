@@ -28,6 +28,7 @@
             chips
             label="Type or select members"
             item-text="firstname"
+            item-value="_id"
             multiple
           >
           <template v-slot:selection="data">

@@ -103,7 +103,7 @@ computed:{
       return items[Math.floor(Math.random()*items.length)];
     },
     home(){
-        this.$router.push({ name: "HomePageOP"});
+        this.$router.push({ name: "HomePagePR"});
     },
     inputfairness(){
         let image = this.selectedImage.front
