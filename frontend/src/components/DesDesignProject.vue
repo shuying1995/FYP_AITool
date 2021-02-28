@@ -33,7 +33,7 @@
                         <h3>This is your application type that can guide you later on.</h3>
                         <div class="pt-4">
                         </div>
-                            <v-img v-bind:src="require('../assets/' + image + '.jpg')" contain max-height="400" max-width="1200"/> 
+                            <v-img :src="this.apptype" contain max-height="400" max-width="1200"/> 
                         </div>
                     </v-flex>
                 </v-flex>
@@ -51,22 +51,21 @@ const axios = require('axios');
 export default {
 data(){
     return{
-    appscenario: window.$cookies.get("acceptedprojectappscenario"),
-    apptype: window.$cookies.get("acceptedprojectapptype")
+    appscenario: '',
+    apptype: ''
     }
 },
-computed: {
+/*computed: {
     image(){
-        return this.apptype
+        return require('../assets/' + this.apptype + '.jpg')
     }
-},
+},*/
 created(){
     const projectid = window.$cookies.get("acceptedprojectid")
         axios
         .get('api/create/' + projectid)
         .then((response) => {
-            let appscenario = response.data.appscenario
-            window.$cookies.set("acceptedprojectappscenario", appscenario, Infinity)
+            this.appscenario = response.data.appscenario
             let apptype = response.data.apptype
             if(apptype == '0')
                 apptype = "appcard1"
@@ -78,7 +77,8 @@ created(){
                 apptype = "appcard4"
             else
                 apptype = "appcard5" 
-            window.$cookies.set("acceptedprojectapptype", apptype, Infinity)
+            this.apptype = apptype
+            this.apptype = require('../assets/' + this.apptype + '.jpg')
         })
 },
 methods:{
@@ -86,6 +86,8 @@ methods:{
         this.$router.push({ name: "HomePagePR"});
         },
     desstakeholders() {
+        window.$cookies.set("acceptedprojectappscenario", this.appscenario, Infinity)
+        window.$cookies.set("acceptedprojectapptype", this.apptype, Infinity)
         this.$router.push({ name: "DesStakeholders"});  
         },
     }

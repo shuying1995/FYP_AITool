@@ -123,6 +123,8 @@ export default {
             window.$cookies.remove("firstname")
             window.$cookies.remove("fullname")
             window.$cookies.remove("authenticated");
+            window.$cookies.remove("acceptedprojectappscenario");
+            window.$cookies.remove("acceptedprojectapptype");
             this.$router.push({ name: "LoginPage"})
         }
     },
