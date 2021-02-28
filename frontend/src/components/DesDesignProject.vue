@@ -55,11 +55,6 @@ data(){
     apptype: ''
     }
 },
-/*computed: {
-    image(){
-        return require('../assets/' + this.apptype + '.jpg')
-    }
-},*/
 created(){
     const projectid = window.$cookies.get("acceptedprojectid")
         axios
@@ -78,6 +73,8 @@ created(){
             else
                 apptype = "appcard5" 
             this.apptype = apptype
+            window.$cookies.set("acceptedprojectappscenario", this.appscenario, Infinity)
+            window.$cookies.set("acceptedprojectapptype", this.apptype, Infinity)
             this.apptype = require('../assets/' + this.apptype + '.jpg')
         })
 },
@@ -86,8 +83,6 @@ methods:{
         this.$router.push({ name: "HomePagePR"});
         },
     desstakeholders() {
-        window.$cookies.set("acceptedprojectappscenario", this.appscenario, Infinity)
-        window.$cookies.set("acceptedprojectapptype", this.apptype, Infinity)
         this.$router.push({ name: "DesStakeholders"});  
         },
     }

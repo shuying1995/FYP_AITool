@@ -79,13 +79,16 @@
 
                 <v-flex row wrap class="justify-center">
                     <v-img src="../assets/inputstakeholder.jpg" contain max-height="600" max-width="600">
+                    <div class="vertical-bottom">
                     <v-row justify="center">
-                    <v-col cols="7">
                     <v-text-field 
+                     background-color="white"
                      v-model="stakeholder"
+                     solo
+                     dense
                     />
-                    </v-col>
                     </v-row>
+                    </div>
                     </v-img>
                 </v-flex>
 
@@ -151,5 +154,13 @@ p{
 
 .v-btn {
   margin-left: 20px;
+}
+
+.vertical-bottom {
+  margin: 0;
+  position: absolute;
+  left: 33%;
+  top: 80%;
+  transform: translateY(-50%);
 }
 </style>
