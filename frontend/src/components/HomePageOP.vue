@@ -28,13 +28,12 @@
               </v-layout>
 
                     <v-layout row wrap ml-8>
-                      <v-flex v-for="(item,e) in OnCards" :key="item.ID" class="custom">
+                      <v-flex v-for="item in this.OnCards" :key="item.ID" class="custom">
                         <v-card 
                          class="ma-2" 
                          max-width="360" 
                          outlined
                          color="orange"
-                         @click="input(e)"
                          >
                           <v-list-item three-line>
                             <v-list-item-content>
@@ -115,11 +114,6 @@ export default {
     },
     homepagecp(){
       this.$router.push({ name: "HomePageCP" })
-    },
-    input(e){
-      let projectid = this.OnCards[e]._id
-      window.$cookies.set("acceptedprojectid", projectid, Infinity)
-      this.$router.push({ name: "DesDesignProject" })
     }
   }
 };
