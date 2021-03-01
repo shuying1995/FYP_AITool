@@ -68,7 +68,7 @@
                          outlined 
                          height="70px"
                          />
-                        <v-btn color="warning" @click="ratingfairness" class="custom">Next</v-btn>
+                        <v-btn color="warning" @click="extradialog" class="custom">Next</v-btn>
                     </v-col>
                 </v-row>
             </v-card>
@@ -85,9 +85,17 @@
                   <v-btn
                     text
                     color="warning"
-                    @click='inputstakeholder'
+                    @click='nextdialog'
+                    :disabled="this.$store.getters.stakeholder.length < this.mincards"
                   >
                     Next
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="warning"
+                    @click='insertmore'
+                  >
+                    Okay!
                   </v-btn>
                 </v-card-actions>
                 <v-card-text class="caption pb-0 font-weight-bold">
@@ -105,19 +113,21 @@
               max-width="500"
             >
               <v-card>
-                <v-card-title class="headline justify-center">
-                  Project Accepted
-                </v-card-title>
-                <v-card-text class="text-center">You've be notified when all members accepts the project.</v-card-text>
-                <v-card-text class="text-center">While waiting, you can add addition fairness card inputs by clicking on the specified project in the Ongoing Projects Tab.</v-card-text>
+                <v-card-text class="text-center">We will notify you of the next step.</v-card-text>
                 <v-card-actions class="justify-center">
                   <v-btn
                     text
-                    @click='home'
+                    @click='complete'
                   >
-                    Close
+                    Okay!
                   </v-btn>
                 </v-card-actions>
+                <v-card-text class="caption pb-0 font-weight-bold">
+                  Stakeholder role count:
+                </v-card-text>
+                <v-card-text class="caption font-weight-bold">
+                  {{this.$store.getters.stakeholder.length}}/{{this.mincards}}
+                </v-card-text>
               </v-card>
             </v-dialog>
 
@@ -169,7 +179,10 @@ created(){
     inputstakeholder(){
         this.$router.push({name: "InputStakeholders"})
     },
-    ratingfairness(){
+    extradialog(){
+        this.moredialog=true;
+    },
+    insertmore(){
         this.arrayfc.push(this.selectedimage)
         this.$store
           .dispatch(
@@ -182,12 +195,25 @@ created(){
         this.$store
           .dispatch(
               "updateGowrong",this.gowrong)
-        const projectid = window.$cookies.get("acceptedprojectid")
-        if(this.$store.getters.stakeholder.length < this.mincards){
-            this.moredialog=true;
-        }
-        else{
-        axios
+        this.$router.push({name: "InputStakeholders"})
+    },
+    nextdialog(){
+      this.dialog=true;
+      this.arrayfc.push(this.selectedimage)
+        this.$store
+          .dispatch(
+              "updateFairnesscards", this.arrayfc)
+        this.arraygr.push(this.goright)
+        this.$store
+          .dispatch(
+              "updateGoright", this.goright)
+        this.arraygw.push(this.gowrong)
+        this.$store
+          .dispatch(
+              "updateGowrong",this.gowrong)
+    },
+    complete(){
+      axios
         .post('api/projectdetails', {
           userid: window.$cookies.get("userid"),
           projectid: window.$cookies.get("acceptedprojectid"),
@@ -197,12 +223,12 @@ created(){
           gowrong: this.$store.getters.gowrong
         })
         .then((response) => {
-          console.log(response)
           this.$store
           .dispatch('resetState')
-          .then(()=>{this.dialog = true;})
+          .then(()=>{
+            this.$router.push({ name: "HomePagePR" })
+          })
         })
-      }
     }
   }
 }

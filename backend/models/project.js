@@ -39,7 +39,8 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         type: String
     },
     mincards: {
-        type: Number
+        type: Number,
+        default: '1'
     },
     minreviews:{
         type: Number
