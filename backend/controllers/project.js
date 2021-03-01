@@ -108,7 +108,6 @@ exports.getNRProjects = function (req, res){
                 project[i].save()
                 }
             }
-        console.log(array)
         res.json(array)
     })
 }
