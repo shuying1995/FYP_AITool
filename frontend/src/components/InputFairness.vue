@@ -68,7 +68,7 @@
                          outlined 
                          height="70px"
                          />
-                        <v-btn color="warning" @click="ratingfairness">Next</v-btn>
+                        <v-btn color="warning" @click="ratingfairness" class="custom">Next</v-btn>
                     </v-col>
                 </v-row>
             </v-card>
@@ -79,10 +79,9 @@
               max-width="350"
             >
               <v-card>
-                <v-card-text>Congrats on completing!</v-card-text>
-                <v-card-text>Let's go with another stakeholder role!</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+                <v-card-text class="text-center">Congrats on completing!</v-card-text>
+                <v-card-text class="text-center">Let's go with another stakeholder role!</v-card-text>
+                <v-card-actions class="justify-center">
                   <v-btn
                     text
                     color="warning"
@@ -91,8 +90,12 @@
                     Next
                   </v-btn>
                 </v-card-actions>
-                <v-card-text>Stakeholder role count:</v-card-text>
-                <v-card-text>{{this.$store.getters.stakeholder.length}}/{{this.mincards}}</v-card-text>
+                <v-card-text class="caption pb-0 font-weight-bold">
+                  Stakeholder role count:
+                </v-card-text>
+                <v-card-text class="caption font-weight-bold">
+                  {{this.$store.getters.stakeholder.length}}/{{this.mincards}}
+                </v-card-text>
               </v-card>
             </v-dialog>
 
@@ -102,13 +105,12 @@
               max-width="500"
             >
               <v-card>
-                <v-card-title class="headline">
+                <v-card-title class="headline justify-center">
                   Project Accepted
                 </v-card-title>
-                <v-card-text>You've be notified when all members accepts the project.</v-card-text>
-                <v-card-text>While waiting, you can add addition fairness card inputs by clicking on the specified project in the Ongoing Projects Tab.</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+                <v-card-text class="text-center">You've be notified when all members accepts the project.</v-card-text>
+                <v-card-text class="text-center">While waiting, you can add addition fairness card inputs by clicking on the specified project in the Ongoing Projects Tab.</v-card-text>
+                <v-card-actions class="justify-center">
                   <v-btn
                     text
                     @click='home'
@@ -226,7 +228,11 @@ p{
 }
 
 .v-btn {
-  margin-left: 20px;
+  margin-left: 7%;
+}
+
+.v-btn.custom {
+  margin-left: 85%;
 }
 
 </style>

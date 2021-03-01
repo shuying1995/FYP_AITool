@@ -60,8 +60,7 @@
                     <v-card-text class="text-center">Congrats on completing!</v-card-text>
                     <v-card-text class="text-center">We would love to hear your feedback! :)</v-card-text>
                     <v-card-text class="text-center">Help us make it better!</v-card-text>
-                    <v-card-actions>
-                    <v-spacer></v-spacer>
+                    <v-card-actions class="justify-center">
                     <v-btn
                         color="warning"
                         text

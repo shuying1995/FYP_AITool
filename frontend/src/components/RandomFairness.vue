@@ -141,6 +141,6 @@ p{
 }
 
 .v-btn {
-  margin-left: 20px;
+  margin-left: 7%;
 }
 </style>>

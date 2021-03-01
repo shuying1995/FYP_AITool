@@ -78,8 +78,7 @@
             >
               <v-card>
                 <v-card-text>Do you want to start on {{this.$store.getters.projectname}} now?</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+                <v-card-actions class="justify-center">
                   <v-btn
                     text
                     color="warning"

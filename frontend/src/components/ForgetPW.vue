@@ -32,15 +32,14 @@
           <v-dialog
               v-model="dialog"
               persistent
-              max-width="290"
+              max-width="450"
             >
               <v-card>
-                <v-card-title class="headline">
+                <v-card-title class="headline justify-center">
                   Reset Password
                 </v-card-title>
-                <v-card-text>If we found an account associated with that email, we've sent password reset instructions to the email address.</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
+                <v-card-text class="text-center">If we found an account associated with that email, we've sent password reset instructions to the email address.</v-card-text>
+                <v-card-actions class="justify-center">
                   <v-btn
                     color="green darken-1"
                     text
