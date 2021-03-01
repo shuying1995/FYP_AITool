@@ -24,6 +24,9 @@ const Project = mongoose.model('Project', new mongoose.Schema({
     acceptedmembers: {
         type: Array
     },
+    inputtedmembers: {
+        type: Array
+    },
     message: {
         type:String,
         default: "No Message"
@@ -58,6 +61,7 @@ const validateProject = function (project) {
         apptype: Joi.number().required(),
         invitedmembers: Joi.array().required(),
         acceptedmembers: Joi.array(),
+        inputtedmembers: Joi.array(),
         message: Joi.string().allow(''),
         facilitator: Joi.string().required(),
         progress: Joi.number(),

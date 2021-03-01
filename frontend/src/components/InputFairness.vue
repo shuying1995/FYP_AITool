@@ -223,10 +223,24 @@ created(){
           gowrong: this.$store.getters.gowrong
         })
         .then((response) => {
+          let projectid = window.$cookies.get("acceptedprojectid")
+          let userid = window.$cookies.get("userid")
           this.$store
           .dispatch('resetState')
           .then(()=>{
-            this.$router.push({ name: "HomePagePR" })
+            axios
+              .put('api/users/' + userid + '/input',{
+                acceptedprojectid: projectid
+              })
+              .then((response)=>{
+                axios
+                  .put('api/create/' + projectid + '/input',{
+                    userid: userid
+                  })
+                  .then(()=>{
+                    this.$router.push({ name: "HomePagePR" })
+                  })
+              })
           })
         })
     }

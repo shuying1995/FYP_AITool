@@ -134,12 +134,12 @@ export default {
       window.$cookies.set("acceptedprojectid", projectid, Infinity)
       let userid = window.$cookies.get("userid")
       axios
-        .put('api/users/' + userid + '/update', {
+        .put('api/users/' + userid + '/accept', {
             invitedprojectid: window.$cookies.get("acceptedprojectid"),
         })
         .then((response)=>{
           axios
-          .put('api/create/' + projectid + '/update', {
+          .put('api/create/' + projectid + '/accept', {
               userid: window.$cookies.get("userid") 
           })
           .then((response)=>{

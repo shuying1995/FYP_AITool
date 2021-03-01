@@ -88,6 +88,30 @@ exports.getOGProjects = function (req, res){
     })
 }
 
+exports.getNRProjects = function (req, res){
+    Project.find((error, project) => {
+        if (error) {
+            return next(error)
+        } 
+        else {
+            var array = []
+                //project is array, need to loop through to find all inputtedmembers columns
+                for (var i=0; i<project.length; i++) {
+                var members = project[i].inputtedmembers
+                //inputtedmembers is array also, loop through to check if found
+                for (var j=0; j<members.length; j++){
+                    if(members[j] == req.body.inputtedmembers)
+                        array.push(project[i])  
+                    }
+                if(project[i].acceptedmembers.length == 0 && project[i].inputtedmembers.length > 0)
+                    project[i].progress = 60
+                project[i].save()
+                }
+            }
+        console.log(array)
+        res.json(array)
+    })
+}
 
 exports.getProjectDetails = function (req, res){
     Project.findById(req.params.projectid, (error, project)=> {
@@ -117,7 +141,7 @@ exports.insertProjectSettings = function (req, res){
     })
 }
 
-exports.updateUserid = function (req, res){
+exports.acceptUserid = function (req, res){
     Project.findById(req.params.projectid, (error,project) =>{
         //projectid does not exist
         if (error) 
@@ -133,6 +157,35 @@ exports.updateUserid = function (req, res){
             project.acceptedmembers = project.acceptedmembers.toString().split(",")
         }
         let userid = project.invitedmembers
+        const index = userid.indexOf(req.body.userid)
+        if(index > -1){
+            userid.splice(index, 1)
+        }
+        project.save((error, updatedProject) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedProject);
+        })
+    })
+}
+
+exports.inputUserid = function (req, res){
+    Project.findById(req.params.projectid, (error,project) =>{
+        //projectid does not exist
+        if (error) 
+            return res.status(400).send("Project id not found");
+
+         //if array is empty
+         if(project.inputtedmembers.length == 0){
+            project.inputtedmembers = req.body.userid;
+        }
+        //else add user id into existing array
+        else { 
+            project.inputtedmembers = project.inputtedmembers + "," + req.body.userid;
+            project.inputtedmembers = project.inputtedmembers.toString().split(",")
+        }
+        let userid = project.acceptedmembers
         const index = userid.indexOf(req.body.userid)
         if(index > -1){
             userid.splice(index, 1)

@@ -32,6 +32,9 @@ const User = mongoose.model('User', new mongoose.Schema({
     acceptedprojectid: {
         type: String
     },
+    inputtedprojectid: {
+        type: String
+    },
     resetPasswordToken: {
         type: String
     },
@@ -57,7 +60,8 @@ const validateUser = function (user) {
         password: passwordComplexity(complexityOptions).required(),
         roles: Joi.string().required(),
         invitedprojectid: Joi.string(),
-        acceptedprojectid: Joi.string()
+        acceptedprojectid: Joi.string(),
+        inputtedprojectid: Joi.string()
     });
     return schema.validate(user);
 }
