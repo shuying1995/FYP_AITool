@@ -39,6 +39,11 @@ exports.getPRProjects = function (req, res){
                 if(members[j] == req.query.invitedmembers)
                     array.push(project[i])  
                 }
+            if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
+                project[i].progress = 25
+            else if(project[i].acceptedmembers.length == 0 && project[i].inputtedmembers.length > 0)
+                project[i].progress = 60
+            project[i].save()
             }
         }
         res.json(array)
@@ -57,6 +62,8 @@ exports.getFProjects = function (req, res){
                     array.push(project[i])
                 if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
                     project[i].progress = 25
+                else if(project[i].acceptedmembers.length == 0 && project[i].inputtedmembers.length > 0)
+                    project[i].progress = 60
                 project[i].save()
                 }
             }
@@ -79,9 +86,6 @@ exports.getOGProjects = function (req, res){
                     if(members[j] == req.query.acceptedmembers)
                         array.push(project[i])  
                     }
-                if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
-                    project[i].progress = 25
-                project[i].save()
                 }
             }
         res.json(array)
@@ -100,12 +104,9 @@ exports.getNRProjects = function (req, res){
                 var members = project[i].inputtedmembers
                 //inputtedmembers is array also, loop through to check if found
                 for (var j=0; j<members.length; j++){
-                    if(members[j] == req.body.inputtedmembers)
+                    if(members[j] == req.query.inputtedmembers && project[i].progress == '60')
                         array.push(project[i])  
                     }
-                if(project[i].acceptedmembers.length == 0 && project[i].inputtedmembers.length > 0)
-                    project[i].progress = 60
-                project[i].save()
                 }
             }
         res.json(array)

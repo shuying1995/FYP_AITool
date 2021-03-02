@@ -4,13 +4,10 @@ const _ = require('lodash');
 const { User, validate, validateLogin } = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { first, result } = require('lodash');
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 var crypto = require('crypto');
 var async = require('async');
-var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 
 exports.register = async (req, res) => {
     // First Validate The Request
