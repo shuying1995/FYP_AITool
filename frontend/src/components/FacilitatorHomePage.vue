@@ -73,7 +73,6 @@
                                 <v-list-item
                                   link
                                   @click="editteam(e)"
-                                  :key="item._id"
                                 >
                                   <v-list-item-title>Edit</v-list-item-title>
                                 </v-list-item>
