@@ -59,7 +59,10 @@
                               Accept
                               <v-icon>mdi-check-circle-outline</v-icon>
                             </v-btn>
-                            <v-btn color="error">
+                            <v-btn 
+                             color="error"
+                             @click="rejectproject(e)"
+                             >
                               Reject
                               <v-icon>mdi-close-circle-outline</v-icon>
                             </v-btn>
@@ -72,7 +75,7 @@
             </v-card>
 
             <v-dialog
-              v-model="dialog"
+              v-model="acceptdialog"
               persistent
               max-width="500"
             >
@@ -97,6 +100,32 @@
               </v-card>
             </v-dialog>
 
+            <v-dialog
+              v-model="rejectdialog"
+              persistent
+              max-width="500"
+            >
+              <v-card>
+                <v-card-text>Are you sure you want to reject project request from {{this.$store.getters.facilitatorname}}?</v-card-text>
+                <v-card-actions class="justify-center">
+                  <v-btn
+                    text
+                    color="error"
+                    @click='rejectdialog = false'
+                  >
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="success"
+                    @click='confirmrejectproject'
+                  >
+                    Yes
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
         </v-container>
 </v-main>
 </template>
@@ -114,7 +143,8 @@ export default {
       { title: "Favourited" }
       ],
       PRCards: [],
-      dialog: false
+      acceptdialog: false,
+      rejectdialog: false
     }
   },
   created(){
@@ -146,7 +176,33 @@ export default {
             this.$store
             .dispatch(
                 "updateProjectname", projectname)
-            .then(() => this.dialog=true)
+            .then(() => this.acceptdialog=true)
+          })
+      })
+    },
+    rejectproject(e){
+      let projectid = this.PRCards[e]._id
+      let facilitatorname = this.PRCards[e].facilitator
+      window.$cookies.set("acceptedprojectid", projectid, Infinity)
+      this.$store
+       .dispatch(
+          "updateFacilitatorname",facilitatorname)
+       .then(() => this.rejectdialog=true)
+    },
+    confirmrejectproject(){
+       let projectid = window.$cookies.get("acceptedprojectid")
+       let userid = window.$cookies.get("userid")
+       axios
+        .put('api/users/' + userid + '/reject', {
+            invitedprojectid: window.$cookies.get("acceptedprojectid"),
+        })
+        .then((response)=>{
+          axios
+          .put('api/create/' + projectid + '/reject', {
+              userid: window.$cookies.get("userid") 
+          })
+          .then((response)=>{
+            this.$router.go()
           })
       })
     },

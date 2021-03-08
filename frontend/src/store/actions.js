@@ -2,6 +2,9 @@ export default {
     updateProjectname({commit},projectname){
         commit('updateProjectname',projectname);
     },
+    updateFacilitatorname({commit},facilitatorname){
+        commit('updateFacilitatorname',facilitatorname);
+    },
     updateApptype({commit},apptype){
         commit('updateApptype',apptype);
     },

@@ -2,6 +2,9 @@ export default {
     updateProjectname(state, projectname){
         state.projectname=projectname
     },
+    updateFacilitatorname(state, facilitatorname){
+        state.facilitatorname=facilitatorname
+    },
     updateApptype(state, apptype){
         state.apptype=apptype
     },

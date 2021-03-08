@@ -110,6 +110,7 @@ exports.insertAcceptedProjectId = function (req, res) {
         else { 
             user.acceptedprojectid = user.acceptedprojectid + "," + req.body.invitedprojectid;
         }
+
         let projectid = user.invitedprojectid
         //split string into array (projectid)
         var array = projectid.split(",");
@@ -118,6 +119,7 @@ exports.insertAcceptedProjectId = function (req, res) {
             array.splice(index, 1)
         }
         user.invitedprojectid = array.toString()
+
         user.save((error, updatedUser) => {
             //Wrong input
             if(error) 
@@ -125,6 +127,38 @@ exports.insertAcceptedProjectId = function (req, res) {
             return res.status(200).json(updatedUser);
         })
     })
+}
+
+exports.insertRejectedProjectId = function (req, res) {
+  User.findById(req.params.userid, (error, user)=> {
+      //userid does not exist
+      if (error) 
+          return res.status(400).send("User id not found");
+       //if array is empty
+       if(user.rejectedprojectid == undefined){
+          user.rejectedprojectid = req.body.invitedprojectid;
+      }
+      //else add project id into existing array
+      else { 
+          user.rejectedprojectid = user.rejectedprojectid + "," + req.body.invitedprojectid;
+      }
+
+      let projectid = user.invitedprojectid
+        //split string into array (projectid)
+        var array = projectid.split(",");
+        const index = array.indexOf(req.body.invitedprojectid)
+        if(index > -1){
+            array.splice(index, 1)
+        }
+        user.invitedprojectid = array.toString()
+
+      user.save((error, updatedUser) => {
+          //Wrong input
+          if(error) 
+              return res.status(400).end();
+          return res.status(200).json(updatedUser);
+      })
+  })
 }
 
 exports.insertInputtedProjectId = function (req, res) {

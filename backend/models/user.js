@@ -32,6 +32,9 @@ const User = mongoose.model('User', new mongoose.Schema({
     acceptedprojectid: {
         type: String
     },
+    rejectedprojectid: {
+        type: String
+    },
     inputtedprojectid: {
         type: String
     },
@@ -61,6 +64,7 @@ const validateUser = function (user) {
         roles: Joi.string().required(),
         invitedprojectid: Joi.string(),
         acceptedprojectid: Joi.string(),
+        rejectedprojectid: Joi.string(),
         inputtedprojectid: Joi.string()
     });
     return schema.validate(user);

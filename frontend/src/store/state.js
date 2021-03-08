@@ -1,5 +1,6 @@
 export default {
     projectname: '',
+    facilitatorname: '',
     apptype:'',
     projects: '',
     members: [],

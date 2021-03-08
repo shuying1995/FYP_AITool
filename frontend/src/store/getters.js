@@ -2,6 +2,9 @@ export default {
     projectname(state) {
         return state.projectname
     },
+    facilitatorname(state) {
+        return state.facilitatorname
+    },
     apptype(state) {
         return state.apptype
     },
