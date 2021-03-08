@@ -61,9 +61,9 @@ exports.getFProjects = function (req, res){
             for(var i=0; i<project.length; i++){
                 if(project[i].facilitator == req.query.facilitator)
                     array.push(project[i])
-                if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
+                    if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length + project[i].rejectedmembers.length == project[i].numinvitedmembers && project[i].acceptedmembers.length != project[i].inputtedmembers.length)
                     project[i].progress = 25
-                else if(project[i].acceptedmembers.length == 0 && project[i].inputtedmembers.length > 0)
+                else if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length == project[i].inputtedmembers.length)
                     project[i].progress = 60
                 project[i].save()
                 }
@@ -84,7 +84,7 @@ exports.getOGProjects = function (req, res){
                 var members = project[i].acceptedmembers
                 //acceptedmembers is array also, loop through to check if found
                 for (var j=0; j<members.length; j++){
-                    if(members[j] == req.query.acceptedmembers)
+                    if(members[j] == req.query.acceptedmembers && project[i].progress != '60')
                         array.push(project[i])  
                     }
                 }
