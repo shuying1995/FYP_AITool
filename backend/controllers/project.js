@@ -19,6 +19,7 @@ exports.createProject = async (req, res) => {
     else {
         // Insert the new project if the name is not taken yet
         project = new Project(_.pick(req.body, ['name', 'appscenario', 'apptype', 'invitedmembers','message','facilitator']));
+        project.numinvitedmembers = project.invitedmembers.length
         await project.save();
         res.status(200).send(project._id)
     }
@@ -39,9 +40,9 @@ exports.getPRProjects = function (req, res){
                 if(members[j] == req.query.invitedmembers)
                     array.push(project[i])  
                 }
-            if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length > 0)
+            if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length + project[i].rejectedmembers.length == project[i].numinvitedmembers && project[i].acceptedmembers.length != project[i].inputtedmembers.length)
                 project[i].progress = 25
-            else if(project[i].acceptedmembers.length == 0 && project[i].inputtedmembers.length > 0)
+            else if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length == project[i].inputtedmembers.length)
                 project[i].progress = 60
             project[i].save()
             }
@@ -193,7 +194,7 @@ exports.rejectUserid = function (req, res){
         if(index > -1){
             userid.splice(index, 1)
         }
-        
+
         project.save((error, updatedProject) => {
             //Wrong input
             if(error) 
@@ -218,11 +219,7 @@ exports.inputUserid = function (req, res){
             project.inputtedmembers = project.inputtedmembers + "," + req.body.userid;
             project.inputtedmembers = project.inputtedmembers.toString().split(",")
         }
-        let userid = project.acceptedmembers
-        const index = userid.indexOf(req.body.userid)
-        if(index > -1){
-            userid.splice(index, 1)
-        }
+        
         project.save((error, updatedProject) => {
             //Wrong input
             if(error) 

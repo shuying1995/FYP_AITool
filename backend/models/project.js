@@ -21,6 +21,9 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         type: Array,
         required: true
     },
+    numinvitedmembers:{
+        type: Number,
+    },
     acceptedmembers: {
         type: Array
     },
@@ -63,6 +66,7 @@ const validateProject = function (project) {
         appscenario: Joi.string().required(),
         apptype: Joi.number().required(),
         invitedmembers: Joi.array().required(),
+        numinvitedmembers: Joi.array(),
         acceptedmembers: Joi.array(),
         rejectedmembers: Joi.array(),
         inputtedmembers: Joi.array(),

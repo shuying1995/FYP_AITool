@@ -34,7 +34,7 @@
                          max-width="360" 
                          outlined
                          color="orange"
-                         @click="input(e)"
+                         @click="review(e)"
                          >
                           <v-list-item three-line>
                             <v-list-item-content>
@@ -65,7 +65,7 @@
                           </div>
                             <hr class="solid">
                           <v-flex row wrap class="pt-2">
-                          <p class="pt-2 ml-4 underline">Member: {{ item.acceptedmembers.length + item.inputtedmembers.length}}</p>
+                          <p class="pt-2 ml-4 underline">Member: {{ item.inputtedmembers.length}}</p>
                           <v-spacer/>
                           <p class="pt-2 round orange--text">{{ Math.ceil(parseInt((new Date(item.deadline)-new Date(item.createdate))/(24*3600*1000))) }} Days Left</p>
                           </v-flex>
@@ -116,10 +116,10 @@ export default {
     homepagecp(){
       this.$router.push({ name: "HomePageCP" })
     },
-    input(e){
+    review(e){
       let projectid = this.NrCards[e]._id
       window.$cookies.set("acceptedprojectid", projectid, Infinity)
-      this.$router.push({ name: "DesDesignProject" })
+      this.$router.push({ name: "RatingFairness" })
     }
   }
 };
