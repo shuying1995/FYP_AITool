@@ -27,7 +27,7 @@ router.put('/create/:projectid/accept', projectController.acceptUserid) //Insert
 router.put('/create/:projectid/reject',projectController.rejectUserid) //Insert into rejectedmembers
 router.put('/create/:projectid/input', projectController.inputUserid) //Remove userid from acceptedmembers and insert into inputtedmembers
 
-
 router.post('/projectdetails', projectdetailsController.createProjectDetails) //Create a collection to store member's project inputs
+router.get('/projectdetails',projectdetailsController.getAllProjectDetails) //Get project details inputted by all members
 
 module.exports = router;

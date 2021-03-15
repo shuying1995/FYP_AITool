@@ -32,15 +32,78 @@
                 </v-row>
 
                 <v-flex row wrap class="justify-center">
-                    <v-col md="4">
+                    <v-col md="6">
+                        <v-row justify="center">
                         What can go right?
+                        </v-row>
+                        <v-row justify="center">
+                        <v-card 
+                         min-height="100px"
+                         max-height="100px"
+                         min-width="600px"
+                         max-width="600px"
+                         >
+                         <v-card-text
+                          class="text-center"
+                         >
+                         {{this.projectdetails[0].goright[0]}}
+                         </v-card-text>
+                         </v-card>
+                        </v-row>
                     </v-col>
-                    <v-col md="4">
+                    <v-col md="6">
+                        <v-row justify="center">
                         What can go wrong?
+                        </v-row>
+                        <v-row justify="center">
+                        <v-card 
+                         min-height="100px"
+                         max-height="100px"
+                         min-width="600px"
+                         max-width="600px"
+                         >
+                         <v-card-text
+                          class="text-center"
+                          >
+                          {{this.projectdetails[0].gowrong[0]}}
+                          </v-card-text>
+                         </v-card>
+                        </v-row>
                     </v-col>
                 </v-flex>
+            
+            <v-row justify="center" class="mt-3">
+                <div class="font-weight-bold">How important is this Fairness Principle to the Application Scenario?</div>
+            </v-row>
 
             <v-row justify="center">
+                <div class="caption">0-Not important at all; 3-Moderately Important; 5-Extremely Important</div>
+            </v-row>
+
+            <v-row justify="center" class="mt-4 mb-4">
+                <v-rating
+                v-model="rating"
+                background-color="orange lighten-3"
+                color="orange"
+                />
+            </v-row>
+
+            <v-row justify="center">
+                <div class="font-weight-bold">Why?</div>
+            </v-row>
+
+            <v-row justify="center">
+                <v-col cols="6">
+                <v-textarea
+                 outlined
+                 v-model="reason"
+                 height="100px"
+                 placeholder="Explain why."
+                />
+                </v-col>
+            </v-row>
+
+            <v-flex class="justify-end pa-2" row wrap>
                 <v-dialog
                 v-model="dialog"
                 persistent
@@ -71,18 +134,32 @@
                     </v-card-actions>
                 </v-card>
                 </v-dialog>
-            </v-row>    
+            </v-flex>    
             </v-card>
         </v-container>
     </v-main>
 </template>
 
 <script>
+const axios = require('axios');
 export default {
 data(){
     return{
+        projectdetails: [],
+        rating: '',
         dialog: false
     }
+},
+created(){
+    axios
+     .get('/api/projectdetails',{
+         params: {
+             projectid: window.$cookies.get("acceptedprojectid")
+         }})
+     .then((response)=>{
+         this.projectdetails = response.data
+         console.log(this.projectdetails)
+     })
 },
 methods: {
     home(){
@@ -118,4 +195,5 @@ p{
 .v-btn {
   margin-left: 20px;
 }
+
 </style>

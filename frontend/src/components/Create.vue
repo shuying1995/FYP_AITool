@@ -28,7 +28,6 @@
                             >
                             <v-text-field
                             v-model="projectname"
-                            class="centered-input" 
                             placeholder="Eg. Design Project 1" 
                             filled 
                             :error-messages="errors"
@@ -139,10 +138,5 @@ p{
 .v-text-field{
       width: 700px;
 }
-
-/*
-/deep/ .centered-input input {
-  text-align: center
-}*/
 
 </style>

@@ -42,7 +42,8 @@ const Project = mongoose.model('Project', new mongoose.Schema({
         required: true
     },
     progress: {
-        type: Number
+        type: Number,
+        default: '0'
     },
     deadline: {
         type: String

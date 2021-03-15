@@ -17,4 +17,18 @@ exports.createProjectDetails = (req, res) => {
     res.status(200).send(projectdetails._id)
 }
 
+exports.getAllProjectDetails = function (req, res){
+    Projectdetails.find((error, projectdetails)=> {
+        if (error) {
+            return next(error)
+        } else {
+            var array = []
+            for (var i = 0; i<projectdetails.length; i++){
+                if(projectdetails[i].projectid == req.query.projectid)
+                    array.push(projectdetails[i])
+            }
+            res.json(array)
+        }
+    })
+}
 

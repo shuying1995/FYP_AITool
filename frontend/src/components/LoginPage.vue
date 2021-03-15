@@ -20,7 +20,7 @@
               <v-layout column>
                 <v-flex xs12>
                   <div class="text-xs-center">
-                    <div class="login-title">AI Tool Name</div>
+                    <div class="login-title">AI Fairness Tool</div>
                     <div class="login-header mt-2">
                       Sign in with your organizational account
                     </div>
@@ -127,34 +127,34 @@ export default {
   },
   methods: {
     login(){
-            axios
-            .post('api/login', {
-                email: this.email,
-                password: this.password
-            })
-            .then((response) => {
-                const userid = response.data.user._id
-                const email = response.data.user.email
-                const roles = response.data.user.roles
-                const firstname = response.data.user.firstname
-                const lastname = response.data.user.lastname
-                const fullname = firstname.concat(' ', lastname)
-                window.$cookies.set("userid", userid, Infinity)
-                window.$cookies.set("email", email, Infinity)
-                window.$cookies.set("roles", roles, Infinity)
-                window.$cookies.set("firstname", firstname, Infinity)
-                window.$cookies.set("fullname", fullname, Infinity)
-                window.$cookies.set("authenticated", true, Infinity);
+      axios
+      .post('api/login', {
+          email: this.email,
+          password: this.password
+      })
+      .then((response) => {
+          const userid = response.data.user._id
+          const email = response.data.user.email
+          const roles = response.data.user.roles
+          const firstname = response.data.user.firstname
+          const lastname = response.data.user.lastname
+          const fullname = firstname.concat(' ', lastname)
+          window.$cookies.set("userid", userid, Infinity)
+          window.$cookies.set("email", email, Infinity)
+          window.$cookies.set("roles", roles, Infinity)
+          window.$cookies.set("firstname", firstname, Infinity)
+          window.$cookies.set("fullname", fullname, Infinity)
+          window.$cookies.set("authenticated", true, Infinity);
 
-                if(window.$cookies.get("roles")=="Member")
-                  this.$router.push({ name: "HomePagePR"})
-                else
-                  this.$router.push({ name: "FacilitatorHomePage"})
-            })
-            .catch((error) => {
-              this.snackbar = true;
-              this.color = "error";
-            })
+          if(window.$cookies.get("roles")=="Member")
+            this.$router.push({ name: "HomePagePR"})
+          else
+            this.$router.push({ name: "FacilitatorHomePage"})
+      })
+      .catch((error) => {
+        this.snackbar = true;
+        this.color = "error";
+      })
     },
     register(){
       this.$router.push({ name: "Register"});
