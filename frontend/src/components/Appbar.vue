@@ -1,25 +1,26 @@
 <template>
   <v-main>
     <v-toolbar fixed height="70%">
+      <v-flex row wrap class="align-center">
         <v-avatar class="ml-6">
         <v-img src="../assets/logo.png"> </v-img>
         </v-avatar>
-      <v-row justify="end">
+      <v-row justify="end" align="center">
         <v-btn icon>
-          <v-icon @click="home" color="orange">mdi-home-outline</v-icon>
+          <v-icon @click="home" color="orange" large>mdi-home-outline</v-icon>
         </v-btn>
         <v-btn icon>
-          <v-icon color="orange">mdi-message-bulleted</v-icon>
+          <v-icon color="orange" large>mdi-wechat</v-icon>
         </v-btn>
         <v-btn icon>
-          <v-icon color="orange">mdi-bell-outline</v-icon>
+          <v-icon color="orange" large>mdi-bell-outline</v-icon>
         </v-btn>
         <v-btn icon>
-          <v-icon @click="profile" color="orange">mdi-account-outline</v-icon>
+          <v-icon @click="profile" color="orange" large>mdi-account-outline</v-icon>
         </v-btn>
 
         <v-col 
-         cols="2"
+         cols="1"
          class="pb-0">
         <v-select
           v-model="item[0]"
@@ -30,6 +31,7 @@
       </v-col>
 
       </v-row>
+      </v-flex>
     </v-toolbar>
   </v-main>
 </template>

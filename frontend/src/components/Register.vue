@@ -2,13 +2,14 @@
     <v-main>
       <v-container>
           <v-card class="justify-center">
+              <v-alert outlined color="black">
             <validation-observer
                 ref="observer"
                 v-slot="{ invalid }"
             >
             <v-form @submit.prevent="register">
             <v-card-text class="text-center">
-            <h3>Create your account</h3>
+            <h2>Create your account</h2>
 
             </v-card-text>
             <validation-provider
@@ -144,6 +145,7 @@
             </v-card-text>
         </v-form>
     </validation-observer>
+    </v-alert>
 </v-card>
 
           <v-dialog

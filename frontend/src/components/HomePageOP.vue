@@ -55,20 +55,21 @@
                             <h2>{{item.name}}</h2>
                           </v-flex>
                           <p>Progress</p>
-                          <div class="pb-0 mb-0">
+                          <div class="pb-3">
+                          <!-- <div class="pb-0 mb-0">
                           <v-flex row wrap>
-                          <v-col cols="10" class="pb-0">
+                          <v-col cols="10" class="pb-0"> -->
                           <v-progress-linear
                             background-color="grey lighten-2"
                             color="red"
                             v-model="item.progress"
                             height="10"
                             />
-                          </v-col>
-                          <v-col cols="2" class="pb-0">
+                          <!-- </v-col> -->
+                          <!-- <v-col cols="2" class="pb-0">
                           <p class="round1">{{item.progress + "%"}}</p>
-                          </v-col>
-                          </v-flex>
+                          </v-col> 
+                          </v-flex> -->
                           </div>
                             <hr class="solid">
                           <v-flex row wrap class="pt-2">
