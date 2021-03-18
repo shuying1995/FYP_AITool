@@ -24,10 +24,16 @@ exports.getAllProjectDetails = function (req, res){
         } else {
             var array = []
             for (var i = 0; i<projectdetails.length; i++){
-                if(projectdetails[i].projectid == req.query.projectid)
+                if(projectdetails[i].projectid == req.body.projectid)
                     array.push(projectdetails[i])
             }
-            res.json(array)
+            const result = {stakeholder:[], fairnesscard:[], goright: [], gowrong: []};
+            for (const obj of array)
+                for (const prop in result)
+                obj[prop].forEach(function(item) {
+                    result[prop] = result[prop].concat(item);
+                })
+            res.json(result)
         }
     })
 }

@@ -22,12 +22,23 @@
         <v-col 
          cols="1"
          class="pb-0">
+         <v-row justify="center">
+           {{this.name}}
+         </v-row>
+         <v-row>
         <v-select
           v-model="item[0]"
           :items="item"
-          single-line
           @change="changerole"
-        ></v-select>
+          dense
+        >
+        <template v-slot:selection="{ item }">
+          <span class="d-flex justify-center" style="width: 100%;">
+            {{ item }}
+          </span>
+        </template>
+        </v-select>
+         </v-row>
       </v-col>
 
       </v-row>
@@ -41,7 +52,8 @@ export default {
 name: "Appbar",
 data() {
   return {
-    items: window.$cookies.get("roles")
+    items: window.$cookies.get("roles"),
+    name: window.$cookies.get("firstname")
     }
   },
 computed:{
@@ -69,3 +81,4 @@ methods: {
     },
 }
 </script>  
+
