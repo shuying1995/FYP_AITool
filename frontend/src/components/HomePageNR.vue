@@ -7,7 +7,7 @@
               <v-btn @click="homepagepr" text>Requests</v-btn>
               <v-btn @click="homepageop" text>In Progress</v-btn>
               <v-btn class="orange--text" text>Needs Review</v-btn>
-              <v-btn @click="homepagecp" text>Completed</v-btn>
+              <v-btn @click="homepagecp" text>Results</v-btn>
             </v-flex>
                   
                   <v-col class="text-right mt-3">

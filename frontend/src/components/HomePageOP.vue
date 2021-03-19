@@ -7,7 +7,7 @@
               <v-btn @click="homepagepr" text>Requests</v-btn>
               <v-btn class="orange--text" text>In Progress</v-btn>
               <v-btn @click="homepagenr" text>Needs Review</v-btn>
-              <v-btn @click="homepagecp" text>Completed</v-btn>
+              <v-btn @click="homepagecp" text>Results</v-btn>
             </v-flex>
                   
                   <v-col class="text-right mt-3">
@@ -33,7 +33,7 @@
                          class="ma-2" 
                          max-width="360" 
                          outlined
-                         color="orange"
+                         :color="item.projectcardcolor"
                          @click="input(e)"
                          >
                           <v-list-item three-line>
@@ -101,18 +101,26 @@ export default {
         { title: "Progress: Low to high" },
         { title: "Favourited" },
       ],
-      OnCards: []
+      OnCards: [],
     }
   },
   created(){
-        axios
-        .get('api/create/membersog', { 
-          params:{
-            acceptedmembers: window.$cookies.get("userid")
-          }})
-        .then((response) => {
-            this.OnCards = response.data
-        })
+      axios
+      .get('api/create/membersog', { 
+        params:{
+          acceptedmembers: window.$cookies.get("userid")
+        }})
+      .then((response) => {
+          this.OnCards = response.data
+          console.log(this.OnCards)
+          for(var i=0; i<this.OnCards.length; i++){
+            var members = this.OnCards[i].inputtedmembers
+            if(members == window.$cookies.get("userid"))
+              this.OnCards[i].projectcardcolor = '#1DE9B6'
+            else 
+              this.OnCards[i].projectcardcolor = 'warning'
+          }
+      })
     },
   methods:{
     homepagepr(){
@@ -128,7 +136,7 @@ export default {
       let projectid = this.OnCards[e]._id
       window.$cookies.set("acceptedprojectid", projectid, Infinity)
       this.$router.push({ name: "DesDesignProject" })
-    }
+    },
   }
 };
 </script>

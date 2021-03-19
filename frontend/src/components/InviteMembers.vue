@@ -15,7 +15,7 @@
                 </v-row>
 
                 <v-row justify="center">
-                    <p>Input in their names or email</p>
+                    <p>Input in their names</p>
                 </v-row>
 
                <v-row justify="center">
@@ -60,7 +60,7 @@
                <v-row justify="center">
                    <v-col cols="4">
                    <v-textarea 
-                    placeholder="Placeholder" 
+                    placeholder="Addition information about the project" 
                     outlined 
                     v-model="message"
                     />
