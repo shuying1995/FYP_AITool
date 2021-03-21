@@ -33,7 +33,16 @@ exports.getAllProjectDetails = function (req, res){
                 obj[prop].forEach(function(item) {
                     result[prop] = result[prop].concat(item);
                 })
-            res.json(result)
+            let size = result["stakeholder"].length;
+            let output = [];
+            for (let i = 0; i < size; i++) {
+                let tempObj = {};
+                for (const [key, value] of Object.entries(result)) {
+                    tempObj[key] = value[i];
+                }
+                output.push(tempObj);
+            }
+            res.json(output)
         }
     })
 }
