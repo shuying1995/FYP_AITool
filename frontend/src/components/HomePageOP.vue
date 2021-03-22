@@ -112,7 +112,6 @@ export default {
         }})
       .then((response) => {
           this.OnCards = response.data
-          console.log(this.OnCards)
           for(var i=0; i<this.OnCards.length; i++){
             var members = this.OnCards[i].inputtedmembers
             if(members == window.$cookies.get("userid"))

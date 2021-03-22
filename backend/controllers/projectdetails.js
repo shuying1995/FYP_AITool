@@ -24,7 +24,7 @@ exports.getAllProjectDetails = function (req, res){
         } else {
             var array = []
             for (var i = 0; i<projectdetails.length; i++){
-                if(projectdetails[i].projectid == req.body.projectid)
+                if(projectdetails[i].projectid == req.query.projectid)
                     array.push(projectdetails[i])
             }
             const result = {stakeholder:[], fairnesscard:[], goright: [], gowrong: []};

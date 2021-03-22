@@ -18,18 +18,26 @@
                         Application Type
                     </v-btn>
                 </v-flex>
-
-                <v-row>
+        
+                <v-carousel light hide-delimiters height="auto">
+                    <v-carousel-item v-for="(item,index) in projectdetails" :key="index">
+                    <v-flex row wrap>
                     <v-col md="4">
-                        H
+                        <v-row justify="center">
+                        <v-img v-bind:src="require('../assets/' + item.fairnesscardfront + '.jpg')" contain max-height="350"></v-img>
+                        </v-row>
                     </v-col>
                     <v-col md="4">
-                        H
+                        <v-row justify="center">
+                        <v-img v-bind:src="require('../assets/' + item.fairnesscardback + '.jpg')" contain max-height="350"></v-img>
+                        </v-row>
                     </v-col>
                     <v-col md="4">
-                        H
+                        <v-row justify="center">
+                        {{item.stakeholder}}
+                        </v-row>
                     </v-col>
-                </v-row>
+                    </v-flex>
 
                 <v-flex row wrap class="justify-center">
                     <v-col md="6">
@@ -46,7 +54,7 @@
                          <v-card-text
                           class="text-center"
                          >
-                         {{this.projectdetails[0].goright[0]}}
+                         {{item.goright}}
                          </v-card-text>
                          </v-card>
                         </v-row>
@@ -65,7 +73,7 @@
                          <v-card-text
                           class="text-center"
                           >
-                          {{this.projectdetails[0].gowrong[0]}}
+                          {{item.gowrong}}
                           </v-card-text>
                          </v-card>
                         </v-row>
@@ -102,6 +110,8 @@
                 />
                 </v-col>
             </v-row>
+            </v-carousel-item>
+        </v-carousel>
 
             <v-flex class="justify-end pa-2" row wrap>
                 <v-dialog
@@ -146,7 +156,10 @@ export default {
 data(){
     return{
         projectdetails: [],
-        rating: '',
+        rating: 0,
+        goright: [],
+        gowrong:[],
+        reason: '',
         dialog: false
     }
 },
@@ -158,7 +171,14 @@ created(){
          }})
      .then((response)=>{
          this.projectdetails = response.data
-         console.log(this.projectdetails)
+         for(var i =0; i<this.projectdetails.length; i++){
+             var image = this.projectdetails[i].fairnesscard
+             image = image.toString().substring(5,12)
+             image = image.replace('.','')
+             this.projectdetails[i].fairnesscardfront=image
+             var backimage = image.replace('f','b')
+             this.projectdetails[i].fairnesscardback=backimage
+         }
      })
 },
 methods: {
