@@ -26,7 +26,7 @@
                  :continuous="false"
                  >
                     <v-carousel-item v-for="(item,index) in projectdetails" :key="index">
-                    <v-flex row wrap>
+                    <v-flex row wrap class="ml-2 mr-2">
                     <v-col md="4">
                         <v-row justify="center">
                         <v-img v-bind:src="require('../assets/' + item.fairnesscardfront + '.jpg')" contain max-height="350"></v-img>
@@ -42,7 +42,7 @@
                         <v-img src="../assets/inputstakeholder.jpg" contain max-height="350">
                         <div class="vertical-bottom">
                         <v-row>
-                            <v-card height="40px" width="210px">
+                            <v-card height="40px" width="185px">
                                 <v-card-text class="text-center">
                                 {{item.stakeholder}}
                                 </v-card-text>
@@ -63,8 +63,8 @@
                         <v-card 
                          min-height="100px"
                          max-height="100px"
-                         min-width="600px"
-                         max-width="600px"
+                         min-width="500px"
+                         max-width="500px"
                          >
                          <v-card-text
                           class="text-center"
@@ -82,8 +82,8 @@
                         <v-card 
                          min-height="100px"
                          max-height="100px"
-                         min-width="600px"
-                         max-width="600px"
+                         min-width="500px"
+                         max-width="500px"
                          >
                          <v-card-text
                           class="text-center"
@@ -234,8 +234,8 @@ p{
 .vertical-bottom {
   margin: 0;
   position: absolute;
-  left: 33%;
-  top: 82%;
+  left: 30%;
+  top: 80%;
   transform: translateY(-50%);
 }
 </style>
