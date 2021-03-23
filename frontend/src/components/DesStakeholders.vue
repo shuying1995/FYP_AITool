@@ -14,11 +14,11 @@
                     <h3>Read through the description of direct and indirect stakeholders</h3>
                 </v-row>
 
-                <v-row>
-                    <v-col cols="6" md="6">
+                <v-row justify="center">
+                    <v-col cols="5">
                         <v-img src="../assets/direct.jpg" contain max-height="350"> </v-img>
                     </v-col>
-                    <v-col cols="6" md="6">
+                    <v-col cols="5">
                         <v-img src="../assets/indirect.jpg" contain max-height="350" max-width="700"> </v-img>
                     </v-col>
                 </v-row>
