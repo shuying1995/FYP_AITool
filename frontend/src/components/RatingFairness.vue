@@ -19,7 +19,12 @@
                     </v-btn>
                 </v-flex>
         
-                <v-carousel light hide-delimiters height="auto">
+                <v-carousel 
+                 light 
+                 hide-delimiters 
+                 height="auto"
+                 :continuous="false"
+                 >
                     <v-carousel-item v-for="(item,index) in projectdetails" :key="index">
                     <v-flex row wrap>
                     <v-col md="4">
@@ -34,13 +39,23 @@
                     </v-col>
                     <v-col md="4">
                         <v-row justify="center">
-                        {{item.stakeholder}}
+                        <v-img src="../assets/inputstakeholder.jpg" contain max-height="350">
+                        <div class="vertical-bottom">
+                        <v-row>
+                            <v-card height="40px" width="210px">
+                                <v-card-text class="text-center">
+                                {{item.stakeholder}}
+                                </v-card-text>
+                            </v-card>
+                        </v-row>
+                        </div>
+                        </v-img>
                         </v-row>
                     </v-col>
                     </v-flex>
 
                 <v-flex row wrap class="justify-center">
-                    <v-col md="6">
+                    <v-col md="5">
                         <v-row justify="center">
                         What can go right?
                         </v-row>
@@ -59,7 +74,7 @@
                          </v-card>
                         </v-row>
                     </v-col>
-                    <v-col md="6">
+                    <v-col md="5">
                         <v-row justify="center">
                         What can go wrong?
                         </v-row>
@@ -90,7 +105,7 @@
 
             <v-row justify="center" class="mt-4 mb-4">
                 <v-rating
-                v-model="rating"
+                v-model="item.rating"
                 background-color="orange lighten-3"
                 color="orange"
                 />
@@ -101,10 +116,10 @@
             </v-row>
 
             <v-row justify="center">
-                <v-col cols="6">
+                <v-col cols="7">
                 <v-textarea
                  outlined
-                 v-model="reason"
+                 v-model="item.reason"
                  height="100px"
                  placeholder="Explain why."
                 />
@@ -216,4 +231,11 @@ p{
   margin-left: 20px;
 }
 
+.vertical-bottom {
+  margin: 0;
+  position: absolute;
+  left: 33%;
+  top: 82%;
+  transform: translateY(-50%);
+}
 </style>
