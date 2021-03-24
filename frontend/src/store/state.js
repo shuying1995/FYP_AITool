@@ -8,5 +8,6 @@ export default {
     fairnesscard: '',
     fairnesscards: [],
     goright: [],
-    gowrong: []
+    gowrong: [],
+    images: []
 }

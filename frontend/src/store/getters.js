@@ -28,5 +28,8 @@ export default {
     },
     gowrong(state){
         return state.gowrong
+    },
+    images(state){
+        return state.images
     }
 }

@@ -22,6 +22,7 @@ export default {
         state.fairnesscards = [];
         state.goright = [];
         state.gowrong = [];
+        state.images = []
     },
     updateStakeholder(state, stakeholder){
         state.stakeholder.push(stakeholder)
@@ -37,5 +38,8 @@ export default {
     },
     updateGowrong(state, gowrong){
         state.gowrong.push(gowrong)
+    },
+    updateImages(state, images){
+        state.images.push(images)
     }
 }

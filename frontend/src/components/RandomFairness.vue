@@ -90,14 +90,23 @@ data() {
       {index: 9, front: require('../assets/fcard9.jpg'), back: require('../assets/bcard9.jpg')},
       {index: 10, front: require('../assets/fcard10.jpg'), back: require('../assets/bcard10.jpg')},
     ],
-    selectedImage: null
   }
 },
 computed:{
     image(){
         return this.apptype
-    }
-},
+    },
+    selectedImage(){
+      let images = this.images
+      let num = this.randomItem(images)
+      let image = this.$store.getters.images
+      while(image.some(index => index.index === num.index)){
+          num = this.randomItem(images)
+        }
+      this.$store.dispatch("updateImages",num)
+      return num
+      }
+  },
   methods: {
     randomItem (items) {
       return items[Math.floor(Math.random()*items.length)];
@@ -114,9 +123,6 @@ computed:{
     flip(){
         this.showFront=!this.showFront;
     }
-  },
-  created() {
-    this.selectedImage = this.randomItem(this.images)
   },
 }
 </script>

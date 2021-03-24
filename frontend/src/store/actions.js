@@ -31,5 +31,8 @@ export default {
     },
     updateGowrong({commit},gowrong){
         commit('updateGowrong',gowrong)
+    },
+    updateImages({commit},images){
+        commit('updateImages',images)
     }
 }
