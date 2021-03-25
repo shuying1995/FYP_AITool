@@ -206,7 +206,6 @@ methods: {
              explainrating: this.projectdetails[i].explainrating
          })
           .then((response)=>{
-              console.log(this.projectdetails)
               this.dialog = true
           })
         }
