@@ -31,8 +31,6 @@
             item-value="_id"
             multiple
             hide-selected
-            :search-input.sync="search"
-            @change="search=''"
           >
           <template v-slot:selection="data">
                <v-chip
@@ -142,7 +140,6 @@ export default {
         color: 'general',
         successMessages: "Project created successfully",
         successdialog:false,
-        search: null
         }
     },
     created(){
