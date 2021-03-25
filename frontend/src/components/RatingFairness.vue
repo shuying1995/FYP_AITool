@@ -119,7 +119,7 @@
                 <v-col cols="7">
                 <v-textarea
                  outlined
-                 v-model="item.reason"
+                 v-model="item.explainrating"
                  height="100px"
                  placeholder="Explain why."
                 />
@@ -140,6 +140,7 @@
                     dark
                     v-bind="attrs"
                     v-on="on"
+                    @click="submit"
                     >
                     Next
                     </v-btn>
@@ -159,7 +160,7 @@
                     </v-card-actions>
                 </v-card>
                 </v-dialog>
-            </v-flex>    
+            </v-flex>   
             </v-card>
         </v-container>
     </v-main>
@@ -171,10 +172,8 @@ export default {
 data(){
     return{
         projectdetails: [],
-        rating: 0,
         goright: [],
         gowrong:[],
-        reason: '',
         dialog: false
     }
 },
@@ -197,6 +196,21 @@ created(){
      })
 },
 methods: {
+    submit(){
+        for(var i =0; i<this.projectdetails.length; i++){
+        axios
+         .post('/api/projectreviews',{
+             projectid: window.$cookies.get("acceptedprojectid"),
+             fairnesscard: this.projectdetails[i].fairnesscardfront,
+             rating: this.projectdetails[i].rating,
+             explainrating: this.projectdetails[i].explainrating
+         })
+          .then((response)=>{
+              console.log(this.projectdetails)
+              this.dialog = true
+          })
+        }
+    },
     home(){
         this.$router.push({ name: "HomePagePR"});
     },
