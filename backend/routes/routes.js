@@ -4,6 +4,7 @@ const router = express.Router();
 var userController = require('../controllers/user')
 var projectController = require('../controllers/project')
 var projectdetailsController = require('../controllers/projectdetails')
+var projectreviewsController = require('../controllers/projectreviews')
 
 router.post('/login', userController.login) //users login route
 router.post('/users', userController.register) //create users
@@ -30,4 +31,5 @@ router.put('/create/:projectid/input', projectController.inputUserid) //Remove u
 router.post('/projectdetails', projectdetailsController.createProjectDetails) //Create a collection to store member's project inputs
 router.get('/projectdetails',projectdetailsController.getAllProjectDetails) //Get project details inputted by all members
 
+router.post('/projectreviews', projectreviewsController.createProjectReviews)
 module.exports = router;

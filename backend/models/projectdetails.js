@@ -29,7 +29,7 @@ const Projectdetails = mongoose.model('Projectdetails', new mongoose.Schema({
     createdate: {
         type: String,
         default: Date
-    }
+    },
 }))
 
 const validateProjectdetails = function (projectdetails) {
@@ -40,7 +40,7 @@ const validateProjectdetails = function (projectdetails) {
         fairnesscard: Joi.array().required(),
         goright: Joi.array().required(),
         gowrong: Joi.array().required(),
-        createdate: Joi.string()
+        createdate: Joi.string(),
     })
     return schema.validate(projectdetails);
 }
