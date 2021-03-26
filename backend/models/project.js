@@ -33,6 +33,9 @@ const Project = mongoose.model('Project', new mongoose.Schema({
     inputtedmembers: {
         type: Array
     },
+    reviewedmembers: {
+        type: Array
+    },
     message: {
         type:String,
         default: "No Message"

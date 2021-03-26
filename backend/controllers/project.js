@@ -229,3 +229,28 @@ exports.inputUserid = function (req, res){
     })
 }
 
+exports.reviewUserid = function (req, res){
+    Project.findById(req.params.projectid, (error,project) =>{
+        //projectid does not exist
+        if (error) 
+            return res.status(400).send("Project id not found");
+
+         //if array is empty
+         if(project.reviewedmembers.length == 0){
+            project.reviewedmembers = req.body.userid;
+        }
+        //else add user id into existing array
+        else { 
+            project.reviewedmembers = project.reviewedmembers + "," + req.body.userid;
+            project.reviewedmembers = project.reviewedmembers.toString().split(",")
+        }
+        
+        project.save((error, updatedProject) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedProject);
+        })
+    })
+}
+

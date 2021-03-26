@@ -38,6 +38,9 @@ const User = mongoose.model('User', new mongoose.Schema({
     inputtedprojectid: {
         type: String
     },
+    reviewedprojectid: {
+        type: String
+    },
     resetPasswordToken: {
         type: String
     },

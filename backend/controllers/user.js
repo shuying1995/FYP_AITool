@@ -191,6 +191,36 @@ exports.insertInputtedProjectId = function (req, res) {
   })
 }
 
+exports.insertReviewedProjectId = function (req, res) {
+  User.findById(req.params.userid, (error, user)=> {
+      //userid does not exist
+      if (error) 
+          return res.status(400).send("User id not found");
+       //if array is empty
+       if(user.reviewedprojectid == undefined){
+          user.reviewedprojectid = req.body.acceptedprojectid;
+      }
+      //else add project id into existing array
+      else { 
+          user.reviewedprojectid = user.reviewedprojectid + "," + req.body.acceptedprojectid;
+      }
+      let projectid = user.inputtedprojectid
+      //split string into array (projectid)
+      var array = projectid.split(",");
+      const index = array.indexOf(req.body.acceptedprojectid)
+      if(index > -1){
+          array.splice(index, 1)
+      }
+      user.inputtedprojectid = array.toString()
+      user.save((error, updatedUser) => {
+          //Wrong input
+          if(error) 
+              return res.status(400).end();
+          return res.status(200).json(updatedUser);
+      })
+  })
+}
+
 exports.forgetPW = function (req, res, next) {
     async.waterfall([
       function(done) {
