@@ -167,6 +167,7 @@
 </template>
 
 <script>
+import HomePagePRVue from './HomePagePR.vue';
 const axios = require('axios');
 export default {
 data(){
@@ -174,7 +175,8 @@ data(){
         projectdetails: [],
         goright: [],
         gowrong:[],
-        dialog: false
+        dialog: false,
+        surveydone: ''
     }
 },
 created(){
@@ -193,6 +195,14 @@ created(){
              var backimage = image.replace('f','b')
              this.projectdetails[i].fairnesscardback=backimage
          }
+         axios.get('api/users')
+            .then((response) => {
+                let users = response.data
+                for(var i=0; i<users.length; i++){
+                    if(users[i]._id==window.$cookies.get("userid"))
+                        this.surveydone = users[i].surveydone
+                }
+        })
      })
 },
 methods: {
@@ -214,8 +224,13 @@ methods: {
         this.$router.push({ name: "HomePagePR"});
     },
     survey(){
-        this.dialog = false
-        this.$router.push({ name: 'Survey1'})
+        if(this.surveydone == 0){
+            this.dialog = false
+            this.$router.push({ name: 'Survey1'})}
+        else{
+            this.dialog = false
+            this.$router.push({ name: 'HomePagePR'})
+        }
     }
 }
 }

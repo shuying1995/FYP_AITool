@@ -46,6 +46,10 @@ const User = mongoose.model('User', new mongoose.Schema({
     },
     resetPasswordExpires: {
         type: Date
+    },
+    surveydone: {
+        type: Number,
+        default:'0'
     }
 }));
 
