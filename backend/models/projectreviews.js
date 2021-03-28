@@ -11,10 +11,10 @@ const Projectreviews = mongoose.model('Projectreviews', new mongoose.Schema({
         required: true
     },
     rating: {
-        type: Array
+        type: String
     },
     explainrating: {
-        type: Array
+        type: String
     }
 }))
 

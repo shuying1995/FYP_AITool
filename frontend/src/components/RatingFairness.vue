@@ -215,10 +215,22 @@ methods: {
              rating: this.projectdetails[i].rating,
              explainrating: this.projectdetails[i].explainrating
          })
-          .then((response)=>{
-              this.dialog = true
-          })
         }
+        let projectid = window.$cookies.get("acceptedprojectid")
+        let userid = window.$cookies.get("userid")
+            axios
+            .put('/api/users/' + userid + '/review',{
+                reviewedprojectid: projectid
+            })
+            .then((response)=>{
+                axios
+                .put('/api/create/' + projectid + '/review',{
+                    userid: userid
+                })
+                .then((response)=>{
+                    this.dialog = true
+                })
+            })
     },
     home(){
         this.$router.push({ name: "HomePagePR"});

@@ -198,11 +198,11 @@ exports.insertReviewedProjectId = function (req, res) {
           return res.status(400).send("User id not found");
        //if array is empty
        if(user.reviewedprojectid == undefined){
-          user.reviewedprojectid = req.body.acceptedprojectid;
+          user.reviewedprojectid = req.body.reviewedprojectid;
       }
       //else add project id into existing array
       else { 
-          user.reviewedprojectid = user.reviewedprojectid + "," + req.body.acceptedprojectid;
+          user.reviewedprojectid = user.reviewedprojectid + "," + req.body.reviewedprojectid;
       }
       let projectid = user.inputtedprojectid
       //split string into array (projectid)
