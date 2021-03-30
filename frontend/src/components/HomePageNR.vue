@@ -33,7 +33,7 @@
                          class="ma-2" 
                          max-width="360" 
                          outlined
-                         color="orange"
+                         :color="item.projectcardcolor"
                          @click="review(e)"
                          >
                           <v-list-item three-line>
@@ -104,6 +104,13 @@ export default {
           }})
         .then((response) => {
             this.NrCards = response.data
+            for(var i=0; i<this.NrCards.length; i++){
+            var members = this.NrCards[i].reviewedmembers
+            if(members == window.$cookies.get("userid"))
+              this.NrCards[i].projectcardcolor = '#1DE9B6'
+            else 
+              this.NrCards[i].projectcardcolor = 'warning'
+          }
         })
     },
   methods:{

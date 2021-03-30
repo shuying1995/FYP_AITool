@@ -81,11 +81,11 @@
                     <v-img src="../assets/inputstakeholder.jpg" contain max-height="600" max-width="600">
                     <div class="vertical-bottom">
                     <v-row justify="center">
-                    <v-text-field 
+                    <v-textarea 
                      background-color="white"
                      v-model="stakeholder"
                      solo
-                     dense
+                     height="70px"
                     />
                     </v-row>
                     </div>
@@ -159,8 +159,12 @@ p{
 .vertical-bottom {
   margin: 0;
   position: absolute;
-  left: 33%;
+  left: 30%;
   top: 80%;
   transform: translateY(-50%);
+}
+
+/deep/ .v-textarea{
+      width: 270px;
 }
 </style>

@@ -19,8 +19,9 @@
                          min-height="400px" 
                          max-width="600px"
                          color="grey"
+                         class="d-flex align-center"
                          >
-                            <v-card-text class="text-center white--text headline">
+                            <v-card-text class="white--text headline">
                                 {{appscenario}}
                             </v-card-text>
                           </v-card>

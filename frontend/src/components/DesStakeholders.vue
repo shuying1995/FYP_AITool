@@ -16,7 +16,7 @@
 
                 <v-row justify="center">
                     <v-col cols="5">
-                        <v-img src="../assets/direct.jpg" contain max-height="350"> </v-img>
+                        <v-img src="../assets/direct.jpg" contain max-height="350" max-width="700"> </v-img>
                     </v-col>
                     <v-col cols="5">
                         <v-img src="../assets/indirect.jpg" contain max-height="350" max-width="700"> </v-img>

@@ -59,14 +59,14 @@
                          v-model="goright"
                          placeholder="Placeholder" 
                          outlined 
-                         height="70px"
+                         height="150px"
                          />
                         <h3>What can go wrong?</h3>
                         <v-textarea 
                          v-model="gowrong"
                          placeholder="Placeholder" 
                          outlined 
-                         height="70px"
+                         height="150px"
                          />
                         <v-btn color="warning" @click="extradialog" class="custom">Next</v-btn>
                     </v-col>
