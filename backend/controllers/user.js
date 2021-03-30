@@ -207,7 +207,7 @@ exports.insertReviewedProjectId = function (req, res) {
       let projectid = user.inputtedprojectid
       //split string into array (projectid)
       var array = projectid.split(",");
-      const index = array.indexOf(req.body.acceptedprojectid)
+      const index = array.indexOf(req.body.reviewedprojectid)
       if(index > -1){
           array.splice(index, 1)
       }

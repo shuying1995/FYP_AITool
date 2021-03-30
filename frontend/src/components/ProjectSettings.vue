@@ -55,8 +55,14 @@
               <v-layout>
                 <v-flex row wrap class="ml-4 mt-4">
                   <v-col md="6" class="pa-0 mb-4">
-                    <v-card max-width="600" height="100" outlined class="scroll rounded-card text-center">
+                    <v-card 
+                     max-width="600" 
+                     height="100" 
+                     outlined 
+                     class="scroll rounded-card">
+                     <v-card-text class="text-center">
                       {{projectitem.appscenario}}
+                     </v-card-text>
                     </v-card>
                   </v-col>
                 </v-flex>

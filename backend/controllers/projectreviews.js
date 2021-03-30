@@ -18,18 +18,15 @@ exports.createProjectReviews = (req, res) => {
     else {
         var found = false
         for(var i=0; i<projectreviews.length; i++){
-            console.log(projectreviews[i])
             if(projectreviews[i].fairnesscard == req.body.fairnesscard && projectreviews[i].projectid == req.body.projectid){
                 projectreviews[i].rating = projectreviews[i].rating + ',' + req.body.rating
                 projectreviews[i].explainrating = projectreviews[i].explainrating + ',' + req.body.explainrating
-                console.log('1')
                 projectreviews[i].save()
                 found = true
                 break
             }
         }
             if(!found){
-                console.log('2')
                 projectreviews = new Projectreviews(_.pick(req.body, ['projectid','fairnesscard','rating','explainrating']))
                 projectreviews.save();
             }
