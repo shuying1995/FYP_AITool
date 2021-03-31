@@ -61,10 +61,10 @@
                         </v-row>
                         <v-row justify="center">
                         <v-card 
-                         min-height="100px"
-                         max-height="100px"
-                         min-width="500px"
-                         max-width="500px"
+                         min-height="130px"
+                         max-height="130px"
+                         min-width="600px"
+                         max-width="600px"
                          >
                          <v-card-text
                           class="text-center"
@@ -80,10 +80,10 @@
                         </v-row>
                         <v-row justify="center">
                         <v-card 
-                         min-height="100px"
-                         max-height="100px"
-                         min-width="500px"
-                         max-width="500px"
+                         min-height="130px"
+                         max-height="130px"
+                         min-width="600px"
+                         max-width="600px"
                          >
                          <v-card-text
                           class="text-center"

@@ -23,8 +23,8 @@ import ForgetPW from "../components/ForgetPW.vue";
 import ResetPW from "../components/ResetPW.vue";
 import Survey1 from "../components/Survey1.vue";
 import Survey2 from "../components/Survey2.vue";
-//import Survey3 from "../components/Survey3.vue";
-//import Survey4 from "../components/Survey4.vue";
+import Survey3 from "../components/Survey3.vue";
+import Survey4 from "../components/Survey4.vue";
 
 Vue.use(VueRouter);
 
@@ -181,11 +181,6 @@ const routes = [
     component: ForgetPW
   },
   {
-    path: "/:token",
-    name: "ResetPW",
-    component: ResetPW
-  },
-  {
     path: "/survey1",
     name: "Survey1",
     component: Survey1,
@@ -201,7 +196,7 @@ const routes = [
       requiresAuth: true
     }
   },
-  /*{
+  {
     path: "/survey3",
     name: "Survey3",
     component: Survey3,
@@ -216,7 +211,12 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  },*/
+  },
+  {
+    path: "/:token",
+    name: "ResetPW",
+    component: ResetPW
+  },
 ];
 
 const router = new VueRouter({

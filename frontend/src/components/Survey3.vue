@@ -24,11 +24,11 @@
                             </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="width:45%"><body>{{q11}}</body></td>
+                                        <td style="width:45%"><body>{{q21}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq11"
+                                            v-model="checkboxq21"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -36,7 +36,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq11"
+                                            v-model="checkboxq21"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -44,7 +44,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq11"
+                                            v-model="checkboxq21"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -52,7 +52,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq11"
+                                            v-model="checkboxq21"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -60,7 +60,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq11"
+                                            v-model="checkboxq21"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -68,7 +68,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq11"
+                                            v-model="checkboxq21"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -76,11 +76,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q12}}</body></td>
+                                        <td><body>{{q22}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq12"
+                                            v-model="checkboxq22"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -88,7 +88,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq12"
+                                            v-model="checkboxq22"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -96,7 +96,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq12"
+                                            v-model="checkboxq22"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -104,7 +104,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq12"
+                                            v-model="checkboxq22"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -112,7 +112,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq12"
+                                            v-model="checkboxq22"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -120,7 +120,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq12"
+                                            v-model="checkboxq22"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -128,11 +128,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q13}}</body></td>
+                                        <td><body>{{q23}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq13"
+                                            v-model="checkboxq23"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -140,7 +140,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq13"
+                                            v-model="checkboxq23"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -148,7 +148,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq13"
+                                            v-model="checkboxq23"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -156,7 +156,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq13"
+                                            v-model="checkboxq23"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -164,7 +164,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq13"
+                                            v-model="checkboxq23"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -172,7 +172,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq13"
+                                            v-model="checkboxq23"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -180,11 +180,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q14}}</body></td>
+                                        <td><body>{{q24}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq14"
+                                            v-model="checkboxq24"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -192,7 +192,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq14"
+                                            v-model="checkboxq24"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -200,7 +200,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq14"
+                                            v-model="checkboxq24"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -208,7 +208,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq14"
+                                            v-model="checkboxq24"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -216,7 +216,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq14"
+                                            v-model="checkboxq24"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -224,7 +224,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq14"
+                                            v-model="checkboxq24"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -232,11 +232,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q15}}</body></td>
+                                        <td><body>{{q25}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq15"
+                                            v-model="checkboxq25"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -244,7 +244,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq15"
+                                            v-model="checkboxq25"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -252,7 +252,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq15"
+                                            v-model="checkboxq25"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -260,7 +260,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq15"
+                                            v-model="checkboxq25"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -268,7 +268,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq15"
+                                            v-model="checkboxq25"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -276,7 +276,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq15"
+                                            v-model="checkboxq25"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -284,11 +284,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q16}}</body></td>
+                                        <td><body>{{q26}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq16"
+                                            v-model="checkboxq26"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -296,7 +296,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq16"
+                                            v-model="checkboxq26"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -304,7 +304,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq16"
+                                            v-model="checkboxq26"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -312,7 +312,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq16"
+                                            v-model="checkboxq26"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -320,7 +320,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq16"
+                                            v-model="checkboxq26"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -328,7 +328,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq16"
+                                            v-model="checkboxq26"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -336,11 +336,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q17}}</body></td>
+                                        <td><body>{{q27}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq17"
+                                            v-model="checkboxq27"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -348,7 +348,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq17"
+                                            v-model="checkboxq27"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -356,7 +356,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq17"
+                                            v-model="checkboxq27"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -364,7 +364,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq17"
+                                            v-model="checkboxq27"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -372,7 +372,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq17"
+                                            v-model="checkboxq27"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -380,7 +380,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq17"
+                                            v-model="checkboxq27"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -388,11 +388,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q18}}</body></td>
+                                        <td><body>{{q28}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq18"
+                                            v-model="checkboxq28"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -400,7 +400,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq18"
+                                            v-model="checkboxq28"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -408,7 +408,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq18"
+                                            v-model="checkboxq28"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -416,7 +416,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq18"
+                                            v-model="checkboxq28"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -424,7 +424,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq18"
+                                            v-model="checkboxq28"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -432,7 +432,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq18"
+                                            v-model="checkboxq28"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -440,11 +440,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q19}}</body></td>
+                                        <td><body>{{q29}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq19"
+                                            v-model="checkboxq29"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -452,7 +452,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq19"
+                                            v-model="checkboxq29"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -460,7 +460,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq19"
+                                            v-model="checkboxq29"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -468,7 +468,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq19"
+                                            v-model="checkboxq29"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -476,7 +476,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq19"
+                                            v-model="checkboxq29"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -484,7 +484,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq19"
+                                            v-model="checkboxq29"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -492,11 +492,11 @@
                                     </tr>
 
                                     <tr>
-                                        <td><body>{{q20}}</body></td>
+                                        <td><body>{{q30}}</body></td>
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq20"
+                                            v-model="checkboxq30"
                                             value="Strongly Disagree"
                                             />
                                             </v-layout>
@@ -504,7 +504,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq20"
+                                            v-model="checkboxq30"
                                             value="Disagree"
                                             />
                                             </v-layout>
@@ -512,7 +512,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq20"
+                                            v-model="checkboxq30"
                                             value="Neither agree nor disagree"
                                             />
                                             </v-layout>
@@ -520,7 +520,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq20"
+                                            v-model="checkboxq30"
                                             value="Agree"
                                             />
                                             </v-layout>
@@ -528,7 +528,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq20"
+                                            v-model="checkboxq30"
                                             value="Strongly agree"
                                             />
                                             </v-layout>
@@ -536,7 +536,7 @@
                                         <td>
                                             <v-layout justify-center>
                                             <v-checkbox
-                                            v-model="checkboxq20"
+                                            v-model="checkboxq30"
                                             value="N/A"
                                             />
                                             </v-layout>
@@ -564,35 +564,35 @@
 export default {
 data(){
     return{
-        checkboxq11:null,
-        checkboxq12:null,
-        checkboxq13:null,
-        checkboxq14:null,
-        checkboxq15:null,
-        checkboxq16:null,
-        checkboxq17:null,
-        checkboxq18:null,
-        checkboxq19:null,
-        checkboxq20:null,
-        q11: 'I understand what kinds of fairness issues can arise in my application area',
-        q12: 'I do not know how my stakeholders might interpret fairness',
-        q13: 'I am unsure of which stakeholders to prioritise when it comes to fairness',
-        q14: 'I do not know how to evaluate different fairness solutions',
-        q15: 'I am unable to determine which fairness issues are more important to focus on first',
-        q16: 'I am able to understand what side effects a particular “fix” for a fairness issue might have on my users’/customers’ experience',
-        q17: 'I am unable to identify fairness issues that might occur when creating AI/ML models',
-        q18: 'I am not sure of the implication of fairness in my application area',
-        q19: 'I do not know how to surface fairness issues that I might have neglected or overlooked',
-        q20: 'I can understand what stakeholders of my products and services will consider fair vs unfair'
+        checkboxq21:null,
+        checkboxq22:null,
+        checkboxq23:null,
+        checkboxq24:null,
+        checkboxq25:null,
+        checkboxq26:null,
+        checkboxq27:null,
+        checkboxq28:null,
+        checkboxq29:null,
+        checkboxq30:null,
+        q21: 'I think that I would like to use this tool frequently',
+        q22: 'I found the tool unneccessarily complex',
+        q23: 'I thought the tool was easy to use',
+        q24: 'I think that I would need the support of a facilitator to be able to use this tool',
+        q25: 'I found the various components in this tool were well integrated',
+        q26: 'I thought there was too much inconsistency in this tool',
+        q27: 'I would imagine that most people would learn to use this tool very quickyl',
+        q28: 'I found the tool very cumbersome to use',
+        q29: 'I felt very confident using the tool',
+        q30: 'I needed to learn a lot of things before I could get going with this tool'
     }
 },
 
 methods: {
     back(){
-        this.$router.push({ name: "Survey1"})
+        this.$router.push({ name: "Survey2"})
     },
     next(){
-        this.$router.push({ name: "Survey3"})
+        this.$router.push({ name: "Survey4"})
     },
 },
 }
