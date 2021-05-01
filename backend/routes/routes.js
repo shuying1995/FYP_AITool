@@ -5,6 +5,7 @@ var userController = require('../controllers/user')
 var projectController = require('../controllers/project')
 var projectdetailsController = require('../controllers/projectdetails')
 var projectreviewsController = require('../controllers/projectreviews')
+var survey = require('../controllers/survey')
 
 router.post('/login', userController.login) //users login route
 router.post('/users', userController.register) //create users
@@ -34,4 +35,6 @@ router.post('/projectdetails', projectdetailsController.createProjectDetails) //
 router.get('/projectdetails',projectdetailsController.getAllProjectDetails) //Get project details inputted by all members
 
 router.post('/projectreviews', projectreviewsController.createProjectReviews)
+
+router.post('/survey',survey.createSurvey)
 module.exports = router;
