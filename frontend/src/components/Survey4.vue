@@ -73,7 +73,6 @@
                         <v-spacer/>
                         <v-btn @click="back">Back</v-btn>
                         <v-btn @click="submit" color="warning">Done</v-btn>
-                        <p>{{this.$store.getters.surveys[0][0]}}</p>
                     </v-flex>
                     </v-flex>
                 </v-layout>
@@ -94,20 +93,13 @@ data(){
         q32:'',
         q33:'',
         q34:'',
+        surveydone: '1'
     }
 },
 methods: {
     submit(){
-        let q31 = this.q31
-        let q32 = this.q32
-        let q33 = this.q33
-        let q34 = this.q34
         let userid = window.$cookies.get("userid")
-        this.$store
-          .dispatch(
-              "updateSurveys", q31,q32,q33,q34)
-        .then(() =>
-            axios
+        axios
             .post('api/survey',{
                 userid: userid,
                 answerq1: this.$store.getters.surveys[0][0],
@@ -146,12 +138,17 @@ methods: {
                 answerq34: this.q34
             })
             .then((response)=>{
-                console.log(response)
-                this.$store
-                .dispatch('resetSurvey')
-                .then(this.$router.push({ name: "HomePagePR" })) 
+                let userid = window.$cookies.get("userid")
+                axios
+                    .put('api/users/' + userid + '/survey', {
+                        surveydone: this.surveydone,
+                    })
+                    .then((response)=>{
+                        this.$store
+                        .dispatch('resetSurvey')
+                        .then(this.$router.push({ name: "HomePagePR" })) 
+                    })
             })
-        )
     },
     back(){
         this.$router.push({ name: "Survey3"})

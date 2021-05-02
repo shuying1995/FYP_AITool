@@ -18,6 +18,7 @@ router.put('/users/:userid/accept', userController.insertAcceptedProjectId) //In
 router.put('/users/:userid/reject', userController.insertRejectedProjectId) //Insert rejectedprojectid into user
 router.put('/users/:userid/input', userController.insertInputtedProjectId) //Insert inputtedprojectid and remove acceptedprojectid from user
 router.put('/users/:userid/review',userController.insertReviewedProjectId) //Insert reviewedprojectid and remove inputtedprojectid from user
+router.put('/users/:userid/survey',userController.insertSurveyDone) //Insert surveydone into user table
 
 router.post('/create', projectController.createProject) //create project
 router.get('/create/facilitator', projectController.getFProjects) //get projects by members/facilitator

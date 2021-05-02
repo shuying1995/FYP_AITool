@@ -283,6 +283,22 @@ exports.getUsers = function (req, res) {
     });
   };
 
+  exports.insertSurveyDone = function (req, res){
+    User.findById(req.params.userid, (error,user)=> {
+        if (error) {
+            return next(error)
+        } else {
+            user.surveydone = req.body.surveydone;
+        }
+        user.save((error, updatedUser) => {
+            //Wrong input
+            if(error) 
+                return res.status(400).end();
+            return res.status(200).json(updatedUser);
+        })
+    })
+}
+
   exports.resetPW = function (req, res) {
     async.waterfall([
       function(done) {
