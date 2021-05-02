@@ -330,3 +330,4 @@ exports.getUsers = function (req, res) {
       res.redirect('/');
     });
   };
+

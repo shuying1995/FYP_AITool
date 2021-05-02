@@ -34,5 +34,11 @@ export default {
     },
     updateImages({commit},images){
         commit('updateImages',images)
-    }
+    },
+    updateSurveys({commit},surveys){
+        commit('updateSurveys',surveys)
+    },
+    resetSurvey({commit}){
+        commit('resetSurvey');
+    },
 }

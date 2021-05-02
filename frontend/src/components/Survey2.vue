@@ -583,7 +583,8 @@ data(){
         q17: 'I am unable to identify fairness issues that might occur when creating AI/ML models',
         q18: 'I am not sure of the implication of fairness in my application area',
         q19: 'I do not know how to surface fairness issues that I might have neglected or overlooked',
-        q20: 'I can understand what stakeholders of my products and services will consider fair vs unfair'
+        q20: 'I can understand what stakeholders of my products and services will consider fair vs unfair',
+        arrayq11to20: []
     }
 },
 
@@ -592,7 +593,11 @@ methods: {
         this.$router.push({ name: "Survey1"})
     },
     next(){
-        this.$router.push({ name: "Survey3"})
+        this.arrayq11to20.push(this.checkboxq11,this.checkboxq12,this.checkboxq13,this.checkboxq14,this.checkboxq15,this.checkboxq16,this.checkboxq17,this.checkboxq18,this.checkboxq19,this.checkboxq20)
+        this.$store
+          .dispatch(
+              "updateSurveys", this.arrayq11to20)
+        .then(() => this.$router.push({ name: "Survey3"}))
     },
 },
 }

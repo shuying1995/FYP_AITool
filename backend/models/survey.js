@@ -125,6 +125,22 @@ const Survey = mongoose.model('Survey', new mongoose.Schema({
     answerq30:{
         type: String,
         required: true
+    },
+    answerq31:{
+        type: String,
+        required: true
+    },
+    answerq32:{
+        type: String,
+        required: true
+    },
+    answerq33:{
+        type: String,
+        required: true
+    },
+    answerq34:{
+        type: String,
+        required: true
     }
 }))
 
@@ -161,6 +177,10 @@ const validateSurvey = function (survey) {
         answerq28: Joi.string().required(),
         answerq29: Joi.string().required(),
         answerq30: Joi.string().required(),
+        answerq31: Joi.string().required(),
+        answerq32: Joi.string().required(),
+        answerq33: Joi.string().required(),
+        answerq34: Joi.string().required(),
     })
     return schema.validate(survey);
 }

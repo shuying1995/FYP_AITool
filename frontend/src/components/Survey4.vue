@@ -16,8 +16,8 @@
                         <v-row justify="center">
                             <v-col cols="5">
                         <v-select
-                        v-model="q5"
-                        :items="q5items" 
+                        v-model="q31"
+                        :items="q31items" 
                         outlined 
                         placeholder="No"
                         />
@@ -31,8 +31,8 @@
                         <v-row justify="center">
                             <v-col cols="5">
                         <v-select
-                        v-model="q6"
-                        :items="q6items" 
+                        v-model="q32"
+                        :items="q32items" 
                         outlined 
                         placeholder="Not at all"
                         />
@@ -46,7 +46,7 @@
                         <v-row justify="center">
                             <v-col cols="5">
                         <v-textarea
-                        v-model="q7"
+                        v-model="q33"
                         outlined
                         dense
                         placeholder="placeholder"
@@ -61,7 +61,7 @@
                         <v-row justify="center">
                             <v-col cols="5">
                         <v-textarea
-                        v-model="q8"
+                        v-model="q34"
                         outlined
                         dense
                         placeholder="placeholder"
@@ -73,6 +73,7 @@
                         <v-spacer/>
                         <v-btn @click="back">Back</v-btn>
                         <v-btn @click="submit" color="warning">Done</v-btn>
+                        <p>{{this.$store.getters.surveys[0][0]}}</p>
                     </v-flex>
                     </v-flex>
                 </v-layout>
@@ -83,20 +84,74 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
 data(){
     return{
-        q5items: ['No','Maybe','Yes'],
-        q5:'',
-        q6items: ['Not at all','A little','A moderate amount','A lot','A great deal'],
-        q6:'',
-        q7:'',
-        q8:'',
+        q31items: ['No','Maybe','Yes'],
+        q31:'',
+        q32items: ['Not at all','A little','A moderate amount','A lot','A great deal'],
+        q32:'',
+        q33:'',
+        q34:'',
     }
 },
 methods: {
     submit(){
-        this.$router.push({ name: "HomePagePR"})
+        let q31 = this.q31
+        let q32 = this.q32
+        let q33 = this.q33
+        let q34 = this.q34
+        let userid = window.$cookies.get("userid")
+        this.$store
+          .dispatch(
+              "updateSurveys", q31,q32,q33,q34)
+        .then(() =>
+            axios
+            .post('api/survey',{
+                userid: userid,
+                answerq1: this.$store.getters.surveys[0][0],
+                answerq2: this.$store.getters.surveys[0][1],
+                answerq3: this.$store.getters.surveys[0][2],
+                answerq4: this.$store.getters.surveys[0][3],
+                answerq5: this.$store.getters.surveys[0][4],
+                answerq6: this.$store.getters.surveys[0][5],
+                answerq7: this.$store.getters.surveys[0][6],
+                answerq8: this.$store.getters.surveys[0][7],
+                answerq9: this.$store.getters.surveys[0][8],
+                answerq10: this.$store.getters.surveys[0][9],
+                answerq11: this.$store.getters.surveys[1][0],
+                answerq12: this.$store.getters.surveys[1][1],
+                answerq13: this.$store.getters.surveys[1][2],
+                answerq14: this.$store.getters.surveys[1][3],
+                answerq15: this.$store.getters.surveys[1][4],
+                answerq16: this.$store.getters.surveys[1][5],
+                answerq17: this.$store.getters.surveys[1][6],
+                answerq18: this.$store.getters.surveys[1][7],
+                answerq19: this.$store.getters.surveys[1][8],
+                answerq20: this.$store.getters.surveys[1][9],
+                answerq21: this.$store.getters.surveys[2][0],
+                answerq22: this.$store.getters.surveys[2][1],
+                answerq23: this.$store.getters.surveys[2][2],
+                answerq24: this.$store.getters.surveys[2][3],
+                answerq25: this.$store.getters.surveys[2][4],
+                answerq26: this.$store.getters.surveys[2][5],
+                answerq27: this.$store.getters.surveys[2][6],
+                answerq28: this.$store.getters.surveys[2][7],
+                answerq29: this.$store.getters.surveys[2][8],
+                answerq30: this.$store.getters.surveys[2][9],
+                answerq31: this.q31,
+                answerq32: this.q32,
+                answerq33: this.q33,
+                answerq34: this.q34
+            })
+            .then((response)=>{
+                console.log(response)
+                this.$store
+                .dispatch('resetSurvey')
+                .then(this.$router.push({ name: "HomePagePR" })) 
+            })
+        )
     },
     back(){
         this.$router.push({ name: "Survey3"})

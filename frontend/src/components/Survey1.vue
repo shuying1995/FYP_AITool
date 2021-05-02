@@ -582,13 +582,18 @@ data(){
         q7: 'I am able to detect potential fairness issues during the process of developing AI/ML models',
         q8: 'I am unsure of the repercussions on my users/customers when I use a certain fairness criteria to solve a fairness issue',
         q9: 'I do not know how to make decisions regarding fairness in AI/ML',
-        q10: 'I am able to compare across different possible strategies for addressing a fairness issue in my application area'
+        q10: 'I am able to compare across different possible strategies for addressing a fairness issue in my application area',
+        arrayq1to10:[]
     }
 },
 
 methods: {
     next(){
-        this.$router.push({ name: "Survey2"})
+        this.arrayq1to10.push(this.checkboxq1,this.checkboxq2,this.checkboxq3,this.checkboxq4,this.checkboxq5,this.checkboxq6,this.checkboxq7,this.checkboxq8,this.checkboxq9,this.checkboxq10)
+        this.$store
+          .dispatch(
+              "updateSurveys", this.arrayq1to10)
+        .then(() => this.$router.push({ name: "Survey2"}))
     },
 },
 }

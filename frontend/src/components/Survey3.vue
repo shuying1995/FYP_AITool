@@ -583,7 +583,8 @@ data(){
         q27: 'I would imagine that most people would learn to use this tool very quickyl',
         q28: 'I found the tool very cumbersome to use',
         q29: 'I felt very confident using the tool',
-        q30: 'I needed to learn a lot of things before I could get going with this tool'
+        q30: 'I needed to learn a lot of things before I could get going with this tool',
+        arrayq21to30: []
     }
 },
 
@@ -592,7 +593,11 @@ methods: {
         this.$router.push({ name: "Survey2"})
     },
     next(){
-        this.$router.push({ name: "Survey4"})
+        this.arrayq21to30.push(this.checkboxq21,this.checkboxq22,this.checkboxq23,this.checkboxq24,this.checkboxq25,this.checkboxq26,this.checkboxq27,this.checkboxq28,this.checkboxq29,this.checkboxq30)
+        this.$store
+          .dispatch(
+              "updateSurveys", this.arrayq21to30)
+        .then(() => this.$router.push({ name: "Survey4"}))
     },
 },
 }

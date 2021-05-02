@@ -14,7 +14,7 @@ exports.createSurvey = (req, res) => {
     survey = new Survey(_.pick(req.body, ['userid','answerq1','answerq2','answerq3','answerq4','answerq5','answerq6',
     'answerq7','answerq8','answerq9','answerq10','answerq11','answerq12','answerq13','answerq14','answerq15',
     'answerq16','answerq17','answerq18','answerq19','answerq20','answerq21','answerq22','answerq23','answerq24',
-    'answerq25','answerq26','answerq27','answerq28','answerq29','answerq30']));
+    'answerq25','answerq26','answerq27','answerq28','answerq29','answerq30','answerq31','answerq32','answerq33','answerq34']));
     survey.save();
     res.status(200).send(survey._id)
 }

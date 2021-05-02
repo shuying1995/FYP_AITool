@@ -41,5 +41,11 @@ export default {
     },
     updateImages(state, images){
         state.images.push(images)
+    },
+    updateSurveys(state,surveys){
+        state.surveys.push(surveys)
+    },
+    resetSurvey(state){
+        state.surveys=[]
     }
 }

@@ -9,5 +9,6 @@ export default {
     fairnesscards: [],
     goright: [],
     gowrong: [],
-    images: []
+    images: [],
+    surveys: []
 }
