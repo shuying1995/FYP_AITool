@@ -228,7 +228,12 @@ methods: {
                     userid: userid
                 })
                 .then((response)=>{
-                    this.dialog = true
+                    if(this.surveydone == 1){
+                        this.$router.push({ name: 'HomePagePR'})
+                    }
+                    else{
+                        this.dialog = true
+                    }
                 })
             })
     },
@@ -236,14 +241,7 @@ methods: {
         this.$router.push({ name: "HomePagePR"});
     },
     survey(){
-        if(this.surveydone == 0){
-            this.dialog = false
-            this.$router.push({ name: 'Survey1'})}
-        else{
-            this.dialog = false
-            this.$router.push({ name: 'HomePagePR'})
-        }
-    }
+        this.$router.push({ name: 'Survey1'})}
 }
 }
 </script>
