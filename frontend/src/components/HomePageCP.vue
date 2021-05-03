@@ -1,16 +1,14 @@
 <template>
-    <v-main>
-        <v-container fluid>
-            <v-card 
-             min-height="650px"
-             >
-                <v-layout row wrap ml-7 mr-8>
-                  <v-flex row wrap class="ma-3 mt-6">
-                    <v-btn @click="homepagepr" text>Requests</v-btn>
-                    <v-btn @click="homepageop" text>In Progress</v-btn>
-                    <v-btn @click="homepagenr" text>Needs Review</v-btn>
-                    <v-btn text class="orange--text">Completed</v-btn>
-                  </v-flex>
+  <v-main>
+    <v-container fluid>
+      <v-card min-height="650px">
+        <v-layout row wrap ml-7 mr-8>
+            <v-flex row wrap class="ma-3 mt-6">
+              <v-btn @click="homepagepr" text>Requests</v-btn>
+              <v-btn @click="homepageop" text>In Progress</v-btn>
+              <v-btn @click="homepagenr" text>Needs Review</v-btn>
+              <v-btn class="orange--text" text>Completed</v-btn>
+            </v-flex>
                   
                   <v-col class="text-right mt-3">
                     <v-menu offset-y>
@@ -27,202 +25,107 @@
                       </v-list>
                     </v-menu>
                   </v-col>
-                </v-layout>
+              </v-layout>
 
-                <v-layout row wrap ml-8>
-                  <v-flex v-for="(item, e) in PRCards" :key="item.ID" class="custom">
-                    <v-card 
-                     class="ma-2" 
-                     max-width="360"
-                     min-height="200"
-                     max-height="200" 
-                     outlined
-                     color="orange"
-                     >
-                      <v-list-item three-line>
-                        <v-list-item-content>
-                          <h3 class="pt-2 pb-2">{{ item.name }}</h3>
-                          <p>{{ item.facilitator }}</p>
-                          <v-sheet outlined color="white" rounded>
-                          <v-card height="80px" color="orange">
-                            <v-card-text class="text-center white--text">
-                                {{ item.message }} 
-                            </v-card-text>
-                          </v-card>
-                          </v-sheet>
-                          <v-flex row wrap class="justify-center pt-2">
-                            <v-btn 
-                             color="success" 
-                             @click="acceptproject(e)"
-                             :key="item._id"
-                             >
-                              Accept
-                              <v-icon>mdi-check-circle-outline</v-icon>
+                    <v-layout row wrap ml-8>
+                      <v-flex v-for="(item,e) in CPCards" :key="item.ID" class="custom">
+                        <v-card 
+                         class="ma-2" 
+                         max-width="360" 
+                         outlined
+                         color="orange"
+                         @click="input(e)"
+                         >
+                          <v-list-item three-line>
+                            <v-list-item-content>
+                              <v-flex row wrap class="ma-0">
+                            <p class="pt-2">Date created: {{ item.createdate }}</p>
+                            <v-spacer />
+                            <v-btn icon @click="item.IsPinned = !item.IsPinned">
+                              <v-icon v-if="!item.IsPinned">mdi-pin-off</v-icon>
+                              <v-icon v-if="item.IsPinned">mdi-pin</v-icon>
                             </v-btn>
-                            <v-btn 
-                             color="error"
-                             @click="rejectproject(e)"
-                             >
-                              Reject
-                              <v-icon>mdi-close-circle-outline</v-icon>
+                            <v-btn icon @click="item.IsFavourite = !item.IsFavourite">
+                              <v-icon v-if="!item.IsFavourite">mdi-heart-outline</v-icon>
+                              <v-icon v-if="item.IsFavourite">mdi-heart</v-icon>
                             </v-btn>
+                              </v-flex>
+
+                              <v-flex row wrap class="justify-center">
+                            <h2>{{item.name}}</h2>
                           </v-flex>
-                        </v-list-item-content>
-                      </v-list-item>
-                    </v-card>
-                  </v-flex>
-                </v-layout> 
-            </v-card>
-
-            <v-dialog
-              v-model="acceptdialog"
-              persistent
-              max-width="500"
-            >
-              <v-card>
-                <v-card-text>Do you want to start on {{this.$store.getters.projectname}} now?</v-card-text>
-                <v-card-actions class="justify-center">
-                  <v-btn
-                    text
-                    color="warning"
-                    @click='reload'
-                  >
-                    Later
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="success"
-                    @click='desdesignproject'
-                  >
-                    Yes
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-
-            <v-dialog
-              v-model="rejectdialog"
-              persistent
-              max-width="500"
-            >
-              <v-card>
-                <v-card-text>Are you sure you want to reject project request from {{this.$store.getters.facilitatorname}}?</v-card-text>
-                <v-card-actions class="justify-center">
-                  <v-btn
-                    text
-                    color="error"
-                    @click='rejectdialog = false'
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="success"
-                    @click='confirmrejectproject'
-                  >
-                    Yes
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-
-        </v-container>
-</v-main>
+                          <p>Progress</p>
+                          <div class="pb-3">
+                          <!-- <div class="pb-0 mb-0">
+                          <v-flex row wrap>
+                          <v-col cols="10" class="pb-0"> -->
+                          <v-progress-linear
+                            background-color="grey lighten-2"
+                            color="red"
+                            v-model="item.progress"
+                            height="10"
+                            />
+                          <!-- </v-col> -->
+                          <!-- <v-col cols="2" class="pb-0">
+                          <p class="round1">{{item.progress + "%"}}</p>
+                          </v-col> 
+                          </v-flex> -->
+                          </div>
+                            <hr class="solid">
+                          <v-flex row wrap class="pt-2">
+                          <p class="pt-2 ml-4 underline">Member: {{ item.acceptedmembers.length }}</p>
+                          <v-spacer/>
+                          <p class="pt-2 round orange--text">{{ Math.ceil(parseInt((new Date(item.deadline)-new Date(item.createdate))/(24*3600*1000))) }} Days Left</p>
+                          </v-flex>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-card>
+                      </v-flex>
+                    </v-layout>
+                </v-card>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
 const axios = require('axios');
 export default {
-  data(){
-    return{
+  name: "HomePageCP",
+  title: "Home",
+  data() {
+    return {
       items: [
-      { title: "Date: New to old" },
-      { title: "Date: Old to new" },
-      { title: "Progress: High to low" },
-      { title: "Progress: Low to high" },
-      { title: "Favourited" }
+        { title: "Date: New to old" },
+        { title: "Date: Old to new" },
+        { title: "Progress: High to low" },
+        { title: "Progress: Low to high" },
+        { title: "Favourited" },
       ],
-      PRCards: [],
-      acceptdialog: false,
-      rejectdialog: false
+      CPCards: [],
     }
   },
   created(){
-    axios
-    .get('api/create/memberspr', { 
-      params:{
-        invitedmembers: window.$cookies.get("userid")
-      }})
-    .then((response) => {
-        this.PRCards = response.data
-    })
-  },
-  methods: {
-    acceptproject(e){
-      let projectid = this.PRCards[e]._id
-      let projectname = this.PRCards[e].name
-      window.$cookies.set("acceptedprojectid", projectid, Infinity)
-      let userid = window.$cookies.get("userid")
       axios
-        .put('api/users/' + userid + '/accept', {
-            invitedprojectid: window.$cookies.get("acceptedprojectid"),
-        })
-        .then((response)=>{
-          axios
-          .put('api/create/' + projectid + '/accept', {
-              userid: window.$cookies.get("userid") 
-          })
-          .then((response)=>{
-            this.$store
-            .dispatch(
-                "updateProjectname", projectname)
-            .then(() => this.acceptdialog=true)
-          })
+      .get('api/create/memberscp', { 
+        params:{
+          reviewedmembers: window.$cookies.get("userid")
+        }})
+      .then((response) => {
+          this.CPCards = response.data
       })
     },
-    rejectproject(e){
-      let projectid = this.PRCards[e]._id
-      let facilitatorname = this.PRCards[e].facilitator
-      window.$cookies.set("acceptedprojectid", projectid, Infinity)
-      this.$store
-       .dispatch(
-          "updateFacilitatorname",facilitatorname)
-       .then(() => this.rejectdialog=true)
+  methods:{
+    homepagepr(){
+      this.$router.push({ name: "HomePagePR" });
     },
-    confirmrejectproject(){
-       let projectid = window.$cookies.get("acceptedprojectid")
-       let userid = window.$cookies.get("userid")
-       axios
-        .put('api/users/' + userid + '/reject', {
-            invitedprojectid: window.$cookies.get("acceptedprojectid"),
-        })
-        .then((response)=>{
-          axios
-          .put('api/create/' + projectid + '/reject', {
-              userid: window.$cookies.get("userid") 
-          })
-          .then((response)=>{
-            this.$router.go()
-          })
-      })
-    },
-    desdesignproject(){
-      this.$router.push({ name: "DesDesignProject" })
-    },
-    reload(){
-      this.$router.go()
+    homepagenr(){
+    this.$router.push({ name: "HomePageNR"});
     },
     homepageop(){
-      this.$router.push({ name: "HomePageOP" });
-      },
-    homepagenr(){
-      this.$router.push({ name: "HomePageNR"});
+      this.$router.push({ name: "HomePageOP" })
     },
-    homepagecp(){
-      this.$router.push({ name: "HomePageCP" })
-    }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -234,5 +137,21 @@ export default {
 
 .v-btn {
   margin-left: 10px;
+}
+
+p.round{
+  border-radius: 8px;
+  background-color: white;
+  width: 100px;
+  height: 30px;
+  padding-left: 5px;
+}
+
+p.round1{
+  border-radius: 8px;
+  background-color: white;
+  width: 50px;
+  height: 20px;
+  padding-left: 5px;
 }
 </style>

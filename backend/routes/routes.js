@@ -25,6 +25,7 @@ router.get('/create/facilitator', projectController.getFProjects) //get projects
 router.get('/create/memberspr',projectController.getPRProjects) //get members pr projects
 router.get('/create/membersog',projectController.getOGProjects) //get members og projects
 router.get('/create/membersnr',projectController.getNRProjects) //get members nr projects
+router.get('/create/memberscp',projectController.getCPProjects) //get members cp projects
 router.get('/create/:projectid', projectController.getProjectDetails) //get selected projectdetails members accept
 router.put('/create/:projectid', projectController.insertProjectSettings) //facilitator inserts projectsettings
 router.put('/create/:projectid/accept', projectController.acceptUserid) //Insert into acceptedmembers

@@ -118,6 +118,28 @@ exports.getNRProjects = function (req, res){
     })
 }
 
+exports.getCPProjects = function (req, res){
+    Project.find((error, project) => {
+        if (error) {
+            return next(error)
+        } 
+        else {
+            var array = []
+                //project is array, need to loop through to find all inputtedmembers columns
+                for (var i=0; i<project.length; i++) {
+                var members = project[i].reviewedmembers
+                //inputtedmembers is array also, loop through to check if found
+                for (var j=0; j<members.length; j++){
+                    if(members[j] == req.query.reviewedmembers && project[i].progress == '100'){
+                        array.push(project[i]) 
+                    }
+                    }
+                }
+            }
+        res.json(array)
+    })
+}
+
 exports.getProjectDetails = function (req, res){
     Project.findById(req.params.projectid, (error, project)=> {
         if (error) {
