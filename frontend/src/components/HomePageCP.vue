@@ -31,10 +31,11 @@
                       <v-flex v-for="(item,e) in CPCards" :key="item.ID" class="custom">
                         <v-card 
                          class="ma-2" 
-                         max-width="360" 
+                         max-width="450"
+                         min-height="200"
+                         max-height="200"  
                          outlined
                          color="orange"
-                         @click="input(e)"
                          >
                           <v-list-item three-line>
                             <v-list-item-content>
@@ -51,31 +52,32 @@
                             </v-btn>
                               </v-flex>
 
-                              <v-flex row wrap class="justify-center">
+                          <v-flex row wrap class="justify-center">
                             <h2>{{item.name}}</h2>
                           </v-flex>
-                          <p>Progress</p>
-                          <div class="pb-3">
-                          <!-- <div class="pb-0 mb-0">
-                          <v-flex row wrap>
-                          <v-col cols="10" class="pb-0"> -->
-                          <v-progress-linear
-                            background-color="grey lighten-2"
-                            color="red"
-                            v-model="item.progress"
-                            height="10"
-                            />
-                          <!-- </v-col> -->
-                          <!-- <v-col cols="2" class="pb-0">
-                          <p class="round1">{{item.progress + "%"}}</p>
-                          </v-col> 
-                          </v-flex> -->
-                          </div>
+                        
+                        <v-flex row wrap class="justify-center pt-2 pb-4">
+                            <v-btn
+                             class="orange--text"
+                             color="grey lighten-3"
+                             @click="acceptproject(e)"
+                             :key="item._id"
+                             >
+                              Review
+                              <v-icon>mdi-google-analytics</v-icon>
+                            </v-btn>
+                            <v-btn 
+                             class="orange--text"
+                             color="grey lighten-3"
+                             @click="rejectproject(e)"
+                             >
+                              Export
+                              <v-icon>mdi-export</v-icon>
+                            </v-btn>
+                          </v-flex>
                             <hr class="solid">
                           <v-flex row wrap class="pt-2">
                           <p class="pt-2 ml-4 underline">Member: {{ item.acceptedmembers.length }}</p>
-                          <v-spacer/>
-                          <p class="pt-2 round orange--text">{{ Math.ceil(parseInt((new Date(item.deadline)-new Date(item.createdate))/(24*3600*1000))) }} Days Left</p>
                           </v-flex>
                             </v-list-item-content>
                           </v-list-item>
@@ -132,7 +134,7 @@ export default {
 .flex.custom{
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 400px;
+  flex-basis: 500px;
 }
 
 .v-btn {

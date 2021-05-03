@@ -65,7 +65,7 @@ exports.getFProjects = function (req, res){
                     array.push(project[i])
                 if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length + project[i].rejectedmembers.length == project[i].numinvitedmembers && project[i].acceptedmembers.length != project[i].inputtedmembers.length)
                     project[i].progress = 25
-                else if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length == project[i].inputtedmembers.length)
+                else if(project[i].invitedmembers.length == 0 && project[i].acceptedmembers.length == project[i].inputtedmembers.length && project[i].reviewedmembers.length == 0)
                     project[i].progress = 60
                 else if(project[i].invitedmembers.length == 0 && project[i].inputtedmembers.length == project[i].reviewedmembers.length)
                     project[i].progress = 100

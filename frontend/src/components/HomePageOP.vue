@@ -31,7 +31,9 @@
                       <v-flex v-for="(item,e) in OnCards" :key="item.ID" class="custom">
                         <v-card 
                          class="ma-2" 
-                         max-width="360" 
+                         max-width="450" 
+                         min-height="200"
+                         max-height="200" 
                          outlined
                          :color="item.projectcardcolor"
                          @click="input(e)"
@@ -144,7 +146,7 @@ export default {
 .flex.custom{
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 400px;
+  flex-basis: 500px;
 }
 
 .v-btn {
