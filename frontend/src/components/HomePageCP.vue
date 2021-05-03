@@ -56,14 +56,14 @@
                             <h2>{{item.name}}</h2>
                           </v-flex>
                         
-                        <v-flex row wrap class="justify-center pt-2 pb-4">
+                        <v-flex row wrap class="justify-center pt-3 pb-4">
                             <v-btn
                              class="orange--text"
                              color="grey lighten-3"
                              @click="acceptproject(e)"
                              :key="item._id"
                              >
-                              Review
+                              Review Results
                               <v-icon>mdi-google-analytics</v-icon>
                             </v-btn>
                             <v-btn 
@@ -71,7 +71,7 @@
                              color="grey lighten-3"
                              @click="rejectproject(e)"
                              >
-                              Export
+                              Export Results
                               <v-icon>mdi-export</v-icon>
                             </v-btn>
                           </v-flex>
