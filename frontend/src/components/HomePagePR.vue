@@ -9,7 +9,7 @@
                     <v-btn text class="orange--text">Requests</v-btn>
                     <v-btn @click="homepageop" text>In Progress</v-btn>
                     <v-btn @click="homepagenr" text>Needs Review</v-btn>
-                    <v-btn @click="homepagecp" text>Results</v-btn>
+                    <v-btn @click="homepagecp" text>Completed</v-btn>
                   </v-flex>
                   
                   <v-col class="text-right mt-3">
