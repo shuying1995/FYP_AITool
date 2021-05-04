@@ -93,7 +93,6 @@ created(){
               else
                 this.ratings[i].fairnesscard = 'Fairness Through Unawareness'
           }
-          console.log(this.ratings)
       })
     },
 methods:{
