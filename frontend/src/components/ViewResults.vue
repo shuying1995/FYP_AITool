@@ -29,15 +29,15 @@
                 <v-layout justify-center>
                     <v-expansion-panels style="maxWidth: 1000px;">
                         <v-expansion-panel
-                        v-for="(item,i) in fairnesscard"
+                        v-for="(item,i) in ratings"
                         :key="i"
                         >
                         <v-expansion-panel-header class="text">
                             <v-col cols="5">
-                                <a>{{item.name}}</a>
+                                <a>{{item.fairnesscard}}</a>
                             </v-col>
                             <v-col cols="5">
-                                <a>Ratings</a>
+                                <a>{{item.rating}}</a>
                             </v-col>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
@@ -59,30 +59,41 @@ const axios = require('axios');
 export default {
 data() {
     return {
-        fairnesscard: [
-          { name: 'Demographic Disparity'},
-          { name: 'Treatment Equality'},
-          { name: 'Equalized Odds'},
-          { name: 'Test Fairness'},
-          { name: 'Equal Opportunity'},
-          { name: 'Conditional Statistical Party'},
-          { name: 'Fairness Through Awareness'},
-          { name: 'Fairness in Relational Domain'},
-          { name: 'Counterfactual Fairness'},
-          { name: 'Fairness Through Unawareness'},
-        ],
+        ratings: []
       }
 },
 created(){
     let selectedprojectid = window.$cookies.get("selectedprojectid")
-    console.log(selectedprojectid)
       axios
       .get('api/projectreviews', { 
         params:{
           projectid: selectedprojectid
         }})
       .then((response) => {
-          console.log(response.data)
+          this.ratings = response.data
+          for(var i = 0; i<this.ratings.length; i++){
+              if(this.ratings[i].fairnesscard == 'fcard1')
+                this.ratings[i].fairnesscard = 'Demographic Disparity'
+              else if(this.ratings[i].fairnesscard == 'fcard2')
+                this.ratings[i].fairnesscard = 'Treatment Equality'
+              else if(this.ratings[i].fairnesscard == 'fcard3')
+                this.ratings[i].fairnesscard = 'Equalized Odds'
+              else if(this.ratings[i].fairnesscard == 'fcard4')
+                this.ratings[i].fairnesscard = 'Test Fairness'
+              else if(this.ratings[i].fairnesscard == 'fcard5')
+                this.ratings[i].fairnesscard = 'Equal Opportunity'
+              else if(this.ratings[i].fairnesscard == 'fcard6')
+                this.ratings[i].fairnesscard = 'Conditional Statistical Party'
+              else if(this.ratings[i].fairnesscard == 'fcard7')
+                this.ratings[i].fairnesscard = 'Fairness Through Awareness'
+              else if(this.ratings[i].fairnesscard == 'fcard8')
+                this.ratings[i].fairnesscard = 'Fairness in Relational Domain'
+              else if(this.ratings[i].fairnesscard == 'fcard9')
+                this.ratings[i].fairnesscard = 'Counterfactual Fairness'
+              else
+                this.ratings[i].fairnesscard = 'Fairness Through Unawareness'
+          }
+          console.log(this.ratings)
       })
     },
 methods:{
