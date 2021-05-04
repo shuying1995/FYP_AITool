@@ -53,13 +53,19 @@ exports.getFairnesscardReviews = function (req, res){
                     }
                     let reduceValue = array.reduce(function(result, tempObject) {
                         if (!result[tempObject.fairnesscard]) {
-                            tempObject["count"] = 1
-                            tempObject["rating"] = parseInt(tempObject["rating"])
+                            tempObject["rating"] = tempObject["rating"].split(',')
+                            tempObject["rating"]= tempObject["rating"].map(Number)
+                            tempObject["count"] = tempObject["rating"].length
+                            tempObject["rating"] = tempObject["rating"].reduce((a,b)=>a+b,0)
                             result[tempObject["fairnesscard"]] = tempObject
                         } else {
                             let intermediate = result[tempObject["fairnesscard"]]
-                            intermediate["rating"] += parseInt(tempObject["rating"])
-                            intermediate["count"] += 1
+                            temp = tempObject["rating"]
+                            temp = temp.split(',')
+                            temp= temp.map(Number)
+                            intermediate["count"] += temp.length
+                            temp = temp.reduce((a,b)=>a+b,0)
+                            intermediate["rating"] += temp
                             result[tempObject["fairnesscard"]] = intermediate
                         }
                         return result
