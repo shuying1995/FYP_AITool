@@ -25,6 +25,7 @@ import Survey1 from "../components/Survey1.vue";
 import Survey2 from "../components/Survey2.vue";
 import Survey3 from "../components/Survey3.vue";
 import Survey4 from "../components/Survey4.vue";
+import ViewResults from "../components/ViewResults.vue"
 
 Vue.use(VueRouter);
 
@@ -208,6 +209,14 @@ const routes = [
     path: "/survey4",
     name: "Survey4",
     component: Survey4,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/viewresults",
+    name: "ViewResults",
+    component: ViewResults,
     meta: {
       requiresAuth: true
     }

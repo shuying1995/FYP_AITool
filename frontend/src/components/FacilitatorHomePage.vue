@@ -37,7 +37,7 @@
                   <v-flex v-for="(item, e) in MyCards" :key="item.ID">
                     <v-card 
                      class="ma-2" 
-                     max-width="360"
+                     max-width="450"
                      max-height="200" 
                      min-height="200"
                      outlined 
@@ -170,7 +170,7 @@ created(){
 .flex{
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 400px;
+  flex-basis: 500px;
 }
 
 p.round{

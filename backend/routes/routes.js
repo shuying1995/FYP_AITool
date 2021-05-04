@@ -37,6 +37,7 @@ router.post('/projectdetails', projectdetailsController.createProjectDetails) //
 router.get('/projectdetails',projectdetailsController.getAllProjectDetails) //Get project details inputted by all members
 
 router.post('/projectreviews', projectreviewsController.createProjectReviews)
+router.get('/projectreviews', projectreviewsController.getFairnesscardReviews) //get ratings of fairness cards for each project
 
 router.post('/survey',survey.createSurvey)
 module.exports = router;

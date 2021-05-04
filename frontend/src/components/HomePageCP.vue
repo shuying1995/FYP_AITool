@@ -60,7 +60,7 @@
                             <v-btn
                              class="orange--text"
                              color="grey lighten-3"
-                             @click="acceptproject(e)"
+                             @click="viewresults(e)"
                              :key="item._id"
                              >
                               Review Results
@@ -126,6 +126,11 @@ export default {
     homepageop(){
       this.$router.push({ name: "HomePageOP" })
     },
+    viewresults(e){
+      let projectid = this.CPCards[e]._id
+      window.$cookies.set("acceptedprojectid", projectid, Infinity)
+      this.$router.push({ name: "ViewResults" })
+    }
   }
 };
 </script>
