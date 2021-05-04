@@ -128,7 +128,7 @@ export default {
     },
     viewresults(e){
       let projectid = this.CPCards[e]._id
-      window.$cookies.set("acceptedprojectid", projectid, Infinity)
+      window.$cookies.set("selectedprojectid", projectid, Infinity)
       this.$router.push({ name: "ViewResults" })
     }
   }

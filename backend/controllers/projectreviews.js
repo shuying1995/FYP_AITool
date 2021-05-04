@@ -46,7 +46,7 @@ exports.getFairnesscardReviews = function (req, res){
             var array = []
                 //project is array, need to loop through to find all projectid columns
                 for (var i=0; i<projectreviews.length; i++) {
-                    if(projectreviews[i].projectid == req.body.projectid){
+                    if(projectreviews[i].projectid == req.query.projectid){
                         projectreviews[i] = projectreviews[i].toObject()
                         array.push(projectreviews[i])  
                     }

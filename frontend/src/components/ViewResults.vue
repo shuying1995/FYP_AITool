@@ -55,6 +55,7 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
 data() {
     return {
@@ -72,6 +73,18 @@ data() {
         ],
       }
 },
+created(){
+    let selectedprojectid = window.$cookies.get("selectedprojectid")
+    console.log(selectedprojectid)
+      axios
+      .get('api/projectreviews', { 
+        params:{
+          projectid: selectedprojectid
+        }})
+      .then((response) => {
+          console.log(response.data)
+      })
+    },
 methods:{
     home(){
         this.$router.push({ name: "HomePagePR" })
