@@ -183,7 +183,8 @@ created(){
     axios
      .get('/api/projectdetails',{
          params: {
-             projectid: window.$cookies.get("acceptedprojectid")
+             projectid: window.$cookies.get("acceptedprojectid"),
+             userid: window.$cookies.get("userid")
          }})
      .then((response)=>{
          this.projectdetails = response.data
