@@ -5,7 +5,7 @@ export default {
     projects: '',
     members: [],
     stakeholder: [],
-    fairnesscard: '',
+    fairnesscard: [],
     fairnesscards: [],
     goright: [],
     gowrong: [],

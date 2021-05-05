@@ -115,9 +115,10 @@ computed:{
         this.$router.push({ name: "HomePagePR"});
     },
     inputfairness(){
-        let image = this.selectedImage.front
+        let frontimage = this.selectedImage.front
+        let backimage = this.selectedImage.back
         this.$store
-        .dispatch("updateFairnesscard",image)
+        .dispatch("updateFairnesscard", {frontimage,backimage})
         this.$router.push({ name: "InputFairness"})
     },
     flip(){

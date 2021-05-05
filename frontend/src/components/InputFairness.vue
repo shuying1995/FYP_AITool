@@ -49,7 +49,8 @@
 
                 <v-row>
                     <v-col md="6">
-                        <v-img :src="fairnesscard" contain max-height="450"></v-img>
+                        <v-img :src="fairnesscardfront" contain max-height="450" @click="flip" v-if="showFront"></v-img>
+                        <v-img :src="fairnesscardback" contain max-height="450" @click="flip" v-if="!showFront"></v-img>
                     </v-col>
                     <v-col md="5">
                         <h3>Using the perspective of your Stakeholder role,</h3>
@@ -141,7 +142,9 @@ export default {
 name: 'InputFairness',
 data(){
     return { 
-        selectedimage: this.$store.getters.fairnesscard,
+        selectedfrontimage: this.$store.getters.fairnesscard.frontimage,
+        selectedbackimage: this.$store.getters.fairnesscard.backimage,
+        showFront:true,
         asdialog: false,
         atdialog: false,
         appscenario: window.$cookies.get("acceptedprojectappscenario"),
@@ -157,8 +160,11 @@ data(){
     }
 },
 computed: {
-    fairnesscard(){
-        return this.selectedimage
+    fairnesscardfront(){
+        return this.selectedfrontimage
+    },
+    fairnesscardback(){
+      return this.selectedbackimage
     },
     image(){
         return this.apptype
@@ -179,11 +185,14 @@ created(){
     inputstakeholder(){
         this.$router.push({name: "InputStakeholders"})
     },
+    flip(){
+        this.showFront=!this.showFront;
+    },
     extradialog(){
         this.moredialog=true;
     },
     insertmore(){
-        this.arrayfc.push(this.selectedimage)
+        this.arrayfc.push(this.selectedfrontimage)
         this.$store
           .dispatch(
               "updateFairnesscards", this.arrayfc)
@@ -199,7 +208,7 @@ created(){
     },
     nextdialog(){
       this.dialog=true;
-      this.arrayfc.push(this.selectedimage)
+      this.arrayfc.push(this.selectedfrontimage)
         this.$store
           .dispatch(
               "updateFairnesscards", this.arrayfc)
