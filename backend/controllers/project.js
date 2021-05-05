@@ -190,6 +190,7 @@ exports.acceptUserid = function (req, res){
             userid.splice(index, 1)
         }
 
+        project.minreviews = project.acceptedmembers.length - 1
         project.save((error, updatedProject) => {
             //Wrong input
             if(error) 

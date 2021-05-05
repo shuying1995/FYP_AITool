@@ -53,7 +53,7 @@ const Project = mongoose.model('Project', new mongoose.Schema({
     },
     mincards: {
         type: Number,
-        default: '1'
+        default: '10'
     },
     minreviews:{
         type: Number
