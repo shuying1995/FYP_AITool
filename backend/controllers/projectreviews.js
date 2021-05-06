@@ -74,6 +74,7 @@ exports.getFairnesscardReviews = function (req, res){
                     
                     output = outputArray.map(obj => {
                         obj.rating = obj.rating / obj.count
+                        obj.rating = Math.round(obj.rating * 100) / 100
                         delete obj["count"]
                         return obj
                     })

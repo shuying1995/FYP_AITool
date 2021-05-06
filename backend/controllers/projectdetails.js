@@ -23,7 +23,7 @@ exports.getAllProjectDetails = function (req, res){
         } else {
             var inputArray = []
             for (var i = 0; i<projectdetails.length; i++){
-                if(projectdetails[i].projectid == req.body.projectid)
+                if(projectdetails[i].projectid == req.query.projectid)
                 inputArray.push(projectdetails[i].toObject())
             }
             let totalLength = inputArray.length
