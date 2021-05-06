@@ -21,11 +21,17 @@ exports.getAllProjectDetails = function (req, res){
         if (error) {
             return next(error)
         } else {
-            var array = []
+            var inputArray = []
             for (var i = 0; i<projectdetails.length; i++){
-                if(projectdetails[i].projectid == req.query.projectid && projectdetails[i].userid != req.query.userid)
-                    array.push(projectdetails[i])
+                if(projectdetails[i].projectid == req.body.projectid)
+                inputArray.push(projectdetails[i].toObject())
             }
+            let totalLength = inputArray.length
+            let index = inputArray.findIndex(x => x.userid == req.body.userid)
+            let finalIndex = (index + 1) % totalLength
+            let array = []
+            array.push(inputArray[finalIndex])
+
             const result = {stakeholder:[], fairnesscard:[], goright: [], gowrong: []};
             for (const obj of array)
                 for (const prop in result)
