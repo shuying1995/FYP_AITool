@@ -125,6 +125,7 @@ export default {
             window.$cookies.remove("authenticated");
             window.$cookies.remove("acceptedprojectappscenario");
             window.$cookies.remove("acceptedprojectapptype");
+            window.$cookies.remove("stakeholderrole");
             this.$router.push({ name: "LoginPage"})
         }
     },

@@ -42,9 +42,28 @@
                        </v-img>
                     </v-dialog>
 
-                    <v-btn color="warning"> 
-                        Stakeholder Role
-                    </v-btn>
+                    <v-dialog v-model="atdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Stakeholder Role
+                        </v-btn>
+                      </template>
+                      <v-img src="../assets/inputstakeholder.jpg" contain max-height="350">
+                      <div class="vertical-bottom">
+                        <v-row>
+                            <v-card height="40px" width="185px">
+                                <v-card-text class="text-center">
+                                {{stakeholder}}
+                                </v-card-text>
+                            </v-card>
+                        </v-row>
+                      </div>
+                      <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                       </v-img>
+                    </v-dialog>
+
                 </v-flex>
 
                 <v-row justify="center">
@@ -78,6 +97,7 @@ data() {
     appscenario: window.$cookies.get("acceptedprojectappscenario"),
     apptype: window.$cookies.get("acceptedprojectapptype"),
     showFront:true,
+    stakeholder: window.$cookies.get("stakeholderrole"),
     images: [
       {index: 1, front: require('../assets/fcard1.jpg'), back: require('../assets/bcard1.jpg')},
       {index: 2, front: require('../assets/fcard2.jpg'), back: require('../assets/bcard2.jpg')},
@@ -149,5 +169,13 @@ p{
 
 .v-btn {
   margin-left: 7%;
+}
+
+.vertical-bottom {
+  margin: 0;
+  position: absolute;
+  left: 30%;
+  top: 80%;
+  transform: translateY(-50%);
 }
 </style>>

@@ -273,7 +273,7 @@ p{
 .vertical-bottom {
   margin: 0;
   position: absolute;
-  left: 30%;
+  left: 35%;
   top: 80%;
   transform: translateY(-50%);
 }

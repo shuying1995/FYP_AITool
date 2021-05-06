@@ -124,6 +124,7 @@ methods:{
         this.$router.push({ name: "HomePagePR"});
     },
     randomfairness(){
+      window.$cookies.set("stakeholderrole", this.stakeholder, Infinity)
       this.arraysh.push(this.stakeholder)
         this.$store
         .dispatch("updateStakeholder",this.arraysh)
