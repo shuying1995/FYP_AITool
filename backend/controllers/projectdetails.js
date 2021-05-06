@@ -27,7 +27,13 @@ exports.getAllProjectDetails = function (req, res){
                 inputArray.push(projectdetails[i].toObject())
             }
             let totalLength = inputArray.length
-            let index = inputArray.findIndex(x => x.userid == req.body.userid)
+            let index = -1
+            for(var j =0; j<inputArray.length; j++){
+                console.log(inputArray[j].userid)
+                if(inputArray[j].userid == req.query.userid)
+                    index = j
+            }
+            //let index = inputArray.findIndex(x => x.userid === req.body.userid)
             let finalIndex = (index + 1) % totalLength
             let array = []
             array.push(inputArray[finalIndex])
