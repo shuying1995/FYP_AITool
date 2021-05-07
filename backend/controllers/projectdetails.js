@@ -29,7 +29,6 @@ exports.getAllProjectDetails = function (req, res){
             let totalLength = inputArray.length
             let index = -1
             for(var j =0; j<inputArray.length; j++){
-                console.log(inputArray[j].userid)
                 if(inputArray[j].userid == req.query.userid)
                     index = j
             }
