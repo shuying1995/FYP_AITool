@@ -11,12 +11,36 @@
                 </v-layout>  
 
                 <v-flex row wrap class="pb-6 justify-start">
-                    <v-btn color="warning">
-                        Application Scenario
-                    </v-btn>
-                    <v-btn color="warning">
-                        Application Type
-                    </v-btn>
+                    <v-dialog v-model="asdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Scenario
+                        </v-btn>
+                      </template>
+                      <v-card 
+                       class="text-center white--text headline"
+                       min-height="270px"
+                       color="grey"
+                       >
+                       <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="asdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                          {{appscenario}}
+                      </v-card>
+                    </v-dialog>
+
+                   <v-dialog v-model="atdialog" persistent max-width="400px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="warning" dark v-bind="attrs" v-on="on">
+                          Application Type
+                        </v-btn>
+                      </template>
+                      <v-img :src="this.apptype" contain max-height="350">
+                      <v-row justify="end" class="ma-0">
+                        <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                      </v-row>
+                       </v-img>
+                    </v-dialog>
                 </v-flex>
         
                 <v-carousel 
@@ -167,7 +191,6 @@
 </template>
 
 <script>
-import HomePagePRVue from './HomePagePR.vue';
 const axios = require('axios');
 export default {
 data(){
@@ -176,7 +199,11 @@ data(){
         goright: [],
         gowrong:[],
         dialog: false,
-        surveydone: ''
+        surveydone: '',
+        appscenario: '',
+        apptype: '',
+        asdialog: false,
+        atdialog: false
     }
 },
 created(){
@@ -196,13 +223,31 @@ created(){
              var backimage = image.replace('f','b')
              this.projectdetails[i].fairnesscardback=backimage
          }
-         axios.get('api/users')
+         let selectedprojectid = window.$cookies.get("acceptedprojectid")
+         axios.get('api/create/' + selectedprojectid)
+        .then((response) => {
+            this.appscenario = response.data.appscenario
+            let apptype = response.data.apptype
+            if(apptype == '0')
+                apptype = "appcard1"
+            else if(apptype == '1')
+                apptype = "appcard2"
+            else if(apptype == '2')
+                apptype = "appcard3"
+            else if(apptype == '3')
+                apptype = "appcard4"
+            else
+                apptype = "appcard5" 
+            this.apptype = apptype
+            this.apptype = require('../assets/' + this.apptype + '.jpg')
+            axios.get('api/users')
             .then((response) => {
                 let users = response.data
                 for(var i=0; i<users.length; i++){
                     if(users[i]._id==window.$cookies.get("userid"))
                         this.surveydone = users[i].surveydone
                 }
+            })
         })
      })
 },

@@ -42,7 +42,7 @@
                        </v-img>
                     </v-dialog>
 
-                    <v-dialog v-model="atdialog" persistent max-width="400px">
+                    <v-dialog v-model="srdialog" persistent max-width="400px">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn color="warning" dark v-bind="attrs" v-on="on">
                           Stakeholder Role
@@ -59,7 +59,7 @@
                         </v-row>
                       </div>
                       <v-row justify="end" class="ma-0">
-                        <v-btn icon @click="atdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
+                        <v-btn icon @click="srdialog = false"><v-icon>mdi-close-circle</v-icon></v-btn>
                       </v-row>
                        </v-img>
                     </v-dialog>
@@ -94,6 +94,7 @@ data() {
     return {
     asdialog: false,
     atdialog: false,
+    srdialog: false,
     appscenario: window.$cookies.get("acceptedprojectappscenario"),
     apptype: window.$cookies.get("acceptedprojectapptype"),
     showFront:true,
