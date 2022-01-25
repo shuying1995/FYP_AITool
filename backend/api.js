@@ -12,7 +12,7 @@ if (!config.get('PrivateKey')) {
     process.exit(1);
 }
 
-mongoose.connect('mongodb://127.0.0.1/fyp')
+mongoose.connect('mongodb://127.0.0.1/fyp',{ useUnifiedTopology: true })
     .then(() => console.log('Now connected to MongoDB!'))
     .catch(err => console.error('Something went wrong', err));
  
